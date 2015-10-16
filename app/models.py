@@ -8,7 +8,7 @@ class File(models.Model):
     time = models.TextField()
     score = models.IntegerField()
     abstraction = models.IntegerField()
-    parallelization = models.IntegerField()
+    parallelism = models.IntegerField()
     logic = models.IntegerField()
     synchronization = models.IntegerField()
     flowControl = models.IntegerField()

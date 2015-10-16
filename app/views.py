@@ -20,6 +20,7 @@ import os
 import ast
 import json
 import sys
+import unicodedata
 import urllib2
 import shutil
 import csv
@@ -224,7 +225,7 @@ def sendRequestgetJSON(idProject):
     # Create DB of files
     now = datetime.now()
     fileName = File (filename = fileURL, method = "url", time = now,
-                     score = 0, abstraction = 0, parallelization = 0,
+                     score = 0, abstraction = 0, parallelism = 0,
                      logic = 0, synchronization = 0, flowControl = 0,
                      userInteractivity = 0, dataRepresentation = 0)
 
@@ -257,13 +258,33 @@ def sendRequestgetJSON(idProject):
 
 # ________________________ LEARN MORE __________________________________#
 
-def learn(request):
+#def learn(request):
+#    if request.user.is_authenticated():
+#        return render_to_response("learn/learn-unregistered.html",
+#                                RC(request))
+#    else:
+#        return render_to_response("learn/learn-unregistered.html",
+#                                RC(request))
+
+def learn(request, page):
+    #Unicode to string(page)
+    page = unicodedata.normalize('NFKD',page).encode('ascii','ignore')
+
+    page = "learn/" + page + ".html"
+
     if request.user.is_authenticated():
-        return render_to_response("learn/learn-unregistered.html",
+     
+        return render_to_response(page,
                                 RC(request))
     else:
-        return render_to_response("learn/learn-unregistered.html",
+       
+        return render_to_response(page,
                                 RC(request))
+
+def learnUnregistered(request):
+       
+    return render_to_response("learn/learn-unregistered.html",)
+
 
 # ________________________ TO REGISTERED USER __________________________#
 
@@ -487,14 +508,14 @@ def procMastery(request, lines):
    
     # capabilities scores
     abstraction = int(p3[1].split(': ')[1])
-    parallelization = int(p3[2].split(': ')[1])
+    parallelism = int(p3[2].split(': ')[1])
     logic = int(p3[3].split(': ')[1])
     synchronization = int(p3[4].split(': ')[1])
     flow = int(p3[5].split(': ')[1])
     userInteractivity = int(p3[6].split(': ')[1])
     dataRepresentation = int(p3[7].split(': ')[1])
 
-    diccionario = {"Abstraction": abstraction, "Parallelization": parallelization}
+    diccionario = {"Abstraction": abstraction, "Parallelism": parallelism}
     d.update(diccionario)
     diccionario = {'Logic': logic, 'Synchronization': synchronization, 'Flow': flow}
     d.update(diccionario)
@@ -566,7 +587,7 @@ def buildMastery(item):
     dmastery = {}
     dmastery["Total points"] = item.TotalPoints
     dmastery["Abstraction"] = item.abstraction
-    dmastery["Parallelization"] = item.paralel
+    dmastery["Parallelism"] = item.paralel
     dmastery["Logic"] = item.logic
     dmastery["Synchronization"] = item.synchronization
     dmastery["Flow Control"] = item.flowcontrol
