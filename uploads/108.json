@@ -1,0 +1,1 @@
+{"file":"/sarabc/first","data":"speed 2\npen red\nfor [1..25]\n  fd 100\n  rt 88\nkeydown 'x', ->\n  t = new Turtle red\nwrite 'Hello.'\nforever 10, ->\n  turnto lastmouse\n  fd 2\n","auth":true,"mtime":1444853623426,"mime":"text/x-pencilcode;charset=utf-8"}
