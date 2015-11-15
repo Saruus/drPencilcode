@@ -1,0 +1,1 @@
+{"file":"/sarabc/untitled","data":"list = (random 10 for [1..8])\nwrite list\n\n","auth":true,"mtime":1445957363727,"mime":"text/x-pencilcode;charset=utf-8"}

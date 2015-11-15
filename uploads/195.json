@@ -1,0 +1,1 @@
+{"file":"/sarabc/colors","data":"speed 100\nrt 90\nfor color in [red, gold, green, blue]\n  jump -40, -160\n  for sides in [3...6]\n    pen path\n    for x in [1..sides]\n      fd 100 / sides\n      lt 360 / sides\n    fill color\n    fd 40\n","auth":true,"mtime":1445033593803,"mime":"text/x-pencilcode;charset=utf-8"}

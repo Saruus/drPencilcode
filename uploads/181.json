@@ -1,0 +1,1 @@
+{"file":"/sarabc/untitled2","data":"numero = 20\nif (numero == 5)\n  write \"El numero es 5!\"\nelse\n  write \"El numero no es 5\"\n","auth":true,"mtime":1447519980996,"mime":"text/x-pencilcode;charset=utf-8"}
