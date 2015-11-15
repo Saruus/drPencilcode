@@ -155,7 +155,7 @@ def urlUnregistered(request):
                 try:
                     # pathProject -> /home/sara/drPencilcode-master/uploads/47.json
                     # request -> <WSGIRequest: POST '/selector'>
-                    d = analyzeProject(request, pathProject)
+                    d = analyzeProject(request, pathProject, file)
                 except IndentationError: # FIXME
                     #There is an error with kutz or hairball
                     #We save the project in folder called error_analyzing
@@ -430,7 +430,7 @@ def myHistoric(request):
 
 # _______________________ AUTOMATIC ANALYSIS _________________________________#
 
-def analyzeProject(request, file_name):
+def analyzeProject(request, file_name, filename):
     dictionary = {}
     # request -> <WSGIRequest: POST '/selector'>
     # file_name -> /home/sara/drPencilcode-master/uploads/47.json
@@ -471,7 +471,7 @@ def analyzeProject(request, file_name):
         print "resultLint --> ", resultLint
 
         # Create a dictionary with necessary information
-        dictionary.update(procMastery(request, resultMastery))
+        dictionary.update(procMastery(request, resultMastery, filename))
         dictionary.update(procLint(request, resultLint))
         
         print dictionary
@@ -486,46 +486,52 @@ def analyzeProject(request, file_name):
 
 # __________________________ PROCESSORS _____________________________#
 
-def procMastery(request, lines):
+def procMastery(request, lines, fileName):
     """Mastery"""
     #print "In procMastery"
     dic = {}
     d = {}
-
     lint_data = json.dumps(lines)
-    # ast.literal_eval() # pasa a python dicc
 
     print "\n LINT_DATA --> ", lint_data
 
-    prueba = lint_data.split("]")[-1]
-    p2 = prueba.split("\n")
-    p3 = p2[0].split('\\n')
+    aux1 = lint_data.split("]")[-1]
+    aux2 = aux1.split("\n")
+    aux3 = aux2[0].split('\\n')
 
-    print "\n Prueba --> ", prueba
-    print "prueba 2 ---> ", p2
-    print "prueba3 -> ", p3
+    print "\n Prueba --> ", aux1
+    print "prueba 2 ---> ", aux2
+    print "prueba3 -> ", aux3
     print "\n"
    
-    # capabilities scores
-    abstraction = int(p3[1].split(': ')[1])
-    parallelism = int(p3[2].split(': ')[1])
-    logic = int(p3[3].split(': ')[1])
-    synchronization = int(p3[4].split(': ')[1])
-    flow = int(p3[5].split(': ')[1])
-    userInteractivity = int(p3[6].split(': ')[1])
-    dataRepresentation = int(p3[7].split(': ')[1])
+    # Capabilities scores
+    abstraction = int(aux3[1].split(': ')[1])
+    parallelism = int(aux3[2].split(': ')[1])
+    logic = int(aux3[3].split(': ')[1])
+    synchronization = int(aux3[4].split(': ')[1])
+    flow = int(aux3[5].split(': ')[1])
+    userInteractivity = int(aux3[6].split(': ')[1])
+    dataRepresentation = int(aux3[7].split(': ')[1])
 
-    diccionario = {"Abstraction": abstraction, "Parallelism": parallelism}
+    diccionario = {"Abstraction": abstraction, "Parallelism": parallelism,
+         'Logic': logic, 'Synchronization': synchronization, 'Flow': flow,
+         'Interactivity': userInteractivity, 'DataRepresentation': dataRepresentation}
     d.update(diccionario)
-    diccionario = {'Logic': logic, 'Synchronization': synchronization, 'Flow': flow}
-    d.update(diccionario)
-    diccionario = {'Interactivity': userInteractivity, 'Representation': dataRepresentation}
-    d.update(diccionario)
-    print d
 
     score = 0
     for key in d:
         score = score + d[key]
+
+    #Save in DB
+    fileName.score = score
+    fileName.abstraction = d["Abstraction"]
+    fileName.parallelization = d["Parallelism"]
+    fileName.logic = d["Logic"]
+    fileName.synchronization = d["Synchronization"]
+    fileName.flowControl = d["Flow"]
+    fileName.userInteractivity = d["Interactivity"]
+    fileName.dataRepresentation = d["DataRepresentation"]
+    fileName.save()
 
     dic["mastery"] = {}
     dic["mastery"] = d
@@ -539,7 +545,7 @@ def procLint(request, lines):
    # print "In procLint"
     dic = {}
     lint_data = json.dumps(lines)
-    
+
     dic["lint"] = {}
     dic["lint"]["points"] = 3
     dic["lint"]["maxi"] = 25
