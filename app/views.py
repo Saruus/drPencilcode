@@ -38,6 +38,7 @@ def main(request):
         user = None
 
     print "USER -----> ", user
+    print request
     # The first time one user enters
     # Create the dashboards associated to users
     createDashboards()
@@ -99,9 +100,9 @@ def selector(request):
                 dic = {'url': url}
                 d.update(dic)
                 
-                if d["mastery"]["points"] >= 15:
+                if d["mastery"]["points"] >= 13:
                     return render_to_response("upload/dashboard-unregistered-master.html", d)
-                elif d["mastery"]["points"] > 7:
+                elif d["mastery"]["points"] > 6:
                     return render_to_response("upload/dashboard-unregistered-developing.html", d)
                 else:
                     return render_to_response("upload/dashboard-unregistered-basic.html", d)
@@ -202,6 +203,9 @@ def processStringUrl(url):
     print "server ---> ", server #sarabc.pencilcode.net
     print "name ---> ", name
     
+    if protocol == "https:":
+        protocol = "http:"
+
     if protocol != "http:": #se puede hacer como en drScratch? auxString == ''?
         return idProject
 
@@ -229,6 +233,7 @@ def sendRequestgetJSON(idProject):
                      logic = 0, synchronization = 0, flowControl = 0,
                      userInteractivity = 0, dataRepresentation = 0)
 
+    print  "GUARDADO EN LA BASE DE DATOS --> ", fileName
 
     # Guardamos en la base de datos.
     fileName.save() 
@@ -451,7 +456,7 @@ def analyzeProject(request, file_name, filename):
         with open(file_name.replace(".json", ".coffee"), "w") as coffee_file:    
             coffee_file.write(data["data"]) # copia el valor de la llave data del diccionario data en 47.coffee
 
-        metricMastery = "python /home/sara/coffee-mastery-master/coffee-mastery.py " + file_name.replace(".json", ".coffee")
+        metricMastery = "python /home/sara/coffee-mastery/coffee-mastery.py " + file_name.replace(".json", ".coffee")
         print "Running", metricMastery
         try:
             resultMastery = os.popen(metricMastery).read()
@@ -536,7 +541,7 @@ def procMastery(request, lines, fileName):
     dic["mastery"] = {}
     dic["mastery"] = d
     dic["mastery"]["points"] = score
-    dic["mastery"]["maxi"] = 21
+    dic["mastery"]["maxi"] = 18
     return dic
 
 

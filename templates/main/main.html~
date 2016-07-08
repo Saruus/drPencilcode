@@ -69,7 +69,7 @@
                     <div class="navbar-collapse collapse" id="stamp-navigation">
                     <!-- NAVIGATION LINK -->
                       <a class="navbar-brand" href="/">
-                        <img src="../static/app/images/logop_main.png" alt="">
+                        <img src="static/app/images/logop_main.png" alt="">
                       </a>
                       <ul class="nav navbar-nav navbar-left main-navigation small-text">
                         <li class="navbar-brand"><a href="#section1"><em>{% trans "Why?" %}</em></a></li>
@@ -98,7 +98,7 @@
 
         <!-- ONLY LOGO ON HEADER -->
                 <div class="row">
-                    <div class="col-md-6 text-left">
+                    <div class="col-md-6 text-right">
 
                         <!-- HEADING AND BUTTONS -->
                         <div class="intro-section">

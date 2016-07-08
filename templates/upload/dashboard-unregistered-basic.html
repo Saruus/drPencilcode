@@ -17,14 +17,14 @@
 
     <link rel="stylesheet" href="../../static/app/content/style.css">
     <!-- =========================
-     FAV AND TOUCH ICONS AND FONT  
+     FAV AND TOUCH ICONS AND FONT
     ============================== -->
     <link rel="icon" href="../../static/app/images/favicon.ico">
-    <link rel="stylesheet" href="static/app/icons/icons.css">  
+    <link rel="stylesheet" href="static/app/icons/icons.css">
     <link type="text/css" rel="stylesheet" href="../../static/app/content/css_002.css">
     <link type="text/css" rel="stylesheet" href="../../static/app/content/css.css">
     <!-- =========================
-     STYLESHEETS   
+     STYLESHEETS
     ============================== -->
     <!-- BOOTSTRAP AND ANIMATION -->
     <link rel="stylesheet" href="../../static/app/content/bootstrap.min.css">
@@ -85,12 +85,12 @@
 <body>
 <div id="wrap">
     <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
-        <div class="container">          
+        <div class="container">
                     <!-- TOP BAR -->
             <div class="navbar-collapse collapse" id="stamp-navigation">
                     <!-- NAVIGATION LINK -->
                 <a class="navbar-brand" href="/">
-                    <img src="static/app/images/logop_main.png" alt="">
+                    <img src="static/app/images/logo_main_pc.png" alt="">
                 </a>
                 <ul class="nav navbar-nav navbar-right main-navigation ">
                         <li class="navbar-brand"><a class="navbar-brand pull-right" href="https://twitter.com/DrScratchTool"><span class="icon-social-twitter colored-text"></span></a></li>
@@ -103,7 +103,7 @@
         </div>
                 <!-- /END CONTAINER -->
     </div>
-    
+
             <!-- /END STICKY NAVIGATION -->
     <!-- JUMBOTRON -->
 <div class="container">
@@ -114,7 +114,7 @@
                             <img src="static/app/images/ferret.png" class="img-responsive col-md-5">
                             <h2 id="score" class="panel-title dark-text"><strong>{% trans "Score:" %}</strong> {{ mastery.points }}/{{ mastery.maxi }}
                             <a class="twitter-share-button" data-text="{% blocktrans with points=mastery.points %} I have just obtained {{ points }} points analyzing my project in Dr. Pencilcode! Beat it! @DrScratchTool {% endblocktrans %}"href="https://twitter.com/share">Tweet</a></h2>
-                        
+
                         </div>
                         <div class="panel-body">
                             <div class="container">
@@ -147,31 +147,31 @@
                                         {{ key }}
                                         {% endblocktrans %}
                                  </a><br>
-                                   
+
                                 </tr>
                             {% elif value == 1 %}
                                 <a href="/learn/{{ key }}/#level1">
-                                    <img src="static/app/images/little_bulb.png" alt=""> 
+                                    <img src="static/app/images/little_bulb.png" alt="">
                                         {% blocktrans %}
                                         {{ key }}
                                         {% endblocktrans %}
                                  </a><br>
-                            
-                            
+
+
                             {% endif %}
-                            {% endif %}   
+                            {% endif %}
                                 {% endif %}
-                                {% endif %}         
+                                {% endif %}
                                 {% if forloop.counter|divisibleby:1 or forloop.last %}
                                {% endif %}
                                 {% endfor %}
-                                
+
                     </div>
-                    
+
                 </div>
             </div>
-            
-            </section>    
+
+            </section>
 
 
   <!-- Score in detail -->
@@ -193,7 +193,7 @@
                                 {% if forloop.counter0|divisibleby:1 %}<tr>{% endif %}
                                 {% if key != "points" %}
                                 {% if key != "maxi" %}
-                                      
+
                                       <td>
                                         {% if value = 3 %}
                                         <span class="glyphicon glyphicon-star" id="star"></span>
@@ -201,7 +201,7 @@
                                         {% blocktrans %}
                                         {{ key }}
                                         {% endblocktrans %}
-                                        
+
                                       </td>
                                       <td>
                                             {% if value = 0 %}
@@ -209,15 +209,15 @@
                                                 <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="3" style="width: 0%">
                                                     <span><strong>{{ value }}/3</strong></span>
                                                 </div>
-                                             <div>  
+                                             <div>
                                             {% elif value = 1 %}
-                                            
+
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="3" style="width: 33%">
                                                     <span><strong>{{ value }}/3</strong></span>
                                                 </div>
                                              <div>
-                                            
+
                                             {% elif value = 2 %}
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="3" style="width: 66%">
@@ -232,9 +232,9 @@
                                              <div>
                                             {% endif %}
                                        </td>
-                                       
+
                                 {% endif %}
-                                {% endif %}         
+                                {% endif %}
                                 {% if forloop.counter|divisibleby:1 or forloop.last %}
                                 </tr>{% endif %}
                                 {% endfor %}
@@ -259,8 +259,8 @@
                 <li><a href=""><span class="icon-social-github transparent-text-dark"></span></a>
                 </li>
             </ul>
-                
-        </div>    
+
+        </div>
 
     </footer>
 
