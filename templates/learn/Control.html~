@@ -1,0 +1,98 @@
+{% extends 'learn/base.html' %}
+{% load i18n %}
+    <!-- JUMBOTRON -->
+    <div id = "cloud"><h2>{% block title %}{% trans "Control" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+    {% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+    {% trans "Instructions related to algorithmic notions of flow control can help you to <b>control the behavior of your characters</b>, making, for example, certain blocks that are repeated a number of times,  or until a situation arises." %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body col-lg-10 col-lg-offset-1">
+                <section id="level0">
+                    <h3>{% trans "Conditions" %}</h3>
+					<h4> Level 1 </h4>
+
+    				{% trans "The most basic block you can start working logical thinking is this:" %} <br><br>
+
+					<img src="../../static/app/images/logica1.png" alt="">
+                    <br><br>
+   					 {% trans "<b> How this block work?</b> When execution reaches this point, the condition on the block is evaluated, 						and if this is true, the set of blocks that are within the if executed." %}
+					{% trans "In the example, if the character is touching the blue color, he says 'I reached the goal.'" %}<br>
+				<h4> Level 2 </h4>
+    			{% trans "Now that you know the instructions <i>if</i>, perhaps you can start using blocks <b><i>if / else</i></b>, which 					can be very practical in many types of projects. The blocks <i>if / else</i> are very similar to the block <i>if</i>, but 					contain two sets of blocks inside." %}<br><br>
+				<img src="../../static/app/images/logica2.png" alt="">
+
+               <br><br>
+  
+			{% trans "<b> How this block work? </b> When execution reaches this point, the condition on the block is evaluated, and if 			this is true, the set of blocks that are within the 'if' is executed, but if the condition is false, then the set of  				blocks that are within the 'else' is executed." %}
+
+			<h3>{% trans "Loops" %}</h3>
+			<h4> Level 2 </h4>
+
+			{% trans "Sometimes when we want a set of blocks is constantly repeated, instead of repeating the same blocks over and over 			again, you can use a repeat instruction allowing achieve the same effect, but more comfortable and manageable way. Consider a 				example with a for loop:" %} <br><br>
+			
+			<div align = 'center'>
+				<img src="../../static/app/images/estrellabucleCODE.png" alt="">
+				<img style="padding-left: 100px" src="../../static/app/images/estrellabucleDRAW.png" alt="">
+			</div>
+			
+			
+			<br><br>
+
+			{% trans "<b> How this block work? </b> In the block <i>'for'</i> when execution reaches this point is repeated as often as 				has been indicated in the parameter block 'for', in the example would be 5 times [1 .. 5], all blocks included within this 				block. We can see that the block 'for' has an arrow at the bottom indicating that when they finish executing the blocks back 				again up." %}
+			{% trans "The block <i>'forever'</i> works like the 'for' but never finish executing the blocks containing in its interior." %}
+			<br><br>
+
+			<h3>{% trans "Interactivity" %}</h3>
+
+			{% trans "Some control blocks can help your PencilCode projects be more interactive, i.e. the person who is running it can perform actions that provoke new situations in the project. For example, You can use the keyboard or mouse to move a character. Here you have a couple of examples: " %}
+
+			<br><br>
+
+			<h5> {% trans "Button block" %} </h5> 
+{% trans "By using this block, an interactive, clickable control button is created. It can be 				used to call a function or initiate an action when a user clicks the button. It takes two arguments: first is the text for the button; second is a function to call whenever the user clicks the button." %}<br><br>
+			
+			<div>
+				<div class="col-md-6">
+				<img src="../../static/app/images/rainingturtlesCODE.png" alt="">
+				</div>
+				<img src="../../static/app/images/rainingturtlesDRAW.png" alt="">
+			</div>
+
+			<br>
+
+			{% trans "<b> How this block work? </b> In this example, each time you click on the button 'Make Turtle' a new turtle appears with a random color and in a random position." %}
+
+			<br><br>
+			
+			<h5> {% trans "Keydown block" %} </h5> <br>
+
+			<img src="../../static/app/images/turtle remote CODE.png" alt="">
+
+			<br><br>
+			
+			{% trans "<b> How this block work? </b> It creates a function that will run when a certain key is pressed. In the example, the 			turtle will move forward or backward when pressing up or down arrow and it will turn right or left when pressing right or letf 				arrow respectively." %}<br><br>
+
+			<img src="../../static/app/images/littlepencil.png" alt="">
+			{% trans "There are more interaction blocks that you can use although they are not visible in this category, such us: <b><i> keyup, keypress, dblclick, mousedown, mouseup, mousemove </b></i> ... " %}
+
+			<br>
+
+             </section>
+  
+			 <br>
+			 <h4> Click for more examples of this Category: </h4>
+			<a href="https://guide.pencilcode.net/edit/loops/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Loops" %}</a> <br>
+			<a href="https://guide.pencilcode.net/edit/nesting/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Nesting" %}</a>
+			<br><br>
+            </div>
+        </div>
+  		
+  </div>
+  
+ {% endblock %}

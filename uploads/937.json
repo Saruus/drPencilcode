@@ -1,0 +1,1 @@
+{"file":"/sarabc/paralelo","data":"rt 90\nto = new Turtle red\nfor [1..2]\n  to.fd 100\n\nfor [1..3]\n  fd 100\n","auth":true,"mtime":1485798266967,"mime":"text/x-pencilcode;charset=utf-8"}

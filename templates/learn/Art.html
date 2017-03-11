@@ -1,0 +1,121 @@
+{% extends 'learn/base.html' %}
+{% load i18n %}
+    <!-- JUMBOTRON -->
+    <div id = "cloud"><h2>{% block title %}{% trans "Art" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+            <section id="level0">
+                <h3>{% trans "Drawing" %}</h3>
+				<h4> Level 1 </h4>
+
+    			{% trans "The most basic Art blocks you can start working with are <i><b> pen </b></i> and <i><b> dot </b></i>. Dot can make a dot in any color and diameter, drawing it under the turtle. As we see in the picture:" %}<br><br>
+
+				<div class="col-md-3">
+					<img src="../../static/app/images/puntosCODE.png" alt="">
+				</div>	
+				<img src="../../static/app/images/puntosDRAW.png" alt="">
+			    <br><br>
+				<br>
+  				{% trans "<b> How does this program work? </b> When the user clicks on the play button, following the blocks in order, the turtle will turn right 90 degrees, paint a lightgrey dot, move forward 30 pixels, paint a grey dot and so on to the last block of the program. " %} <br><br>
+				<img src="../../static/app/images/littlepencil.png" alt="">
+				{% trans "<i><b>Pen</b></i> will trace out a line in the pen color you have chosen. Pen allows you to specify three more arguments apart from the color: the width of the pen in pixels, the line-cap style to use and the line-join style to use." %}<br><br>
+
+				<div class="col-md-3">
+					<img src="../../static/app/images/florFILLCODE.png" alt="">
+				</div>	
+				<img src="../../static/app/images/florFILLDRAW.png" alt="">
+			    <br><br>
+
+  				{% trans "<b> How does this program work?</b> Once the pen's color is chosen, the turtle will create a 240º arc of radius 30 followed by a right turn of 180 degrees. Since these two blocks are inside a for-loop, they will be repeated as many times as has been indicated in the loop code (in this case, from 1 to 6, 6 times). Finally, <i><b>fill</b></i> works by filling and retracing the path that you have drawn with the current pen, therefore, our flower will be filled with orange." %} <br><br>
+
+				<img src="../../static/app/images/littlepencil.png" alt="">
+
+				{% trans " Some of the colors you can use to create your masterpieces are the following:" %}<br><br>
+
+				<center><table style="border-collapse:separate;border:0;border-spacing:8px"><tr>
+				<td style="background:white;width:60px;text-align:center;border-radius:5px">white</td>
+				<td style="background:yellow;width:60px;text-align:center;border-radius:5px">yellow</td>
+				<td style="background:lime;width:60px;text-align:center;border-radius:5px">lime</td>
+				<td style="background:aqua;width:60px;text-align:center;border-radius:5px">aqua</td>
+				<td style="background:blue;width:60px;text-align:center;border-radius:5px">blue</td>
+				<td style="background:fuchsia;width:60px;text-align:center;border-radius:5px">fuchsia</td>
+				<td style="background:red;width:60px;text-align:center;border-radius:5px">red</td>
+				<td style="background:silver;width:60px;text-align:center;border-radius:5px">silver</td>
+				</tr><tr>
+				<td style="background:gray;color:silver;width:60px;text-align:center;border-radius:5px">gray</td>
+				<td style="background:olive;color:silver;width:60px;text-align:center;border-radius:5px">olive</td>
+				<td style="background:green;color:silver;width:60px;text-align:center;border-radius:5px">green</td>
+				<td style="background:teal;color:silver;width:60px;text-align:center;border-radius:5px">teal</td>
+				<td style="background:navy;color:silver;width:60px;text-align:center;border-radius:5px">navy</td>
+				<td style="background:purple;color:silver;width:60px;text-align:center;border-radius:5px">purple</td>
+				<td style="background:maroon;color:silver;width:60px;text-align:center;border-radius:5px">maroon</td>
+				<td style="background:black;color:silver;width:60px;text-align:center;border-radius:5px">black</td>
+				</tr>
+				</tr></table></center><br>
+
+				{% trans "In addition to pen and dot, using <i><b>box</i></b>, Pencil Code allows to draw a square box in any color under the turtle. This block accepts an optional second argument: the side length of the box in pixels." %}<br><br>
+
+				<div class="col-md-4">
+					<img src="../../static/app/images/mouse2CODE.png" alt="">
+				</div>	
+	
+			    <br>
+		
+				{% trans "<b> How does this program work? </b> First of all, 'mouse' function is created. Each time this function is called, the blocks inside it are executed orderly drawing a mouse on the screen as a result." %}
+
+				<br><br>
+				<div align='center'>
+				<img src="../../static/app/images/mouseDRAW.png" alt="">
+				</div>
+
+				<br><br>
+
+				<h3>{% trans "Appearance" %}</h3>
+				<h4> Level 2 </h4>
+
+				{% trans "With Pecil Code is possible to add images to our program easily, using blocks as <i><b> wear </b></i> or <i><b> img </b></i>. Images can be displayed using <i><b> img </b></i> or they can be worn by objects (1) using <i><b> wear </b></i> which can also modify the look of the turtle by changing its color (2). Check out the examples below!" %}<br><br>
+
+				<p> (1) </p>
+				<div class="col-md-4">
+					<img src="../../static/app/images/wer2part2CODE.png" alt="">
+				</div>	
+				<img style="margin-right: 15px" src="../../static/app/images/wear2part1DRAW.png" alt="">
+				<img style="margin-right: 15px" src="../../static/app/images/flechapeque.png" alt="">
+				<img src="../../static/app/images/wer2part2DRAW.png" alt="">
+			    <br><br>
+
+				{% trans "<b> How does this program work? </b> A new blue turtle will be created, then it'll go forward 50px and will be pause for 2 seconds, finally, at that point, the turtle's color will change to purple using <i><b> wear </b></i>." %}				
+				<br><br>
+				<p> (2) </p>
+				<div class="col-md-4">
+				<img src="../../static/app/images/dogCODE.png" alt="">
+				</div>
+				<img src="../../static/app/images/dogDRAW.png" alt="">
+				<img src="../../static/app/images/flecha3.png" alt="">
+				<br><br>
+
+  				{% trans "<b> How does this program work? </b> This program is the same as the one above. Instead of changing the color of the new turtle, <i><b> wear </b></i> add a img on it. When execution reaches the line 't.bk 50', the image of the dog is the thing that will be go backward. <br> <i><b> hide( ) </b></i>  will hide the turtle." %}
+
+				<h4> Level 3 </h4>
+				{% trans "Every color on a computer screen is made by mixing red, green, and blue light. Each of the three colors can be adjusted to 256 intensities, from 0 to 255, which makes a total of 256 × 256 × 256 = 16777216 possible colors. <br> The <b>rgb</b> function can be used to create a color code that can be used with <b>dot</b> or <b>pen</b> or <b>fill</b>." %}<br>
+
+				{% trans "<b> How does this program work? </b> The program above specifies a light blueish-greenish color that includes red with intensity 176, green with intensity 224, and blue with intensity 230. Using <b>dot</b>, it's possible to set its diameter, in this case, 150. <b>do fadeOut</b> will fade out the turtle and hide it." %}
+
+
+ 				<br><br>
+				<h4> Click for more examples of this Category: </h4>
+				<a href="https://gym.pencilcode.net/draw/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Code your own Art" %}</a> <br>
+			<a href="http://yanamal.pencilcode.net/edit/tiny/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Drawing" %}</a><br>
+<a href="https://gym.pencilcode.net/ref/colors.html" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Colors" %}</a>
+
+			<br><br>
+
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

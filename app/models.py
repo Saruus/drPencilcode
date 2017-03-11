@@ -6,14 +6,12 @@ class File(models.Model):
     filename = models.CharField(max_length=100)
     method = models.CharField(max_length=100)
     time = models.TextField()
-    score = models.IntegerField()
-    abstraction = models.IntegerField()
-    parallelism = models.IntegerField()
-    logic = models.IntegerField()
-    synchronization = models.IntegerField()
-    flowControl = models.IntegerField()
-    userInteractivity = models.IntegerField()
-    dataRepresentation = models.IntegerField()
+    move = models.CharField(max_length=100)
+    art = models.CharField(max_length=100)
+    text = models.CharField(max_length=100)
+    sound = models.CharField(max_length=100)
+    control = models.CharField(max_length=100)
+    operators = models.CharField(max_length=100)
 
 class Dashboard(models.Model):
 	user = models.TextField()
@@ -52,14 +50,12 @@ class Sprite(models.Model):
 
 class Mastery(models.Model):
 	myproject = models.ForeignKey(Project)
-	abstraction = models.IntegerField()
-	paralel = models.IntegerField()
-	logic = models.IntegerField()
-	synchronization = models.IntegerField()
-	flowcontrol = models.IntegerField()
-	interactivity = models.IntegerField()
-	representation = models.IntegerField()
-	scoring = models.IntegerField()	
+	move = models.CharField(max_length=100)
+	art = models.CharField(max_length=100)
+	text = models.CharField(max_length=100)
+	sound = models.CharField(max_length=100)
+	control = models.CharField(max_length=100)
+	operators = models.CharField(max_length=100)
 
 class Comment(models.Model):
 	user = models.TextField()
@@ -69,6 +65,11 @@ class Comment(models.Model):
 class Activity(models.Model):
 	text = models.TextField()
 	date = models.DateField()
+
+class Survey(models.Model):
+	question1 = models.CharField(max_length=50)
+	#question2 = models.CharField(max_length=10)
+	#question3 = models.CharField(max_length=10)
 
 
 

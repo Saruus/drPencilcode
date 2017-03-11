@@ -1,0 +1,82 @@
+{% extends 'learn/base.html' %}
+{% load i18n %}
+    <!-- JUMBOTRON -->
+    <div id = "cloud"><h2>{% block title %}{% trans "Operators" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+            <section id="level0">
+
+				{% trans "The blocks of this category are used mostly for basic mathematical operations, logical expressions, tracing control flow... " %}
+
+				<h3>{% trans "Arithmetic" %}</h3>
+
+				{% trans "Traditional order of operations applies, with * and / being done before + and -. Of course, by using parentheses, 				you can force any order you like." %} <br><br>
+
+				<p><table class="table table-bordered table-condensed">
+				<tr><th>Operator</th><th>Result</th></tr>
+				<tr><td><code> 4 + 5 </code></td><td> Addition. <code> = 9 </code></td></tr>
+				<tr><td><code> 8 - 2 </code></td><td> Subtraction. <code> = 6 </code></td></tr>
+				<tr><td><code> 3 * 5 </code></td><td>  Multiplication. <code>= 15 </code> </td></tr>
+				<tr><td><code> 21 / 7 </code></td><td> Division.<code> = 3 </code></td></tr>
+				<tr><td><code> 4 * 4 + 3 * 3 </code></td><td> <code> 25 </code> </td></tr>
+				<tr><td><code> 4* (4 + 3) * 3 </code></td><td> <code> 84 </code> </td></tr>
+				</table>
+
+                <h3>{% trans "Assigning variables" %}</h3>
+
+				{% trans "The operations that assign or change variables are summarized below." %}
+
+				<p><table class="table table-bordered table-condensed">
+				<tr><th>Operator</th><th>Meaning</th></tr>
+				<tr><td><code>x = 2</code></td><td>Set <code>x</code> to 2.</td></tr>
+				<tr><td><code>x += 2</code></td><td>Increase <code>x</code> by 2; equivalent to <code>x = x + 2</code></td></tr>
+				<tr><td><code>x -= 2</code></td><td>Decrease <code>x</code> by 2; equivalent to <code>x = x - 2</code></td></tr>
+				<tr><td><code>x *= 2</code></td><td>Double <code>x</code>; equivalent to <code>x = x * 2</code> (use <code>*</code> to 					multiply:
+				"<code>2x</code>" doesn't work)</td></tr>
+				<tr><td><code>x /= 2</code></td><td>Halve <code>x</code> allowing fractions; equivalent to <code>x = x / 2</code></td></tr>
+				<tr><td><code>x //= 2</code></td><td>Halve <code>x</code> rounding down
+				to an integer; equivalent to <code>x = x // 2</code></td></tr>
+				<tr><td><code>x %= 2</code></td><td>Apply signed remainder modulo 2; equivalent to <code>x = x % 2</code></td></tr>
+				<tr><td><code>x %%= 2</code></td><td>Apply unsigned (mathematical) remainder modulo 2; equivalent to <code>x = x %% 2</code></td></tr>
+				<tr><td><code>x **= 2</code></td><td>Square <code>x</code>; equivalent to <code>x = x ** 2</code></td></tr>
+				<tr><td><code>++x</code></td><td>Shorthand for <code>x += 1</code></td></tr>
+				<tr><td><code>x++</code></td><td>Postincrement shorthand for doing <code>x += 1</code> <em>after</em> the current 					expression</td></tr>
+				</table>
+
+				<h3>{% trans "Logical expressions" %}</h3>
+
+				{% trans "A logical expression is a proposition of fact which may be true or false. For example x is 2 is true if the 					variable x happens to have been assigned the value 2, but false if it happens to have any other value." %} <br><br>
+
+				<p><table class="table table-bordered table-condensed">
+				<tr><th>Operator</th><th>is <strong>true</strong> only when</th></tr>
+				<tr><td><code>x is 2</code></td><td><code>x</code> is equal to 2 (also written <code>x == 2</code>)</td></tr>
+				<tr><td><code>x isnt 2</code></td><td><code>x</code> is not 2 (also written <code>x != 2</code>)</td></tr>
+				<tr><td><code>x &gt; 2</code></td><td><code>x</code> is greater than 2</td></tr>
+				<tr><td><code>x &gt;= 2</code></td><td><code>x</code> is greater than or equal to 2</td></tr>
+				<tr><td><code>x &lt; 2</code></td><td><code>x</code> is less than 2</td></tr>
+				<tr><td><code>x &lt;= 2</code></td><td><code>x</code> is less than or equal to 2</td></tr>
+				<tr><td><code>a and b</code></td><td>Both <code>a</code> and
+				<code>b</code> are <strong>true</strong> (also written <code>a && b</code>)</td></tr>
+				<tr><td><code>a or b</code></td><td>At least one of
+				<code>a</code> or <code>b</code> are <strong>true</strong> (also written <code>a || b</code>)</td></tr>
+				<tr><td><code>not a</code></td><td><code>a</code> is <strong>false</strong> (also written <code>!a</code>)</td></tr>
+				<tr><td><code>true</code></td><td>always (also written <code>yes</code> or <code>on</code>)</td></tr>
+				<tr><td><code>false</code></td><td>never (also written <code>no</code> or <code>off</code>)</td></tr>
+				</table>
+  
+				<h4> Click for more examples of this Category: </h4>
+
+				<a href="http://david.pencilcode.net/home/know.html" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Mastering Control Flow. " %}</a><br>
+				<a href="https://gym.pencilcode.net/ref/arithmetic.htm" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Basic Math Operations. " %}</a><br><br>
+
+
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

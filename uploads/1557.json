@@ -1,0 +1,1 @@
+{"file":"/yanamal/tiny/foreverflag","data":"for [1..5]\n  typebox blue\n  typebox white\n  typebox red\n  typeline()\n\n","auth":true,"mtime":1464718582000,"mime":"text/x-pencilcode;charset=utf-8"}

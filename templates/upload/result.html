@@ -1,0 +1,199 @@
+{% load i18n %}
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Responsive Bootstrap 3 Startup and Multipurpose Template">
+    <meta name="keywords" content="Stamp, Startup, Multipurpose, Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="author" content="Programamos URJC Libresoft FECyT">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="../../static/app/content/bootstrap-tour.css">
+    <script src="../../static/app/scripts/bootstrap.min.js"></script>
+    <script src="../../static/app/scripts/bootstrap-tour.js"></script>
+
+    <!-- SITE TITLE -->
+    <title>Dr. Pencilcode</title>
+
+
+    <link rel="stylesheet" href="../../static/app/content/style.css">
+    <!-- =========================
+     FAV AND TOUCH ICONS AND FONT
+    ============================== -->
+    <link rel="icon" href="../../static/app/images/favicon.ico">
+    <link rel="stylesheet" href="static/app/icons/icons.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css_002.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css.css">
+    <!-- =========================
+     STYLESHEETS
+    ============================== -->
+    <!-- BOOTSTRAP AND ANIMATION -->
+    <link rel="stylesheet" href="../../static/app/content/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/app/content/animate.css">
+
+    <!-- CAROUSEL AND LIGHTBOX -->
+    <link rel="stylesheet" href="../../static/app/content/owl_002.css">
+    <link rel="stylesheet" href="../../static/app/content/owl.css">
+    <link rel="stylesheet" href="../../static/app/content/nivo-lightbox.css">
+    <link rel="stylesheet" href="../../static/app/content/default.css">
+
+    <!-- CUSTOM STYLESHEETS -->
+    <link rel="stylesheet" href="../../static/app/content/styles.css">
+    <link rel="stylesheet" href="../../static/app/content/basic.css">
+    <!-- RESPONSIVE FIXES -->
+    <link rel="stylesheet" href="../../static/app/content/responsive.css">
+
+    <!-- DEFAULT COLOR/ CURRENTLY USING -->
+    <link rel="stylesheet" href="../../static/app/content/red.css">
+
+    <script>
+                    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+    </script>
+
+
+</head>
+<body>
+  <div id="wrap">
+      <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
+          <div class="container">
+                      <!-- TOP BAR -->
+              <div class="navbar-collapse collapse" id="stamp-navigation">
+                      <!-- NAVIGATION LINK -->
+                  <a class="navbar-brand" href="/">
+                      <img src="static/app/images/logo_main_pc.png" alt="">
+                  </a>
+                  <ul class="nav navbar-nav navbar-right main-navigation ">
+                          <li class="navbar-brand"><a class="navbar-brand pull-right" href="https://twitter.com/DrScratchTool"><span class="icon-social-twitter colored-text"></span></a></li>
+                          <li class="navbar-brand"><a class="navbar-brand pull-right" href="mailto:drscratch@programamos.es"><span class="icon-basic-mail colored-text"></span></a></li>
+                          <li class="navbar-brand"><a class="navbar-brand pull-right">{% trans "Dr. Pencilcode(Beta Version)" %}</a></li>
+                        </ul>
+              </div>
+                      <!-- /END TOP BAR -->
+          </div>
+                  <!-- /END CONTAINER -->
+      </div>
+    <!-- JUMBOTRON -->
+      <div class="container">
+          <section id="blackboard" class="services col-md-5">
+          <div class="devpanel">
+              <div class="panel panel-success" id="devpanel">
+                  <div class="panel-heading" id="stepone">
+                      <img src="static/app/images/cat.png" class="img-responsive col-md-5">
+                      <h3 class="panel-title dark-text"><strong>{% trans "YOU'RE DOING GREAT!" %}</strong>
+
+                  </div>
+              <div class="panel-body">
+
+              <p class='text-left dark-text'> {% trans "Keep going to discover <br> more about Pencilcode and <br> this NICE ADVENTURE!" %}</p>
+              <a class="twitter-share-button" data-text="{% blocktrans with points=mastery.points %} I have just used Dr. Pencilcode! Beat it! @DrScratchTool {% endblocktrans %}"href="https://twitter.com/share">Tweet</a></h2>
+
+              <div class="container">
+                  <p class='text-left'>
+                    {% if url != "" %}
+                    <br>
+                   <a href="{{ url }}" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Come back to your Pencilcode project." %}</a>
+                   {% endif %}
+                  </p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- HOW TO IMPROVE -->
+      <div class="improve">
+          <div class="panel panel-success" id="improve">
+              <div class="panel-heading" id="steptwo">
+                  <h2 id="score" class="panel-title dark-text">{% trans "Want to know more?"%}</h2>
+              </div>
+              <div class="panel-body text-left">
+
+                          {% for key, value in mastery.items %}
+                          {% if forloop.counter0|divisibleby:1 %}<tr>{% endif %}
+
+                            <a  href="/learn/{{ key }}/#level0">
+                              <img src="static/app/images/little_bulb.png" alt="">
+                                  {% blocktrans %}
+                                  {{ key }}
+                                  {% endblocktrans %}
+                           </a><br>
+                          </tr>
+
+                          {% if forloop.counter|divisibleby:1 or forloop.last %}
+                         {% endif %}
+                          {% endfor %}
+
+              </div>
+          </div>
+        </div>
+        </section>
+
+
+      <!-- Score in detail -->
+        <div class="col-md-7">
+            <section id="dashboard">
+                <div class="container-fluid" id="stepthree">
+                    <div class="row marketing">
+                        <div class="jumbotron">
+                            <div class="table-responsive">
+                                <table class="table tablesorter">
+                                    <thead>
+                                        <tr>
+                                        <th class="col-md-4"><h4>{% trans "Category" %}</h4></th>
+                                        <th class="col-md-4"><h4>{% trans "Blocks" %}</h4></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for key, value in mastery.items %}
+                                    {% if forloop.counter0|divisibleby:1 %}<tr>{% endif %}
+                                      <div>
+                                        <td>
+                                          {% blocktrans %}
+                                          {{ key }}
+                                          {% endblocktrans %}
+                                        </td>
+                    										<td class="col-md-4">
+                    										{% if value = "false" %}
+                    		                  <strong> Not used </strong>
+                    										{% else %}
+                    											{% for element in value %}
+                    												{% if forloop.last %}
+                    												<strong> {{ element }} </strong>
+                    												{% else %}
+                    												<strong> {{ element }}, </strong>
+                    												{% endif %}
+                    											{% endfor %}
+                    										{% endif %}
+                                       </td>
+                                      </div>
+                                    {% if forloop.counter|divisibleby:1 or forloop.last %}
+                                    </tr>{% endif %}
+
+                                    {% endfor %}
+                                    </tbody>
+                                 </table>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+            </section>
+         </div>
+      </div>
+    </div>
+
+      <footer class="footer grey-bg">
+          <div class="container">
+             {% trans "©2014 Dr. Pencilcode is powered by " %}<a href="https:/github.com/ucsb-cs-education/hairball" class="dark-text">CoffeLint</a>
+
+              <!-- SOCIAL ICONS -->
+              <ul class="social-icons">
+                  <li><a href="https:/twitter.com/drscratchtool"><span class="icon-social-twitter transparent-text-dark"></span></a>
+                  </li>
+                  <li><a href=""><span class="icon-social-github transparent-text-dark"></span></a>
+                  </li>
+
+              </ul>
+          </div>
+      </footer>
+</body>
+</html>

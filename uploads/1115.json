@@ -1,0 +1,1 @@
+{"file":"/sarabc/untitled4","data":"secret = random [1..100]\nturns = 5\nwrite \"Guess my number.\"\nwrite \"You get #{turns} guesses.\"\n# Esto es un comentario\n","auth":true,"mtime":1485529357717,"mime":"text/x-pencilcode;charset=utf-8"}

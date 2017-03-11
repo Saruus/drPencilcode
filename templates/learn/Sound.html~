@@ -1,0 +1,43 @@
+{% extends 'learn/base.html' %}
+{% load i18n %}
+
+    <!-- JUMBOTRON -->
+    <div id = "cloud"><h2>{% block title %}{% trans "Sound" %} {% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+            <section id="level0">
+                <h3>{% trans "Piano" %}</h3>
+
+				{% trans "With Pencil Code it is possible to create several melodies and sounds using blocks of this category. For example, you can create a Piano! In order to make one, use <b><i>p = new Piano</b></i>. (p can be any variable name we choose). A Piano can be moved like any other visual element. Now, to play the piano, use <b><i>p.play</b></i>. The notes are written in standard " %}
+<a href="http://www.lesession.co.uk/abc/abc_notation.htm" target="_blank"> {% trans " ABC notation: " %}</a><br><br>
+
+				<div align = 'center'>
+					<img src="../../static/app/images/pianoCODE.png" alt="">
+					<img style="padding-left: 50px" src="../../static/app/images/pianoDRAW.png" alt="">
+				</div>
+			
+			    <br>
+
+    			<h3>{% trans "Tone" %}</h3>
+
+   				{% trans "We can add more interactivity by associating buttons to tones using <b><i>button</b></i> and <b><i>tone</b></i>, i.e:" %}<br><br>
+
+			
+				<img src="../../static/app/images/toneCODE.png" alt="">
+				<img src="../../static/app/images/toneDRAW2.png" alt=""><br><br>
+
+				{% trans "<b>How does this program work? </b> As we know, the button block creates a clickeable button which can be used to call a function or initiate an action when a user clicks the button. In this program, if you click on the C button, the tone C will be played, if you click on the X button, the melody or tone which is playing will be muted. The same procedure with the other two buttons (D and E)." %}<br><br>
+
+ 				<h4> Click for more examples of this Category: </h4>
+				<a href="https://gym.pencilcode.net/jam" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Code your own music " %}</a> <br><br>
+
+                  </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

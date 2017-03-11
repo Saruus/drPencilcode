@@ -248,6 +248,17 @@
      </div>
 </div>
 
+			<div class="row">
+		  	<div>
+				<h4>
+				 <form name="form" class="project-form" enctype="multipart/form-data" method="post" action="/download_certificate">
+				{% csrf_token %}
+               <!--django obliga a establecer este metodo de seguridad para el metodo post -->
+               <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button>
+               </form></h4>
+			</div>
+		  	<div>
+
     <footer class="footer grey-bg">
         <div class="container">
            {% trans "©2014 Dr. Pencilcode is powered by " %}<a href="https:/github.com/ucsb-cs-education/hairball" class="dark-text">CoffeeLint</a>

@@ -1,0 +1,1 @@
+{"file":"/sarabc/first","data":"speed 2\npen red\nfor [1..25]# otro comentario\n  fd 100\n  rt 88\nt = new Turtle red #prueba de comentario\nif touches t\n  rt 90\n","auth":true,"mtime":1477589958927,"mime":"text/x-pencilcode;charset=utf-8"}

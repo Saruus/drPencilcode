@@ -1,0 +1,1 @@
+{"file":"/yanamal/tiny/spiral","data":"ht()\nforever ->\n  pen random color\n  rt 10, 5\n  scale 1.02\n","auth":true,"mtime":1476142446000,"mime":"text/x-pencilcode;charset=utf-8","meta":{"libs":[{"name":"turtle","src":"//{site}/turtlebits.js"}]}}

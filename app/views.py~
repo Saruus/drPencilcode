@@ -5,28 +5,46 @@
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.http import HttpResponse, HttpResponseServerError
 from django.core.context_processors import csrf
+from django.template.context_processors import csrf
+from django.shortcuts import render_to_response
 from django.core.cache import cache
+from django.core.mail import EmailMessage
+from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext as RC
 from django.template import Context, loader
-from django.contrib.auth import logout, login, authenticate
-from django.utils.translation import ugettext as _
+from django.template.loader import render_to_string
+from django.contrib import messages
+from django.contrib.auth import logout, login, authenticate,get_user_model
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.db.models import Avg
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.utils import timezone
 from app.models import Project, Dashboard, Attribute
-from app.models import Dead, Sprite, Mastery, Duplicate, File
-from app.forms import UploadFileForm, UserForm, NewUserForm, UrlForm
+from app.models import Dead, Sprite, Mastery, Duplicate, File, Survey
+from app.forms import UploadFileForm, UserForm, NewUserForm, UrlForm, SurveyForm
+from app import pyploma
 from django.contrib.auth.models import User
-from datetime import datetime, date
+from datetime import datetime,timedelta,date
+from django.contrib.auth.decorators import login_required
+from email.MIMEText import MIMEText
+from django.utils.encoding import smart_str
+from django.utils.translation import activate
+import smtplib
+import ast
+import email.utils
 import os
 import ast
 import json
 import sys
-import unicodedata
 import urllib2
 import shutil
+import unicodedata
 import csv
+import kurt
 import zipfile
 from zipfile import ZipFile
-
 
 # ___________________________ MAIN _________________________________ #
 
@@ -38,6 +56,7 @@ def main(request):
         user = None
 
     print "USER -----> ", user
+    print request
     # The first time one user enters
     # Create the dashboards associated to users
     createDashboards()
@@ -94,17 +113,14 @@ def selector(request):
                     {'no_exists':no_exists},
                     RC(request))
             else:
-                print "DICCIONARIO ---> ", d
-                url = request.POST['urlProject']
+                url = request.POST['urlProject'] # urlProject es el nombre de la url que metes para analizar
                 dic = {'url': url}
                 d.update(dic)
+
+                #return render_to_response("upload/result3.html",d)
+                return render_to_response("upload/dashboard-unregistered-basic.html",d)
                 
-                if d["mastery"]["points"] >= 13:
-                    return render_to_response("upload/dashboard-unregistered-master.html", d)
-                elif d["mastery"]["points"] > 6:
-                    return render_to_response("upload/dashboard-unregistered-developing.html", d)
-                else:
-                    return render_to_response("upload/dashboard-unregistered-basic.html", d)
+             
     else:
         return HttpResponseRedirect('/')
 
@@ -115,14 +131,14 @@ def handler_upload(fileSaved, counter):
     # Primera vez que entra en handler_uppload
     # ---> fileSaved = /home/sara/drPencilcode-master/uploads/15.json
     # ---> counter = 0
-  
+
     if os.path.exists(fileSaved):
         counter = counter + 1
         if counter == 1:
         	fileSaved = fileSaved.split(".")[0] + "(1).json" # sb2? --> Dr.Scratch.
         else:
             fileSaved = fileSaved.split('(')[0] + "(" + str(counter) + ").json"
-       
+
         file_name = handler_upload(fileSaved, counter)
         return file_name
     else:
@@ -181,31 +197,46 @@ def urlUnregistered(request):
 
 def processStringUrl(url):
     """Process String of URL from Form
-    
+
     We allow URLs fof the type:
     http://login.pencilcode.net/edit/project
-    
+
     Responds the JSON URL
     or "error" else
     """
 
-    #http://sarabc.pencilcode.net/load/first
+    #http://sarabc.pencilcode.net/edit/first
     # idProject = ''
     idProject = "error"
-    
+    counter = 0
+    name = ''
+
     try:
-        protocol, blank, server, edit, name = url.split('/')
+        lista = url.split('/')
+        try:
+            protocol = lista[0]
+            blank = lista[1]
+            server = lista[2]
+        except IndexError:
+            return idProject
+
+        for i in lista:
+            if counter > 3: 
+                if counter == 4:
+                    name = name + lista[counter]
+                else:
+                    name = name + '/' + lista[counter]              
+            counter = counter + 1
+
     except ValueError:
+        idProject = 'error';
         return idProject
 
-    print "protocol ---> ", protocol
-    print "server ---> ", server #sarabc.pencilcode.net
-    print "name ---> ", name
-    
+
     if protocol == "https:":
         protocol = "http:"
 
-    if protocol != "http:": #se puede hacer como en drScratch? auxString == ''?
+    if protocol != "http:": 
         return idProject
 
     login, pencilcode, net = server.split('.')
@@ -214,6 +245,7 @@ def processStringUrl(url):
     else:
         if name == '':
             return idProject
+
 
     idProject = protocol + '/' + blank + '/' + server + '/' + "load" + '/' + name
 
@@ -228,19 +260,18 @@ def sendRequestgetJSON(idProject):
     # Create DB of files
     now = datetime.now()
     fileName = File (filename = fileURL, method = "url", time = now,
-                     score = 0, abstraction = 0, parallelism = 0,
-                     logic = 0, synchronization = 0, flowControl = 0,
-                     userInteractivity = 0, dataRepresentation = 0)
+                     move = "", art = "", text = "", sound = "",
+                     control = "", operators = "")
 
     print  "GUARDADO EN LA BASE DE DATOS --> ", fileName
 
     # Guardamos en la base de datos.
-    fileName.save() 
+    fileName.save()
     dir_zips = os.path.dirname(os.path.dirname(__file__)) + "/uploads/"
-    fileSaved = dir_zips + str(fileName.id) + ".json" 
+    fileSaved = dir_zips + str(fileName.id) + ".json"
     #fileName.id -> models añaden el campo id automaticamente.
 
-    # /home/sara/drPencilcode-master/uploads/15.json    
+    # /home/sara/drPencilcode-master/uploads/15.json
 
     # Log
     pathLog = os.path.dirname(os.path.dirname(__file__)) + "/log/"
@@ -251,24 +282,16 @@ def sendRequestgetJSON(idProject):
 
     # Save file in server
     counter = 0
-    file_name = handler_upload(fileSaved, counter)  # /home/sara/drPencilcode-master/uploads/15.json    
+    file_name = handler_upload(fileSaved, counter)  # /home/sara/drPencilcode-master/uploads/15.json
     outputFile = open(file_name, 'wb')
    # print "Retrieving: ", idProject
-    jsonFile = urllib2.urlopen(idProject) # http://sarabc.pencilcode.net/load/first 
+    jsonFile = urllib2.urlopen(idProject) # http://sarabc.pencilcode.net/load/first
     # abre la url(urlopen) y lee los datos de esa url(urllib2).
-    outputFile.write(jsonFile.read()) 
+    outputFile.write(jsonFile.read())
     outputFile.close() #lo escribe todo en un .json.
     return (file_name, fileName)
 
 # ________________________ LEARN MORE __________________________________#
-
-#def learn(request):
-#    if request.user.is_authenticated():
-#        return render_to_response("learn/learn-unregistered.html",
-#                                RC(request))
-#    else:
-#        return render_to_response("learn/learn-unregistered.html",
-#                                RC(request))
 
 def learn(request, page):
     #Unicode to string(page)
@@ -277,85 +300,18 @@ def learn(request, page):
     page = "learn/" + page + ".html"
 
     if request.user.is_authenticated():
-     
+
         return render_to_response(page,
                                 RC(request))
     else:
-       
+
         return render_to_response(page,
                                 RC(request))
 
 def learnUnregistered(request):
-       
+
     return render_to_response("learn/learn-unregistered.html",)
 
-
-# ________________________ TO REGISTERED USER __________________________#
-
-def loginUser(request):
-    """Log in app to user"""
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponseRedirect('/myDashboard')
-            else:
-                flag = True
-                return render_to_response("main/main.html",
-                                            {'flag': flag},
-                                            context_instance=RC(request))
-
-    else:
-        return HttpResponseRedirect("/")
-
-
-def logoutUser(request):
-    """Method for logging out"""
-    logout(request)
-    return HttpResponseRedirect('/')
-
-def createUser(request):
-    """Method for to sign up in the platform"""
-    logout(request)
-    if request.method == "POST":
-        form = NewUserForm(request.POST)
-        if form.is_valid():
-            nickName = form.cleaned_data['nickname']
-            emailUser = form.cleaned_data['emailUser']
-            passUser = form.cleaned_data['passUser']
-            user = User.objects.create_user(nickName, emailUser, passUser)
-            return render_to_response("profile.html", {'user': user}, context_instance=RC(request))
-
-# ________________________ PROFILE ____________________________#
-
-
-def updateProfile(request):
-    """Update the pass, email and avatar"""
-    if request.user.is_authenticated():
-        user = request.user.username
-    else:
-        user = None
-    if request.method == "POST":
-        form = UpdateForm(request.POST)
-        if form.is_valid():
-            newPass = form.cleaned_data['newPass']
-            newEmail = form.cleaned_data['newEmail']
-            choiceField = forms.ChoiceField(widget=forms.RadioSelect())
-            return HttpResponseRedirect('/mydashboard')
-        else:
-            return HttpResponseRedirect('/')
-
-
-def changePassword(request, new_password):
-    """Change the password of user"""
-    user = User.objects.get(username=current_user)
-    user.set_password(new_password)
-    user.save()
 
 # ________________________ DASHBOARD ____________________________#
 
@@ -410,31 +366,9 @@ def myProjects(request):
         return HttpResponseRedirect("/")
 
 
-def myRoles(request):
-    """Show the roles in Doctor Pencilcode"""
-    if request.user.is_authenticated():
-        user = request.user.username
-        return render_to_response("myRoles/content-roles.html",
-                                context_instance=RC(request))
-    else:
-        return HttpResponseRedirect("/")
-
-
-def myHistoric(request):
-    """Show the progress in the application"""
-    if request.user.is_authenticated():
-        user = request.user.username
-        mydashboard = Dashboard.objects.get(user=user)
-        projects = mydashboard.project_set.all()
-        return render_to_response("myHistoric/content-historic.html",
-                                    {'projects': projects},
-                                    context_instance=RC(request))
-    else:
-        return HttpResponseRedirect("/")
-
 # _______________________ AUTOMATIC ANALYSIS _________________________________#
 
-def analyzeProject(request, file_name, filename):
+def analyzeProject(request, file_name, filename): #ESTA FUNCION DEVUELVE UN DICCIONARIO
     dictionary = {}
     # request -> <WSGIRequest: POST '/selector'>
     # file_name -> /home/sara/drPencilcode-master/uploads/47.json
@@ -448,22 +382,22 @@ def analyzeProject(request, file_name, filename):
         print "list_file ---> !", list_file
         print "file_name -> ", file_name #/home/sara/drPencilcode-master/uploads/47.json
         # Request to coffeelint
-        with open(file_name) as data_file:    
+        with open(file_name) as data_file:
             data = json.load(data_file)  #todo lo que hay escrito en 47.json (diccionario) lo guarda en data
-        
+
         print "DATA -> ",data
-        with open(file_name.replace(".json", ".coffee"), "w") as coffee_file:    
+        with open(file_name.replace(".json", ".coffee"), "w") as coffee_file:
             coffee_file.write(data["data"]) # copia el valor de la llave data del diccionario data en 47.coffee
 
-        metricMastery = "python /home/sara/coffee-mastery/coffee-mastery.py " + file_name.replace(".json", ".coffee")
+        metricMastery = "python /home/sara/coffee-masteryBETA/coffee-mastery.py " + file_name.replace(".json", ".coffee")
         print "Running", metricMastery
         try:
-            resultMastery = os.popen(metricMastery).read()
+            resultMastery = os.popen(metricMastery).read() # resultmastery es lo que hay en el json mas los niveles basic, developing.. de cada categoria.
         except:
             print "error en mastery"
 
-        
-        metricLint = "coffeelint --reporter raw " + file_name.replace(".json", ".coffee") 
+
+        metricLint = "coffeelint --reporter raw " + file_name.replace(".json", ".coffee")
         # devuelve diccionario con errores del proyecto .coffee (si hay o no hay)
 
         try:
@@ -472,96 +406,262 @@ def analyzeProject(request, file_name, filename):
             print "error en lint"
 
         print "\n resultMastery --> ",resultMastery
-        print "resultLint --> ", resultLint
+        # print "resultLint --> ", resultLint
 
         # Create a dictionary with necessary information
         dictionary.update(procMastery(request, resultMastery, filename))
-        dictionary.update(procLint(request, resultLint))
-        
-        print dictionary
+
+        # print dictionary
         return dictionary
     else:
         return HttpResponseRedirect('/')
-
-
-# __________________________ JSON Analyzer _____________________________#
-
 
 
 # __________________________ PROCESSORS _____________________________#
 
 def procMastery(request, lines, fileName):
     """Mastery"""
-    #print "In procMastery"
-    dic = {}
     d = {}
+    lint = {}
+    diccduplic = {}
+    diccblocks = {}
+    diccpuntos = {}
+    mssg = ''
+    diccpoints = {}
+    MaxBonus = [1, 2, 3, 4, 5, 6]
+    current_points = 0
     lint_data = json.dumps(lines)
+    categories = ['Move', 'Art', 'Text', 'Sound', 'Control', 'Operators', 'Duplicados']
 
-    print "\n LINT_DATA --> ", lint_data
+    aux = lint_data.split('Move: ')[1]
+    dicc = {}
+    dicclevels = {}
+    n = 1
 
-    aux1 = lint_data.split("]")[-1]
-    aux2 = aux1.split("\n")
-    aux3 = aux2[0].split('\\n')
+    # Creo un diccionario con el nombre de las categorias y los bloques que se están usando 
+    # en cada una de ellas.
 
-    print "\n Prueba --> ", aux1
-    print "prueba 2 ---> ", aux2
-    print "prueba3 -> ", aux3
-    print "\n"
-   
-    # Capabilities scores
-    abstraction = int(aux3[1].split(': ')[1])
-    parallelism = int(aux3[2].split(': ')[1])
-    logic = int(aux3[3].split(': ')[1])
-    synchronization = int(aux3[4].split(': ')[1])
-    flow = int(aux3[5].split(': ')[1])
-    userInteractivity = int(aux3[6].split(': ')[1])
-    dataRepresentation = int(aux3[7].split(': ')[1])
+    for i in categories:
+        if i != 'Duplicados' and i != 'Levels':
+            a = categories[n] + ": "        
+            dicc[i] = aux.split(a)[0].split('\\n')[0]
+            aux = aux.split(a)[1]
+            n = n + 1
+        else:
+            diccduplic = aux.split("\\n")[0]
+            dicclevels = aux.split("\\n")[1].split('Levels: ')[1]
+         
+    dicclevels = ast.literal_eval(dicclevels)
 
-    diccionario = {"Abstraction": abstraction, "Parallelism": parallelism,
-         'Logic': logic, 'Synchronization': synchronization, 'Flow': flow,
-         'Interactivity': userInteractivity, 'DataRepresentation': dataRepresentation}
-    d.update(diccionario)
+    for elem in dicc:
+        value = dicc[elem]
+        listblocks = []
+        if value == 'false':
+            diccblocks[elem] = 'false'
+        else:
+            value = ast.literal_eval(value)
+            dicc[elem] = value
+            lista = value.values()
+            for i in lista:
+                if i != 'false':
+                    listblocks = listblocks + i
+                    diccblocks[elem] = listblocks
 
-    score = 0
-    for key in d:
-        score = score + d[key]
+    
+    for elem in dicclevels:
+        current_points = current_points + dicclevels[elem]
+
+    # BONUS??
+    calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBonus)
+
+
+    mssg = wtimprove(dicclevels)
+    print mssg
+
 
     #Save in DB
-    fileName.score = score
-    fileName.abstraction = d["Abstraction"]
-    fileName.parallelization = d["Parallelism"]
-    fileName.logic = d["Logic"]
-    fileName.synchronization = d["Synchronization"]
-    fileName.flowControl = d["Flow"]
-    fileName.userInteractivity = d["Interactivity"]
-    fileName.dataRepresentation = d["DataRepresentation"]
+
+    fileName.move = dicc["Move"]
+    fileName.art = dicc["Art"]
+    fileName.text = dicc["Text"]
+    fileName.sound = dicc["Sound"]
+    fileName.control = dicc["Control"]
+    fileName.operators = dicc["Operators"]
+#    fileName.bonus = dicc["Bonus"]
     fileName.save()
+    
+    d["mastery"] = {}
+    d["mastery"] = diccblocks
+    d["lint"] = dicclevels
+    d["mastery"]["points"] = current_points
+    d["mastery"]["emptybonus"] = MaxBonus
+    d["mastery"]["message"] = mssg
 
-    dic["mastery"] = {}
-    dic["mastery"] = d
-    dic["mastery"]["points"] = score
-    dic["mastery"]["maxi"] = 18
-    return dic
+    print str(d) + "\n"
+    #print "PUNTUACION FINAL: ", totalpoints
+
+    return d
+
+#{'mastery': {'Sound': 'false', 'Control': ['for'], 'Art': ['pen'], 'Text': 'false', 
+#'Operators': ['='], 'Move': ['rt', 'speed', 'fd']}, 'Error': 'None'}
+
+def wtimprove(dicclevels):
+    #{'Sound': 0, 'Control': 3, 'Art': 1, 'Text': 1, 'Operators': 3, 'Move': 3}
+    print "DICCLEVELS ", dicclevels
+    level0 = []
+    level1 = []
+    level2 = []
+    level3 = []
+    lowlevel = 'false'
+    basiclevel = 'false'
+    intermediatelevel = 'false'
+    highlevel = 'false'
+
+    for element in dicclevels:
+        value = dicclevels[element]
+        if value == 0:
+            level0.append(element)
+            lowlevel = 'true'
 
 
-def procLint(request, lines):
-    """Lint"""
-   # print "In procLint"
-    dic = {}
-    lint_data = json.dumps(lines)
+    if lowlevel == 'true':
+        if len(level0) == 1:
+                string = str('Ohh! You have not used blocks from ' + level0[0] + 
+        ' category..\nCheck out the examples and blocks that you can use in this class to raise your level.')
+        else:
+            categ = ''
+            for elem in level0:
+                if categ == '':
+                    categ = str(elem)
+                else:
+                    categ = categ + ', ' + elem
 
-    dic["lint"] = {}
-    dic["lint"]["points"] = 3
-    dic["lint"]["maxi"] = 25
-    return dic
+            string = str('Ohh! You have not used blocks from ' + categ + 
+            ' categories.. \nCheck out the examples and blocks that you can use in these classes to raise your level!')
+    elif lowlevel == 'false':
+        for element in dicclevels:
+            value = dicclevels[element]
+            if value == 1:
+                level1.append(element)
+                basiclevel = 'true'
 
 
-# _____________________ CREATE STATS OF ANALYSIS PERFORMED ___________#
+    if basiclevel == 'true' and lowlevel == 'false':
+        if len(level1) == 1:
+                string = str("You're good! but you can still raise your level working on " + level1[0] + 
+                " category.\nCheck out the examples for more help!")
+        else:
+            categ = ''
+            for elem in level1:
+                if categ == '':
+                    categ = str(elem)
+                else:
+                    categ = categ + ', ' + elem
+            string = str("You're good! but you can still raise your level working on " + categ + 
+            " categories.\nCheck out the examples for more help!")
 
-def createStats(file_name, dictionary):
-    flag = True
+    elif basiclevel == 'false':
+        for element in dicclevels:
+            value = dicclevels[element]
+            if value == 2:
+                level2.append(element)
+                intermediatelevel = 'true'
 
-    return flag
+    if intermediatelevel == 'true' and lowlevel == 'false' and basiclevel == 'false':
+        if len(level2) == 1:
+                string = str("You're almost a master! Take a look on " + level2[0] + 
+                " category. \nCheck the examples to level up. You will make it!")
+        else:
+            categ = ''
+            for elem in level2:
+                if categ == '':
+                    categ = str(elem)
+                else:
+                    categ = categ + ', ' + elem
+            string = str("You're almost a master! Take a look on " + categ + 
+            " categories.\nCheck the examples to level up. You will make it!")
+
+    elif intermediatelevel == 'false':
+        if lowlevel == 'false' and basiclevel == 'false':
+            highlevel = 'true'
+
+    return string
+
+
+def calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBonus):
+    listbonus = []
+    allcategor = 0
+    bonuscomplex = []
+    bonusdiversi = []
+    for element in categories:
+        if element != 'Duplicados' and diccblocks[element] != 'false':
+            allcategor = allcategor + 1
+            
+    print MaxBonus
+    if allcategor == 6:
+        listbonus.append("You have used blocks of all categories!")
+        print "BONUS: you have used blocks of all categories!"  
+        current_points = current_points + 1 
+        MaxBonus.pop()  
+
+    categ = []
+    alLevels = 'false'
+    complexity = 'false'
+    for elem in dicc:
+        cont = 0
+        value = dicc[elem]
+        if value != 'false': # value = {'1': ['write'], '3': 'false', '2': 'false'}
+            alLevels = 0
+            for level in value:
+               blocks = value[level]
+               if blocks != 'false':
+                    cont = cont + 1
+        if cont == 3:        
+            alLevels = 'true'
+            bonusdiversi.append(elem)
+            num1 = len(value['1'])
+            num2 = len(value['2'])
+            num3 = len(value['3'])
+            if num1 < num3 and num2 < num3:
+                complexity = 'true'
+                bonuscomplex.append(elem)
+
+    if alLevels == 'true':
+        # Bonus por diversidad
+        if len(bonusdiversi) == 1:
+            string = str('You have used blocks of three different levels in ' + bonusdiversi[0] + ' category!')
+        else:
+            categ = ''
+            for elem in bonusdiversi:
+                if categ == '':
+                    categ = str(elem)
+                else:
+                    categ = categ + ', ' + elem
+            string = str('You have used blocks of three different levels in ' + categ + ' categories!')
+      	
+        listbonus.append(string)
+        print str("You have used blocks of three different levels in a category!")
+        current_points = current_points + 1
+        MaxBonus.pop()
+
+        # Bonus por complejidad
+        if complexity == 'true':
+            listbonus.append(str("Bonus for complexity, you have used more blocks of level 3 than 1 and 2."))
+            print str("Bonus for complexity, you have used more blocks of level 3 than 1 and 2.")
+            current_points = current_points + 1
+            MaxBonus.pop()
+    
+    diccduplic = ast.literal_eval(diccduplic)
+      
+    if diccduplic != dict():
+        print "You have use the same block more than once!" 
+        listbonus.append("You have use the same block more than once!")
+        current_points = current_points + 1
+        MaxBonus.pop()
+
+    diccblocks["Bonus"] = listbonus
+    print "bonussss", diccblocks["Bonus"]
+
 
 
 # _____ ID/BUILDERS ____________#
@@ -646,7 +746,51 @@ def writeErrorAttribute(dic):
                 lErrors.append(text)
     return lErrors
 
-# _________________________  _______________________________ #
+#_________________________Download Certificate_______________________________#
+def download_certificate(request):
+    if request.method == "POST":
+        filename = "http://sarabc.pencilcode.net/edit/first"
+        level = "15"
+        pyploma.generate(filename,level)
+        path_to_file = os.path.dirname(os.path.dirname(__file__)) + "/app/output.pdf"
+        pdf_data = open(path_to_file, 'r')
+        response = HttpResponse(pdf_data, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(filename)
+        return response
+
+def csrf_failure(request, reason=""):
+    ctx = {'message': 'CSRF no furula'}
+    return render_to_response('csrf/fallo.html', ctx)
+
+
+
+# _________________________ SURVEY FOR FEEDBACK _______________________________ #
+
+
+def getFeedback(request):
+    print "ENTRO EN FEEDBACK"
+
+   # if request.method == "POST":
+   #     if "_question1" in request.POST:
+   #         form = SurveyForm(request.POST)
+     #       if form.is_valid():
+	#
+#			form_diccionario = form.cleaned_data['question1']
+
+				#para conseguir la "informacion limpia" sin los corchetes y demas
+		# 		guardar_pregunta = form_diccionario.get("question1")
+
+				# guardar en base de datos
+		 #		obj = Survey()
+		 #		obj.question1 = guardar_pregunta
+		 #		obj.save()
+
+          #  context = {
+		   #     "form":form
+		  #  }
+
+           # return render (request, "formulario.html", context)
+
 
 
 def uncompress_zip(zip_file):

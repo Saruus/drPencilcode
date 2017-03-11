@@ -59,10 +59,10 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -73,6 +73,7 @@ ROOT_URLCONF = 'drPencilcode.urls'
 
 WSGI_APPLICATION = 'drPencilcode.wsgi.application'
 
+CSRF_FAILURE_VIEW = 'app.views.csrf_failure'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

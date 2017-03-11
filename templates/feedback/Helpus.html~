@@ -1,0 +1,79 @@
+{% load i18n %}
+    <!-- JUMBOTRON -->
+    <div id = "cloud"><h2>{% block title %}{% trans "Help US" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+    {% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+    {% trans "We'd love to improve our tool step by step and your help and opinion about Dr.Pencilcode would be very useful for us in order to do it. Take a minute of your time to fill this survey about our page. We'll take into account your opinion! Thank you :)" %}
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body col-lg-10 col-lg-offset-1">
+                <section>
+                    <h3>{% trans "What do you think about Dr.Pencilcode?" %}</h3><br>
+							
+					<h4 align = 'center'> Dr.Pencilcode workshop - survey </h4>
+					<p><strong>Task 1. When visiting Dr.Pencilcode http://drpencilcode.libresoft.es </strong></p>
+					<p> a. What do you think about the webpage? Do you like it? </p>
+ 
+				<!--		 <form action="survey.php" method="post">
+						  <input type="radio" name="task1" value="yes"> Yes <br>
+						  <input type="radio" name="task1" value="moreless"> More or less <br>
+						  <input type="radio" name="task1" value="no"> No 
+						</form> -->
+
+                         <form name="form" class="project-form" method="get" action="/feedback/Helpus/" href="/learn/Move/">
+                                {% csrf_token %} <!--django obliga a establecer este metodo de seguridad para el metodo post-->
+                                    <input name="question1" class="form-control input-box placeholder" placeholder="Give us your opinion." type="text" />
+                                    <button id="Submit" name='_question1' type="submit" class="btn btn-primary standard-button">{% trans "Save" %}</button>
+                                    <br><br>
+                         </form>
+
+
+				<!--	<p> b. Have you understood what is the web for?
+						<form>
+						  <input type="radio" name="gender" value="yes"> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p><strong>Task 2. When analyzing your project </strong></p>
+					<p> a. Was it easy to do the analysis?</p>
+						 <form>
+						  <input type="radio" name="gender" value="yes" checked> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p> b. Do you undestood the results shown?</p>
+						 <form>
+						  <input type="radio" name="gender" value="yes" checked> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p> c. How did you feel when you saw the results?</p>
+						 <form>
+						  <input type="radio" name="gender" value="yes" checked> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p> d. Why? </p>
+					<input type="text" name="firstname" value="Explain why."><br>
+					<input type="text" class="form-control" placeholder="Text input">-->
+
+				<div align='center'>
+					<img src="../../static/app/images/survey_img.png" alt="">
+				</div>	
+
+             </section>
+  
+			 <br>
+			 <br><br>
+            </div>
+        </div>
+  		
+  </div>
+  
+ {% endblock %}

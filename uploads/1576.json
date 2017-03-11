@@ -1,0 +1,1 @@
+{"file":"/sarabc/todos","data":"rt 90\nbk 100\ndot green, 50\nt = 'Hola.'\nwrite typeof(t)\nplay 'c'\nkeydown 'X', ->\n  fd 100\nrt 90\n","auth":true,"mtime":1488124313841,"mime":"text/x-pencilcode;charset=utf-8"}

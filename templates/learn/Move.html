@@ -1,0 +1,86 @@
+{% extends 'learn/base.html' %}
+{% load i18n %}
+
+    <!-- JUMBOTRON -->
+    <div id = "cloud"><h2>{% block title %}{% trans "Move" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+            <section>
+                <h3>{% trans "Movement" %}</h3>
+				<h4> Level 1 </h4>
+    			{% trans "The most basic Move blocks you can start working with are <i><b> fd </b></i>, <i><b> bk </b></i>, <i><b> rt </b></i> and <i><b> lt </b></i>. <i><b> fd </b></i> and <i><b> bk </b></i> are used to move the turtle forward and backward (the distance is measured in pixels) while <i><b>rt</i></b> and <i><b>lt</i></b> pivot the turtle clockwise and counterclockwise respectively (the turn is measured in degrees)." %}<br><br>
+
+				<div class="col-md-3">
+					<img src="../../static/app/images/cuadradoCODE.png" alt="">
+				</div>	
+				<img src="../../static/app/images/cuadradoDRAW.png" alt="">
+			    <br><br>
+				<br>
+  				{% trans "<b> How does this program work? </b> Using a purple pen, the turtle will move forward 100 pixels, then, it will turn right 90 degrees, move forward 100px again, turn right 90º and so on, drawing a square as a result." %} <br><br>
+
+				{% trans "Another example:" %}<br><br>
+
+				<div class="col-md-3">
+					<img src="../../static/app/images/starCODE.png" alt="">
+				</div>	
+				<img src="../../static/app/images/starDRAW.png" alt="">
+			    <br><br>
+				<br>
+
+				<img src="../../static/app/images/littlepencil.png" alt="">
+				{% trans " <i><b> rt </b></i> and <i><b> lt </b></i> blocks can also be used to draw curves by using a second argument. The first argument is the angle of the curve (in dregrees) and the second one is the radius (measure in pixels). An arc can have any value as an angle, even negative values. An angle of 360 degrees creates a circle. Check out this example:" %}<br><br>
+
+				<div class="col-md-3">
+					<img src="../../static/app/images/tortugaCODE.png" alt="">
+				</div>	
+				<img style = 'height: 220px' src="../../static/app/images/tortugaDRAW.png" alt="">
+			    <br><br><br><br>
+
+				<h4> Level 2 </h4>	
+			
+				<img src="../../static/app/images/littlepencil.png" alt="">
+				{% trans "If you think the turtle is moving too slow and it takes its time to draw your code, don't worry! Pencil code have the perfect block for you! With <i><b> speed </b></i> you can speed up the movements of the turtle as fast as you want. Speed only allows one argument: number of moves per second. <br><i><b> speed Infinity </i></b> sets the animation time to zero, which means turtle motion occurs immediately, as soon as you run it (as long as there is nothing else already ahead of it in the queue)." %}<br><br>
+
+				<div class="col-md-4">
+					<img src="../../static/app/images/serpienteCODE.png" alt="">
+				</div>	 
+				<img src="../../static/app/images/serpienteDRAW.png" alt="">
+			    <br><br>
+
+				{% trans "<b> How does this program work? </b> When the user calls to the 'snake' function, following the blocks in order, the turtle will draw 90º arcs with 50px radius, first, turning right, then, turning left and, finally, turning right and left again. It'll also paint 2 dots (using <i><b> label </b></i>) to simulate the snake's eyes. As you can see, before calling to the fuction, the turtle is turned 45º to the right and speeded up to 100 moves per sec." %} <br><br>
+
+				<h4> Level 3 </h4>
+
+				<img src="../../static/app/images/littlepencil.png" alt="">
+				{% trans " <i><b> jumpto </b></i> moves the turtle to a new location without drawing. This block jumps to an absolute location in traditional Cartesian coordinates. <i><b> jumpxy </b></i> moves by an xy offset in traditional Cartesian coordinates. In this coordinate system, each unit is one pixel, and each graph paper grid square is 25 units. The mathematical coordinate axes are used, placing (0, 0) at the middle with x increasing to the right and y increasing upward." %}<br><br>
+				
+				<div align = 'center'>
+				<img style="height: 300px" src="../../static/app/images/coordenadas.png" alt="">	
+				</div>
+				<br>
+
+				{% trans "Neither <i><b> jumpto </b></i> nor <i><b> jumpxy </b></i> will trace lines if a pen is being used, however, you can use the function <i><b> moveto </b></i> or <i><b> movexy </b></i> with a pen to draw lines between points. These blocks do not affect the turtle rotation, only its position." %}<br><br>
+	
+				<div class="col-md-3">
+					<img src="../../static/app/images/rayasCODE.png" alt="">
+				</div>	
+				<img src="../../static/app/images/rayasDRAW.png" alt="">
+			    <br><br>
+				{% trans "<b> How does this program work? </b> A purple pen is chosen. The turtle starts in the middle of the window, at (x, y) coordinates (0, 0). With <i><b> fd 100 </b></i> it will go forward 100px to (0, 100), <i><b> jumpto 100, 100 </b></i>  will move the turtle to (100, 100) without drawing, then, with <i><b> bk 100 </b></i>, the turtle will go backard 100px (100, 0). <i><b> jumpxy -200, 0 </b></i> will move the turtle, without drawing, from its current position (cpX, cpY) to (cpX -200, cpY + 0) i.e. (100 - 200, 0 + 0) = (-100, 0). Finally, the turtle will go forward 100px again (-100, 100)." %} <br><br>
+
+				<h4> Click for more examples of this Category: </h4>
+
+				<a href="https://gym.pencilcode.net/draw/#/draw/tree.html" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Code your own programs. " %}</a> <br><br>
+
+			<br><br>
+
+ 
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

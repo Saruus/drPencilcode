@@ -1,0 +1,65 @@
+{% extends 'learn/base.html' %}
+{% load i18n %}
+    <!-- JUMBOTRON -->
+    <div id ="cloud"><h2>{% block title %}{% trans "Text" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+    {% block content %}
+
+    <div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+            <section id="level0">
+                <h3>{% trans "Write" %}</h3>
+
+   				{% trans "The most basic and most obvious way to start with this category is using <i><b>write</b></i>. This block allows to write words and sentences onto the page. <i><b>Write</b></i> only takes one argument: the text you want to write (wrapped up in quotes). n order to level up and make it more complex, <i><b>await</b></i>, <i><b>read</b></i> and <i><b>defer</b></i> blocks are used in this program. As the Control Category, these blocks can help your PencilCode projects be more interactive, but in this case, by answering questions. "%}<br>
+<img src="../../static/app/images/littlepencil.png" alt="">
+{% trans "<i><b>Await</b></i> pauses execution until an asynchronous process completes. Execution is unblocked when the <i><b>defer</b></i> function is triggered."%}<br>
+<img src="../../static/app/images/littlepencil.png" alt="">
+{% trans "<i><b>Read</b></i> shows a box for text input. It takes two arguments: first, an optional prompt. Second, a function to call after the user enters some text. The entered text or number is passed as the argument to the function.<br> For example:" %}<br><br>
+
+				<div class='col-md-6'>
+					<img src="../../static/app/images/TEXTCODE.png" alt="">
+				</div>
+        		<img src="../../static/app/images/TEXTDRAW.png" alt="">
+
+                  <br><br><br>
+   				{% trans "<b> How does it work? </b> After the program shows on the screen <i>'Whats your favourite color?' </i> followed by a box where you can write your answer, it will be paused until we answer the question. Our response will be saved in 'X' and, then, it will show the message 'I like X it too!' where 'X' is the answer (color) you have written." %}<br><br>
+
+				<img src="../../static/app/images/TEXT2DRAW.png" alt="">
+
+ 				<h3>{% trans "Type" %}</h3>
+
+				{% trans "<i><b>Type</b></i> shows text in a monospace font, with every letter the same width. It takes one argument: the text you want to write. Wrap it up in quotes. <i><b>Typebox</b></i> is similar to Type but instead of writing text, this one, shows a colored box. <i><b>Typeline</b></i> creates a new line." %} <br><br>
+
+
+				<div align = 'center'>
+					<img src="../../static/app/images/typeline2CODE.png" alt="">
+					<img style="padding-left: 90px" src="../../static/app/images/typeline2DRAW.png" alt="">
+				</div>
+
+                  <br>
+   				{% trans "<b> How does this program work? </b> <i><b>Typebox</b></i> will display a box with a random color and, then, <i><b>typeline</b></i> will introduce a new line. Since there is a for loop, each block will be repeated 5 times."%}
+				<br><br>
+				<h4> Click for more examples of this Category: </h4>
+				<a href="https://gym.pencilcode.net/imagine" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Code interactive fiction." %}</a> <br><br>
+
+			<div class="row">
+		  	<div>
+				<h4>
+				 <form name="form" class="project-form" enctype="multipart/form-data" method="post" action="/download_certificate">
+				{% csrf_token %}
+               <!--django obliga a establecer este metodo de seguridad para el metodo post -->
+               <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button>
+               </form></h4>
+			</div>
+		  	<div>
+
+
+
+
+             </section>
+        </div>
+    </div>
+ </div>
+ {% endblock %}

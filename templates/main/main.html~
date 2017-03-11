@@ -15,14 +15,14 @@
 
     <link rel="stylesheet" href="static/app/content/style.css">
     <!-- =========================
-     FAV AND TOUCH ICONS AND FONT  
+     FAV AND TOUCH ICONS AND FONT
     ============================== -->
     <link rel="icon" href="static/app/images/favicon.ico">
-    <link rel="stylesheet" href="static/app/icons/icons.css">  
+    <link rel="stylesheet" href="static/app/icons/icons.css">
     <link type="text/css" rel="stylesheet" href="static/app/content/css_002.css">
     <link type="text/css" rel="stylesheet" href="static/app/content/css.css">
     <!-- =========================
-     STYLESHEETS   
+     STYLESHEETS
     ============================== -->
     <!-- BOOTSTRAP AND ANIMATION -->
     <link rel="stylesheet" href="static/app/content/bootstrap-main.css">
@@ -37,7 +37,7 @@
     <!-- CUSTOM STYLESHEETS -->
     <link rel="stylesheet" href="static/app/content/styles.css">
 
-    
+
     <!-- RESPONSIVE FIXES -->
     <link rel="stylesheet" href="static/app/content/responsive.css">
 
@@ -48,7 +48,7 @@
 <body>
     <div id="mywrapper">
     <!-- =========================
-     PRE LOADER       
+     PRE LOADER
     ============================== -->
     <div style="display: none;" class="preloader">
         <div style="display: none;" class="status">
@@ -57,19 +57,19 @@
     </div>
 
     <!-- =========================
-     SECTION: HOME / HEADER  
+     SECTION: HOME / HEADER
     ============================== -->
     <header id="home" style="background-position: 50% -40.5px;" class="header" data-stellar-background-ratio="0.5">
         <!-- COLOR OVER IMAGE -->
         <div class="overlay-layer">
             <!-- STICKY NAVIGATION -->
             <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top  sticky-navigation" role="navigation">
-                <div class="container">          
+                <div class="container">
                     <!-- TOP BAR -->
                     <div class="navbar-collapse collapse" id="stamp-navigation">
                     <!-- NAVIGATION LINK -->
                       <a class="navbar-brand" href="/">
-                        <img src="static/app/images/logop_main.png" alt="">
+                        <img src="static/app/images/logo_main_pc.png" alt="">
                       </a>
                       <ul class="nav navbar-nav navbar-left main-navigation small-text">
                         <li class="navbar-brand"><a href="#section1"><em>{% trans "Why?" %}</em></a></li>
@@ -79,7 +79,7 @@
                       </ul>
 
                       <!-- LOGIN REGISTER -->
-                    <ul class="nav navbar-nav navbar-right login-register small-text">                
+                    <ul class="nav navbar-nav navbar-right login-register small-text">
                             <li style="display: none;" class="register-button js-register inpage-scroll">
                                 <a href="#home" class="navbar-register-button">{% trans "Get Started" %}</a>
                             </li>
@@ -98,41 +98,41 @@
 
         <!-- ONLY LOGO ON HEADER -->
                 <div class="row">
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-6 text-left">
 
                         <!-- HEADING AND BUTTONS -->
                         <div class="intro-section">
 
                             <!-- WELCOM MESSAGE -->
                             <h1 class="intro white-text">{% trans "Analyze your Pencil Code projects" %}</h1>
-                            
+
                             <h4 align=justify class="transparent-text"><strong>{% trans "Welcome to the Dr. PencilCode website, an analytical tool that evaluates your Pencil Code projects in a variety of computational areas. This analyzer is a helpful tool to evaluate your own projects, or those of your Pencil Code students." %} </strong></h4>
-                         
+
                             <!-- BUTTON -->
                             <div class="button hidden-xs">
                                 <a href="#section1" class="btn btn-primary secondary-button">{% trans "Learn More" %}</a>
                             </div>
                             <!-- /END BUTTON -->
-                            
+
                         </div>
 
                     </div>
                         <div class="container">
                     <div class="col-md-6">
-                        
+
                         <!-- VERTICAL PROJECT FORM -->
 
                             <div class="vertical-project-form" >
-                                
+
                                 <h5 class="dark-text form-heading"><strong>{% trans "Analyze your Pencilcode Project now!" %}</strong></h5>
-                                
+
                                 <form name="form" class="project-form" method="post" action="/selector">
                                 {% csrf_token %}
                                     <input name="urlProject" id="cf-name" class="form-control input-box placeholder" placeholder="https://your_name.pencilcode.net/edit/project_name" type="text" />
                                     <button id="url" name='_url' type="submit" class="btn btn-primary standard-button">{% trans "Add project URL" %}</button>
                                     <br>
                                 </form>
-                                
+
                                 <!-- FORM SUBMIT SUCCESS / ERROR MESSAGES -->
                                 <p class="file-error dark-text small-text">
                                 {% trans "Error! Please introduce a URL" %}</p>
@@ -155,7 +155,7 @@
                 </div>
             </div>
         </div>
-    
+
 
     <!-- =========================
      SECTION: CLIENTS LOGOs
@@ -166,7 +166,7 @@
             <li>
                 <a href="http://programamos.es">
                 <img src="static/app/images/logoProgramamos.png" alt="">
-                </a>            
+                </a>
             </li>
             <li>
                 <a href="http://www.urjc.es">
@@ -193,7 +193,7 @@
      SECTION: Why
     ============================== -->
     <section id="section1" class="services grey-bg">
-      
+
         <div class="container">
             <!-- SECTION HEADER -->
             <div class="section-header">
@@ -256,7 +256,7 @@
     </section>
 
     <!-- =========================
-     SECTION: HOW 
+     SECTION: HOW
     ============================== -->
 	<section id="section2" class="services grey-bg">
 		<div class="container">
@@ -306,7 +306,7 @@
 					<div class="col-md-6 col-sm-6">
                         <ul class="feature-list text-left">
                         	<li><p>
-                            <span class="icon-basic-home colored-text"></span> 
+                            <span class="icon-basic-home colored-text"></span>
                               {% trans "You can keep on improving your programming skills by yourself even from home." %}
                             <p></li>
 						</ul>
@@ -314,8 +314,8 @@
 					<div class="col-md-6 col-sm-6">
 						<ul class="feature-list text-left">
                             <li><p>
-                              <span class="icon-ecommerce-graph3 colored-text"></span> 
-                              {% trans "You can track your progress through charts and stats." %} 
+                              <span class="icon-ecommerce-graph3 colored-text"></span>
+                              {% trans "You can track your progress through charts and stats." %}
                             <p></li>
                         </ul>
                     </div>
@@ -327,7 +327,7 @@
 	</section>
 
     <!-- =========================
-     SECTION: BENEFITS   
+     SECTION: BENEFITS
     ============================== -->
     <section id="section3" class="unique-features white-bg">
         <div class="container">
@@ -340,7 +340,7 @@
                 <div class="colored-line">
                 </div>
                 <div class="sub-heading">
-                    <h3><em>{% trans "We are working on new features to improve Dr. Pencilcode" %}</em></h3>    
+                    <h3><em>{% trans "We are working on new features to improve Dr. Pencilcode" %}</em></h3>
                 </div>
             </div>
 
@@ -348,7 +348,7 @@
             <div class="row">
                 <div style="visibility: visible; animation-duration: 1.75s; animation-name: fadeInRight;" class="col-md-4 wow fadeInRight animated" data-wow-duration="1.75s" data-wow-offset="40">
 
-        
+
                     <!-- SINGLE FEATURE -->
                     <div class="feature">
                         <div class="icon-container">
@@ -454,10 +454,10 @@
         </div>
     </section>
 
-    
+
 
     <!-- =========================
-     SECTION: TEAM   
+     SECTION: TEAM
     ============================== -->
     <section id="section4" class="team grey-bg">
         <div class="container">
@@ -476,7 +476,7 @@
 
 
         <!-- =========================
-     SECTION: CONTACT INFO  
+     SECTION: CONTACT INFO
     ============================== -->
     <div class="contact-info white-bg">
         <div class="container">
@@ -510,9 +510,9 @@
     </div>
     </section>
 
- 
+
     <!-- =========================
-     SECTION: CALL TO ACTION   
+     SECTION: CALL TO ACTION
     ============================== -->
     <section style="background-position: 40% 827.245px;" class="call-to-action" id="section7" data-stellar-background-ratio="0.1">
         <div class="overlay-layer-2">
@@ -535,10 +535,10 @@
             </div>
         </div>
     </section>
-  
+
     <!-- FOOTER -->
     <footer class="footer grey-bg">
-       {% trans "©2015 Dr. Pencilcode is powered by " %}<a href="http://www.coffeelint.org/	" class="dark-text">CoffeeLint</a>
+       {% trans "©2016 Dr. Pencilcode is powered by " %}<a href="http://www.coffeelint.org/	" class="dark-text">CoffeeLint</a>
 
         <!-- SOCIAL ICONS -->
         <ul class="social-icons">
@@ -546,13 +546,13 @@
             </li>
             <li><a href=""><span class="icon-social-github transparent-text-dark"></span></a>
             </li>
-            
+
         </ul>
 
     </footer>
     </div>
 
-    <div id="pb" class="jumbotron"> 
+    <div id="pb" class="jumbotron">
     <div class="container">
             <p>
                 <h2>
@@ -563,7 +563,7 @@
 
 
         <div class="container">
-            <img src="../../static/app/images/logop_main.png"/>
+            <img src="../../static/app/images/logo_main_pc.png"/>
         </div>
 
 
@@ -582,12 +582,12 @@
     </div>
     </div>
 </div>
-	
+
 
         </div>
 
     <!-- =========================
-     SCRIPTS   
+     SCRIPTS
     ============================== -->
     <script src="static/app/scripts/jquery.min.js"></script>
     <script>

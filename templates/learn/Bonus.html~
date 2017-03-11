@@ -1,0 +1,35 @@
+{% extends 'learn/base.html' %}
+{% load i18n %}
+    <!-- JUMBOTRON -->
+    <div id = "cloud"><h2>{% block title %}{% trans "Bonus" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+    {% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+    {% trans "" %}
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body col-lg-10 col-lg-offset-1">
+                <section id="level0">
+                    <h3>{% trans "Do you want more Bonus?" %}</h3>
+					
+		
+
+             </section>
+  
+			 <br>
+			 <h4> Click for more information about blocks and examples: </h4>
+			<a href="https://ref.pencilcode.net/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Pencil Code Reference." %}</a><br>
+			<a href="https://gym.pencilcode.net/ref/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Pencil Code Gym." %}</a><br>
+
+			<br><br>
+            </div>
+        </div>
+  		
+  </div>
+  
+ {% endblock %}

@@ -18,4 +18,16 @@ class UrlForm(forms.Form):
 class UpdateForm(forms.Form):
 	newPass = forms.CharField(max_length=50)
 	newEmail = forms.CharField(max_length=50)
-#	choiceAvatar = forms.ChoiceField(choices=AVATAR_CHOICES, widget=forms.RadioSelect()
+
+class SurveyForm(forms.Form):
+
+#	question1 = forms.ChoiceField(widget=forms.RadioSelect(), choices=[(1, 'yes'), (2, 'moreless'), (3,'no')])
+#	question2 = forms.ChoiceField(widget=forms.RadioSelect(), choices=[(1, 'yes'), (2, 'moreless'), (3,'no')])
+#	question3 = forms.ChoiceField(widget=forms.RadioSelect(), choices=[(1, 'yes'), (2, 'moreless'), (3,'no')])
+    question1 = forms.CharField(max_length=50)
+
+#CHOICES=[('select1','select 1'),
+ #        ('select2','select 2')]
+
+
+
