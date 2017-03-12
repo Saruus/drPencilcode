@@ -767,28 +767,49 @@ def csrf_failure(request, reason=""):
 
 def getFeedback(request):
     print "ENTRO EN FEEDBACK"
+    form = SurveyForm(request.POST or None)
+    form_filled = False
+    if form.is_valid():
+        form_diccionario = form.cleaned_data
+        form_filled = True
+        print form_diccionario
+		#para conseguir la "informacion limpia" sin los corchetes y demas
+        save_question1a = form_diccionario.get("question1a")
+        save_question1b = form_diccionario.get("question1b")
+        save_question2a = form_diccionario.get("question2a")
+        save_question2b = form_diccionario.get("question2b")
+        save_question2c = form_diccionario.get("question2c")
+        save_question2d = form_diccionario.get("question2d")
+        save_question3a = form_diccionario.get("question3a")
+        save_question3b = form_diccionario.get("question3b")
+        save_question3c = form_diccionario.get("question3c")
+        save_question4 = form_diccionario.get("question4")
+        save_question5 = form_diccionario.get("question5")
+        save_question6 = form_diccionario.get("question6")
+        
+        #Guardar en la base de datos
+        Encuesta = Survey()
+        Encuesta.question1a = save_question1a
+        Encuesta.question1b = save_question1b
+        Encuesta.question2a = save_question2a
+        Encuesta.question2b = save_question2b
+        Encuesta.question2c = save_question2c
+        Encuesta.question2d = save_question2d
+        Encuesta.question3a = save_question3a
+        Encuesta.question3b = save_question3b
+        Encuesta.question3c = save_question3c
+        Encuesta.question4 = save_question4
+        Encuesta.question5 = save_question5
+        Encuesta.question6 = save_question6
+        Encuesta.save()
 
-   # if request.method == "POST":
-   #     if "_question1" in request.POST:
-   #         form = SurveyForm(request.POST)
-     #       if form.is_valid():
-	#
-#			form_diccionario = form.cleaned_data['question1']
 
-				#para conseguir la "informacion limpia" sin los corchetes y demas
-		# 		guardar_pregunta = form_diccionario.get("question1")
-
-				# guardar en base de datos
-		 #		obj = Survey()
-		 #		obj.question1 = guardar_pregunta
-		 #		obj.save()
-
-          #  context = {
-		   #     "form":form
-		  #  }
-
-           # return render (request, "formulario.html", context)
-
+    context = {
+    "form":form,
+    "form_filled": form_filled
+	}
+    
+    return render(request, 'feedback/Helpus.html', context)
 
 
 def uncompress_zip(zip_file):

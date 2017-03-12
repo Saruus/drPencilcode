@@ -67,9 +67,18 @@ class Activity(models.Model):
 	date = models.DateField()
 
 class Survey(models.Model):
-	question1 = models.CharField(max_length=50)
-	#question2 = models.CharField(max_length=10)
-	#question3 = models.CharField(max_length=10)
+	question1a = models.CharField(max_length=10)
+	question1b = models.CharField(max_length=10)
+	question2a = models.CharField(max_length=10)
+	question2b = models.CharField(max_length=10)
+	question2c = models.CharField(max_length=10)
+	question2d = models.CharField(max_length=200)
+	question3a = models.CharField(max_length=100)
+	question3b = models.CharField(max_length=10)
+	question3c = models.CharField(max_length=10)
+	question4 = models.CharField(max_length=10)
+	question5 = models.CharField(max_length=10)
+	question6 = models.CharField(max_length=500)
 
 
 

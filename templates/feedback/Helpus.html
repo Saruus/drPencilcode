@@ -1,3 +1,190 @@
 {% load i18n %}
+
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Responsive Bootstrap 3 Startup and Multipurpose Template">
+    <meta name="keywords" content="Stamp, Startup, Multipurpose, Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="author" content="Programamos URJC Libresoft FECyT">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="../../static/app/scripts/translations.js"></script>
+
+    <!-- SITE TITLE -->
+    <title>Dr. Pencilcode</title>
+
+
+    <link rel="stylesheet" href="../../static/app/content/style.css">
+    <!-- =========================
+     FAV AND TOUCH ICONS AND FONT
+    ============================== -->
+    <link rel="icon" href="../../static/app/images/favicon.ico">
+    <link rel="stylesheet" href="../../static/app/icons/icons.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css_002.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css.css">
+    <!-- =========================
+     STYLESHEETS
+    ============================== -->
+    <!-- BOOTSTRAP AND ANIMATION -->
+    <link rel="stylesheet" href="../../static/app/content/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/app/content/animate.css">
+
+    <!-- CAROUSEL AND LIGHTBOX -->
+    <link rel="stylesheet" href="../../static/app/content/owl_002.css">
+    <link rel="stylesheet" href="../../static/app/content/owl.css">
+    <link rel="stylesheet" href="../../static/app/content/nivo-lightbox.css">
+    <link rel="stylesheet" href="../../static/app/content/default.css">
+
+    <!-- CUSTOM STYLESHEETS -->
+    <link rel="stylesheet" href="../../static/app/content/styles.css">
+    <link rel="stylesheet" href="../../static/app/content/cloud.css">
+
+
+    <!-- RESPONSIVE FIXES -->
+    <link rel="stylesheet" href="../../static/app/content/responsive.css">
+
+    <!-- DEFAULT COLOR/ CURRENTLY USING -->
+    <link rel="stylesheet" href="../../static/app/content/red.css">
+
+</head>
+<body>
+   <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top  sticky-navigation" role="navigation">
+        <div class="container">
+                    <!-- TOP BAR -->
+            <div class="navbar-collapse collapse" id="stamp-navigation">
+                    <!-- NAVIGATION LINK -->
+                <a class="navbar-brand" href="/">
+                    <img src="../../static/app/images/logo_main_pc.png" alt="">
+                </a>
+                <ul class="nav navbar-nav navbar-right main-navigation ">
+                        <li class="navbar-brand"><a class="navbar-brand pull-right" href="https://twitter.com/DrScratchTool"><span class="icon-social-twitter colored-text"></span></a></li>
+                        <li class="navbar-brand"><a class="navbar-brand pull-right" href="mailto:sara.blazquezca@gmail.com"><span class="icon-basic-mail colored-text"></span></a></li>
+                    <li class="navbar-brand"><a class="navbar-brand pull-right">{% trans "Dr. Pencilcode (Beta Version)" %}</a></li>
+                      </ul>
+            </div>
+                    <!-- /END TOP BAR -->
+        </div>
+                <!-- /END CONTAINER -->
+    </div>
+            <!-- /END STICKY NAVIGATION -->
+
+    <!-- PANEL-->
+
     <!-- JUMBOTRON -->
-	<p>hola</p>
+    <div id = "cloud"><h2>{% block title %}{% trans "Help us" %}{% endblock %}</h2><span class='shadow'></span></div>
+    <!-- /END JUMBOTRON -->
+    <!-- PANEL-->
+    {% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body col-lg-10 col-lg-offset-1">
+    {% trans "We'd love to improve our tool step by step and your help and opinion about Dr.Pencilcode would be very useful for us in order to do it. Take a minute of your time to fill this survey about our page. We'll take into account your opinion! Thank you :)" %}
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body col-lg-10 col-lg-offset-1">
+                <section>
+
+				{% if form_filled %}
+
+				 <div class="alert alert-success">
+				  <strong> Your survey has been saved! </strong> Thank you so much for your help! <span class="glyphicon glyphicon-thumbs-up"></span>
+				<a  href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+				</div>
+				
+				{% else %}
+
+				 <div class="alert alert-warning">
+				  <strong> Please</strong>, answer and complete all the questions!    <span class="glyphicon glyphicon-pencil"></span>
+				<a  href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+				</div>
+
+    			{% endif %}
+					<h4 align = 'center'> Dr.Pencilcode workshop - survey </h4>
+					<div align = 'center'><img align= 'center' src="../../static/app/images/caritas.png" alt=""></div>
+			
+				  <form method = "POST" action = "" class="project-form" name=form >
+					<!--action, ruta url donde quiero mandarlo para
+					que sea procesado por la vista, si lo dejo en blanco lo manda
+					a la misma vista de donde viene -->
+       				{% csrf_token %} <!--django obliga a establecer este metodo de seguridad para el metodo post-->
+					<h5 style="color: red">{% trans "Task 1. When visiting Dr.Pencilcode:" %}</h5>
+					<p><b>{% trans "a. What do you think about the webpage? Do you like it?" %}</b></p>
+
+					<div id="form">{{form.question1a}}</div>
+
+					<p><b>{% trans "b. Do you understand what the web is for?" %}</b></p>
+
+					<div id="form">{{form.question1b}}</div>
+
+					<h5 style="color: red">{% trans "Task 2. Analyze one of your Pencil Code Projects:" %}</h5>
+					<p><b>{% trans "a. Was it easy to do the analysis?" %}</b></p>
+
+					<div id="form">{{form.question2a}}</div>
+
+					<p><b>{% trans "b. Did you understand the results shown?" %}</b></p>
+					<div id="form">{{form.question2b}}</div> 
+
+					<p><b>{% trans "c. How did you feel when you show your results?" %}</b></p>
+					<div id="form">{{form.question2c}}</div> 
+
+					<p><b>{% trans "d. Why?" %}</b></p>
+					<div id="form">{{form.question2d}}</div><br>
+
+					<h5 style="color: red">{% trans "Task 3. Help pages:" %}</h5>
+					<p><b>{% trans "From the results page, after analyzing your project, click on any of the category links to get information that can help you to level up." %}</b></p>
+
+					<p><b>{% trans "a. Write the name of the link you have clicked on:" %}</p></b>
+					<div id="form">{{form.question3a}}</div><br>
+					<p><b>{% trans "b. Do you understand the information shown on the new page?" %}</p></b>
+					<div id="form">{{form.question3b}}</div>
+					<p><b>{% trans "c. After reading the information..." %} <br> {% trans "Do you feel like adding more blocks to your Pencilcode project to do it better? " %}</p></b>
+					<div id="form">{{form.question3c}}</div>
+
+					<h5 style="color: red">{% trans "Task 4. Try to increase your score:" %}</h5>
+					<p><b>{% trans "Using the information of the help page, try to add something new to your project." %}<br>{% trans "Is the information shown enough to understand how to do it?" %}</p></b>
+					<div id="form">{{form.question4}}</div>
+
+					<h5 style="color: red">{% trans "Task 5. Reanalyze:" %}</h5>
+					<p><b>{% trans "After following the instructions on the help page,  re-analyze your Pencilcode project with Dr. Pencilcode." %} <br> {% trans "Have you got a higher score?" %} </p></b>
+		<div id="form">{{form.question5}}</div>
+
+					<h5 style="color: red">{% trans "Task 6. Give us some feedback:" %}</h5>
+					<p><b>{% trans "Comment whatever you want about Dr. Pencilcode:" %} <br> {% trans "Things you like,  things you don't like, ideas that we could add to the webpage..." %}</b></p>
+					<div id="form">{{form.question6}}</div><br>
+					
+
+   				 <button id ="Submit" type='submit' class="btn btn-primary standard-button" value="submit form">Submit</button>
+				<button type="reset" class="btn btn-primary standard-button"> {% trans "Reset" %}</button>
+
+				</form>
+
+             </section>
+  
+			 <br>
+			 <br><br>
+            </div>
+        </div>
+  		
+  </div>
+  
+ {% endblock %}
+
+<footer class="footer grey-bg">
+        <div class="container">
+               {% trans "©2016 Dr. Pencilcode is powered by " %}<a href="https://github.com/clutchski/coffeelint" class="dark-text">CoffeeLint</a>
+
+                <!-- SOCIAL ICONS -->
+                <ul class="social-icons">
+                    <li><a href="https:/twitter.com/drscratchtool">
+                        <span class="icon-social-twitter transparent-text-dark"></span></a>
+                    </li>
+                    <li><a href=""><span class="icon-social-github transparent-text-dark"></span></a>
+                    </li>
+
+                </ul>
+        </div>
+    </footer>
