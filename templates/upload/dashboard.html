@@ -1,0 +1,465 @@
+{% load i18n %}
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Responsive Bootstrap 3 Startup and Multipurpose Template">
+    <meta name="keywords" content="Stamp, Startup, Multipurpose, Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="author" content="Programamos URJC Libresoft FECyT">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="../../static/app/content/bootstrap-tour.css">
+    <script src="../../static/app/scripts/bootstrap.min.js"></script>
+    <script src="../../static/app/scripts/bootstrap-tour.js"></script>
+	<script src="../../static/app/scripts/js/mdb.min.js"></script>
+
+    <!-- SITE TITLE -->
+    <title>Dr. Pencilcode</title>
+
+
+    <link rel="stylesheet" href="../../static/app/content/style.css">
+    <!-- =========================
+     FAV AND TOUCH ICONS AND FONT
+    ============================== -->
+    <link rel="icon" href="../../static/app/images/favicon.ico">
+    <link rel="stylesheet" href="static/app/icons/icons.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css_002.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css.css">
+    <!-- =========================
+     STYLESHEETS
+    ============================== -->
+    <!-- BOOTSTRAP AND ANIMATION -->
+    <link rel="stylesheet" href="../../static/app/content/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/app/content/animate.css">
+
+
+    <!-- CAROUSEL AND LIGHTBOX -->
+    <link rel="stylesheet" href="../../static/app/content/owl_002.css">
+    <link rel="stylesheet" href="../../static/app/content/owl.css">
+    <link rel="stylesheet" href="../../static/app/content/nivo-lightbox.css">
+    <link rel="stylesheet" href="../../static/app/content/default.css">
+
+    <!-- CUSTOM STYLESHEETS -->
+    <link rel="stylesheet" href="../../static/app/content/styles.css">
+    <link rel="stylesheet" href="../../static/app/content/basic.css">
+    <!-- RESPONSIVE FIXES -->
+    <link rel="stylesheet" href="../../static/app/content/responsive.css">
+
+    <!-- DEFAULT COLOR/ CURRENTLY USING -->
+    <link rel="stylesheet" href="../../static/app/content/red.css">
+
+	<style>
+
+	</style>
+
+    <script>
+
+                    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+    </script>
+	<script>
+		// Instance the tour
+		// Initialize the tour
+		$(document).ready(function(){
+		 $("#tour").click(function(){
+		var tour = new Tour({
+		  storage: false,
+		  backdrop: true,
+		 steps: [
+		  {
+		    element: "#stepone",
+		    title: "{% trans 'Score' %}",
+		    content: "{% trans 'This section shows the total score.' %}"
+		  },
+		  {
+		    element: "#steptwo",
+		    title: "{% trans 'What can you improve?' %}",
+		    content:"{% trans 'This section gives you some advice of how you can level up.'%}"
+		  },
+		  {
+		    element: "#stepthree",
+		    title: "{% trans 'Score in detail'%}",
+		    content: "{% trans 'Here we show the score in each category. If you want to know more, you can check some examples by clicking in each category name.' %}",
+		    placement:'left'
+		  },
+ 		  {
+		    element: "#stepfour",
+		    title: "{% trans 'Used blocks' %}",
+		    content:"{% trans 'This section shows all the blocks you have use of each category.'%}"
+		  },
+          {
+            element: "#stepfive",
+            title: "{% trans 'Certificate' %}",
+            content:"{% trans 'Want to show off level? Download your certificate!'%}"
+          },
+          {
+            element: "#stepsix",
+            title: "{% trans 'Feedback' %}",
+            content:"{% trans 'Complete this survey! We will be thankful if you give us your opinion about our web!'%}"
+          }
+		]});
+		        tour.init();
+		        tour.start();
+
+		    });
+	});
+		</script>
+
+		<script>
+		$(document).ready(function(){
+
+		var filename = "https://scratch.mit.edu/projects/76904542/";
+		var level = "10";
+		var list =[filename,level];
+		$("#certificate").val(list.toString());
+		});
+
+		</script>
+
+        <script>
+        $(document).ready(function(){
+
+             $("#caret").click(function(){
+                $("#bonus").fadeToggle('1000');
+                $("#caret").toggleClass("top hvr-sink bottom hvr-float");
+            });
+        });
+
+        </script>
+
+		<script>
+		$(function() {
+   	
+			$(".progress-bar").each(function() {
+        		var finalWidth = parseInt($(this).attr("aria-valuenow"));
+        	$(this).animate({width: finalWidth+"%"}, 800);
+    		});
+		});	
+
+		</script>
+
+		<script>new WOW().init();</script>
+
+</head>
+<body>
+  <div id="wrap">
+      <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
+          <div class="container">
+                      <!-- TOP BAR -->
+              <div class="navbar-collapse collapse" id="stamp-navigation">
+                      <!-- NAVIGATION LINK -->
+                  <a class="navbar-brand" href="/">
+                      <img src="static/app/images/logo_main_pc.png" alt="">
+                  </a>
+                  <ul class="nav navbar-nav navbar-right main-navigation ">
+                          <li class="navbar-brand"><a class="navbar-brand pull-right" href="https://twitter.com/DrScratchTool"><span class="icon-social-twitter colored-text"></span></a></li>
+                          <li class="navbar-brand"><a class="navbar-brand pull-right" href="mailto:drscratch@programamos.es"><span class="icon-basic-mail colored-text"></span></a></li>
+							<li class="navbar-brand"><a class="btn btn-default" id="tour">{% trans "HELP  " %}<span class = "glyphicon glyphicon-search"></span></a></li>
+
+                          <li class="navbar-brand"><a class="navbar-brand pull-right">{% trans "Dr. Pencilcode(Beta Version)" %}</a></li>
+                        </ul>
+              </div>
+                      <!-- /END TOP BAR -->
+          </div>
+                  <!-- /END CONTAINER -->
+      </div>
+    <!-- JUMBOTRON -->
+      <div class="container">
+          <section id="blackboard" class="services col-md-5">
+          <div class="devpanel">
+              <div class="panel panel-success" id="devpanel">
+                  <div class="panel-heading" id = 'stepone'>
+
+					{% if mastery.points > 21 %}
+                      <img src="static/app/images/catexpert.png" class="img-responsive col-md-5">
+					{% else %}
+                      <img src="static/app/images/cat.png" class="img-responsive col-md-5">
+					{% endif %}
+
+
+                      <h3 class="panel-title dark-text" id="score"><strong>{% trans "Score:" %}</strong> {{ mastery.points }}
+
+                  </div>
+              <div class="panel-body">
+				
+			{% if mastery.points <= 6 %}
+				{% trans "<h4 class='dark-text'>Your level is... <strong> BASIC! </strong></h4>" %}
+                          <p class='dark-text'> {% trans "Well done, keep it up!" %}</br></p>
+
+			{% elif mastery.points > 6 and mastery.points <= 12 %}
+				{% trans "<h4 class='dark-text'>Your level is... <strong> INTERMEDIATE! </strong></h4>" %}
+                          <p class='dark-text'> {% trans "You're doing great!" %}</br></p>
+
+			{% elif mastery.points > 12 and mastery.points <= 18 %}
+				{% trans "<h4 class='dark-text'>Your level is... <strong> ADVANCED! </strong></h4>" %}
+                          <p class='dark-text'> {% trans "You're a master!" %}</br></p>
+
+			{% elif mastery.points > 18 %}
+				{% trans "<h4 class='dark-text'>Your level is... <strong> EXPERT! </strong></h4>" %}
+                          <p class='dark-text'> {% trans "You're a genious!" %}</br></p>
+
+
+			{% endif %}
+              <a class="twitter-share-button" data-text="{% blocktrans with points=mastery.points %} I have just used Dr. Pencilcode! Beat it! @DrScratchTool {% endblocktrans %}"href="https://twitter.com/share">Tweet</a>
+
+              <div class="container">
+                  <p class='text-left'>
+                    {% if url != "" %}
+                    <br>
+                   <a href="{{ url }}" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Come back to your Pencilcode project." %}</a>
+                   {% endif %}
+                  </p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- HOW TO IMPROVE -->
+      <div class="improve">
+          <div class="panel panel-success" id="improve">
+			<div id="steptwo">
+              <div class="panel-heading">
+                  <h2 id="score" class="panel-title dark-text">{% trans "What can you improve?"%}</h2>
+              </div>
+              <div class="panel-body text-left">
+				<img src="static/app/images/little_bulb.png" alt="">
+				<strong> {{ mastery.message }} </strong> 
+				<br><br>
+				<img src="static/app/images/little_bulb.png" alt="">
+				{% if mastery.emptybonus|length != 0 %}
+					
+					<strong> Try to complete the Bonus! </strong>
+				{% else %}
+
+					<strong> Well Done! You have complete all the Bonus! </strong>
+
+				{% endif %}
+
+				<br>
+
+              </div>
+          </div>
+        </div>
+        </section>
+
+
+      <!-- Score in detail -->
+        <div class="col-md-7">
+            <section id="dashboard">
+                <div class="container-fluid" id="stepthree">
+                    <div class="row marketing">
+                        <div class="jumbotron">
+                            <div class="table-responsive">
+                                <table class="table tablesorter">
+                                    <thead>
+                                        <tr>
+                                        <th class="col-md-4"><h4>{% trans "Category" %}</h4></th>
+                                        <th class="col-md-4"><h4>{% trans "Points" %}</h4></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for key, value in lint.items %}
+                                    {% if forloop.counter0|divisibleby:1 %}<tr>{% endif %}
+                                    {% if key != "points" %}
+									{% if key != "emptybonus" %}
+									{% if key != "message" %}
+ 									  <td>
+                                       <!-- {% if value = 3 %}
+                                        <span class="glyphicon glyphicon-star" id="star"></span>
+                                        {% endif %}-->
+										<a  href="/learn/{{ key }}">
+                                        {% blocktrans %}
+                                        {{ key }}
+                                        {% endblocktrans %}
+
+                                      </td>
+										<td>
+                                            {% if value = 0 %}
+                                             <div class="progress">
+                                                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="3" style="width: 0%">
+                                                    <span><strong> {{ value }} </strong></span>
+                                                </div>
+                                             <div>
+                                            {% elif value = 1 %}
+
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="3">
+                                                    <span><strong> {{ value }}/3 </strong></span>
+                                                </div>
+                                             <div>
+
+                                            {% elif value = 2 %}
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="3">
+                                                    <span><strong> {{ value }}/3 </strong></span>
+                                                </div>
+                                             <div>
+                                            {% elif value = 3 %}
+                                            <div class="progress">
+                                                <div class="progress-bar wow progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="3">
+                                                    <span><strong> {{ value }}/3 </strong></span>
+                                                </div>
+                                             <div>
+                                            {% endif %}
+                                       </td>
+                                {% endif %}
+                                {% endif %}
+								{% endif %}
+                                {% if forloop.counter|divisibleby:1 or forloop.last %}
+                                </tr>{% endif %}
+                                {% endfor %}
+
+                               	<br>
+                                 {% for key, value in mastery.items %}
+                                    {% if key == "Bonus" %}<tr>
+                                        <td>
+										<a  href="/learn/{{ key }}">
+                                        {% blocktrans %}
+                                        {{ key }}
+                                        {% endblocktrans %}
+                                        </td>
+                                        <td>
+
+                                        {% for element in value %}
+                                            <span class="glyphicon glyphicon-star" id="star"></span>
+                                        {% endfor %}
+										{% for number in mastery.emptybonus %}
+                                            <span class="glyphicon glyphicon-star-empty" id="star"></span>
+										{% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+
+
+                                    </tbody>
+                                 </table>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+            </section>
+         </div>
+      </div>
+
+<div class="container">
+	<section id="blackboard" class="services col-md-12">
+          <div class="panel panel-success" id="improve">
+			<div id = 'stepfour'>
+              <div class="panel-heading">
+                  <h4><strong> Details </strong></h4>
+              </div>
+              <div class="panel-body text-left">
+
+                  {% for key, value in mastery.items %}
+                     {% if forloop.counter0|divisibleby:1 %}<tr>{% endif %}
+                     {% if key != "points" %}
+					 {% if key != "emptybonus" %}
+					 {% if key != "message" %}
+                      <div>
+
+                        {% if key != "Bonus" %}
+ 							             <td>
+                           {% blocktrans %}
+                           {{ key }}:
+                           {% endblocktrans %}
+                           </td>
+                    	    <td class="col-md-4">
+                        	{% if value = "false" %}
+                                <strong> Not used </strong>  <span class="glyphicon glyphicon-remove" id='cross'></span>
+                        	{% else %}
+                        		{% for element in value %}
+                        			{% if forloop.last %}
+                        				<strong> {{ element }} </strong>
+                        			{% else %}
+                        				<strong> {{ element }}, </strong>
+                        			{% endif %}
+                        		{% endfor %}
+								            <span class=" glyphicon glyphicon-ok" id='ok'></span>
+                        	{% endif %}
+                             </td>
+                         {% endif %}
+                        </div>
+			  {% endif %}
+              {% endif %}
+			  {% endif %}
+              {% if forloop.counter|divisibleby:1 or forloop.last %}
+              </tr>{% endif %}
+              {% endfor %}
+
+            {% for key, value in mastery.items %}
+            {% if forloop.counter0|divisibleby:1 %}<tr>{% endif %}
+            {% if key != "points" %}
+			{% if key != "emptybonus" %}
+			{% if key != "message" %}
+
+                {% if key = "Bonus" %}
+                  <div class="dropdown">
+                           {{ key }} <span id="caret" class="top hvr-float"></span>
+                    <div class="dropdown-content" id="bonus">
+                      {% for element in value %}
+
+                       <span class="glyphicon glyphicon-star" id="star"></span>
+                       <strong> {{ element }} </strong><br>
+
+                      {% endfor %}
+                    </div>
+                  </div>
+                 </td>
+                {% endif %}
+                {% endif %}
+				{% endif %}
+				{% endif %}
+                {% if forloop.counter|divisibleby:1 or forloop.last %}
+                </tr>{% endif %}
+                {% endfor %}
+
+      					<br>
+      					<span class="glyphicon glyphicon-hand-right" style="color: red"></span>
+      					<strong>{% trans " Check out the blocks you can use in each category by" %}
+                         <a href="/learn/Blocks"> {% trans "clicking here!" %}</a></strong>
+
+
+              </div>
+          </div>
+		</div>
+	</section>
+</div>
+
+
+		<div class="row">
+		  	<div>
+				<h4>
+				 <form name="form" class="project-form" enctype="multipart/form-data" method="post" action="/download_certificate">
+				{% csrf_token %}
+               <!--django obliga a establecer este metodo de seguridad para el metodo post -->
+               <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button>
+               </form></h4>
+
+			</div>
+		  	<div>
+
+			<form action="helpus">
+   			 <button type="submit" id="stepsix" class="btn btn-danger btn-lg"> {% trans "Help us!" %} </button>
+			</form>
+				<br><br>
+
+			</div>
+		</div>
+
+      <footer class="footer grey-bg">
+          <div class="container">
+             {% trans "©2016 Dr. Pencilcode is powered by " %}<a href="https://github.com/clutchski/coffeelint" class="dark-text">CoffeLint</a>
+
+              <!-- SOCIAL ICONS -->
+              <ul class="social-icons">
+                  <li><a href="https:/twitter.com/drscratchtool"><span class="icon-social-twitter transparent-text-dark"></span></a>
+                  </li>
+                  <li><a href=""><span class="icon-social-github transparent-text-dark"></span></a>
+                  </li>
+
+              </ul>
+          </div>
+      </footer>
+</body>
+</html>

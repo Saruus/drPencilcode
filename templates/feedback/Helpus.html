@@ -48,6 +48,7 @@
     <!-- DEFAULT COLOR/ CURRENTLY USING -->
     <link rel="stylesheet" href="../../static/app/content/red.css">
 
+
 </head>
 <body>
    <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top  sticky-navigation" role="navigation">
@@ -107,10 +108,15 @@
 					<div align = 'center'><img align= 'center' src="../../static/app/images/caritas.png" alt=""></div>
 			
 				  <form method = "POST" action = "" class="project-form" name=form >
+
 					<!--action, ruta url donde quiero mandarlo para
 					que sea procesado por la vista, si lo dejo en blanco lo manda
 					a la misma vista de donde viene -->
        				{% csrf_token %} <!--django obliga a establecer este metodo de seguridad para el metodo post-->
+
+					<b>{% trans "Name:" %}</b>  <div id="form">{{form.name}}</div>
+					<b>{% trans "Surname:" %}</b> <div id="form">{{form.surname}}</div><br>
+
 					<h5 style="color: red">{% trans "Task 1. When visiting Dr.Pencilcode:" %}</h5>
 					<p><b>{% trans "a. What do you think about the webpage? Do you like it?" %}</b></p>
 

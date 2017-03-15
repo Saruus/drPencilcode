@@ -22,18 +22,20 @@ class UpdateForm(forms.Form):
 
 class SurveyForm(forms.Form):
 
-	question1a = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question1b = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question2a = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question2b = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question2c = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('awesome', 'Awesome!'), ('good', 'Good'), ('mol','Neither good not bad'), ('bad','Bad')])
-	question2d = forms.CharField(max_length=200)
-	question3a = forms.CharField(max_length=100)
-	question3b = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question3c = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question4 = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question5 = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
-	question6 = forms.CharField(max_length=500)
+    name = forms.CharField(max_length=100)
+    surname = forms.CharField(max_length=100)
+    question1a = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question1b = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question2a = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question2b = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question2c = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('awesome', 'Awesome!'), ('good', 'Good'), ('mol','Neither good not bad'), ('bad','Bad')])
+    question2d = forms.CharField(max_length=200)
+    question3a = forms.CharField(max_length=100)
+    question3b = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question3c = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question4 = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question5 = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
+    question6 = forms.CharField(max_length=500)
 
 
 

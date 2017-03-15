@@ -117,7 +117,7 @@ def selector(request):
                 dic = {'url': url}
                 d.update(dic)
 
-                return render_to_response("upload/result3.html",d)
+                return render_to_response("upload/dashboard.html",d)
                          
     else:
         return HttpResponseRedirect('/')
@@ -756,9 +756,9 @@ def download_certificate(request):
         response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(filename)
         return response
 
-def csrf_failure(request, reason=""):
-    ctx = {'message': 'CSRF no furula'}
-    return render_to_response('csrf/fallo.html', ctx)
+#def csrf_failure(request, reason=""):
+#    ctx = {'message': 'CSRF no furula'}
+#    return render_to_response('csrf/fallo.html', ctx)
 
 
 
@@ -773,7 +773,10 @@ def getFeedback(request):
         form_diccionario = form.cleaned_data
         form_filled = True
         print form_diccionario
-		#para conseguir la "informacion limpia" sin los corchetes y demas
+        #para conseguir la "informacion limpia" sin los corchetes y demas
+        save_name = form_diccionario.get("name")
+        save_surname = form_diccionario.get("surname")
+        save_date = datetime.now()
         save_question1a = form_diccionario.get("question1a")
         save_question1b = form_diccionario.get("question1b")
         save_question2a = form_diccionario.get("question2a")
@@ -789,6 +792,9 @@ def getFeedback(request):
         
         #Guardar en la base de datos
         Encuesta = Survey()
+        Encuesta.name = save_name
+        Encuesta.surname = save_surname
+        Encuesta.date = save_date
         Encuesta.question1a = save_question1a
         Encuesta.question1b = save_question1b
         Encuesta.question2a = save_question2a
