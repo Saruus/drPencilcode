@@ -11,7 +11,7 @@
         <div class="panel-body col-lg-10 col-lg-offset-1">
             <section>
                 <h3>{% trans "Movement" %}</h3>
-				<h4> Level 1 </h4>
+				<h4>{% trans "Level 1" %}</h4>
     			{% trans "The most basic Move blocks you can start working with are <i><b> fd </b></i>, <i><b> bk </b></i>, <i><b> rt </b></i> and <i><b> lt </b></i>. <i><b> fd </b></i> and <i><b> bk </b></i> are used to move the turtle forward and backward (the distance is measured in pixels) while <i><b>rt</i></b> and <i><b>lt</i></b> pivot the turtle clockwise and counterclockwise respectively (the turn is measured in degrees)." %}<br><br>
 
 				<div class="col-md-3">
@@ -40,7 +40,7 @@
 				<img style = 'height: 220px' src="../../static/app/images/tortugaDRAW.png" alt="">
 			    <br><br><br><br>
 
-				<h4> Level 2 </h4>	
+				<h4>{% trans "Level 2" %}</h4>	
 			
 				<img src="../../static/app/images/littlepencil.png" alt="">
 				{% trans "If you think the turtle is moving too slow and it takes its time to draw your code, don't worry! Pencil code have the perfect block for you! With <i><b> speed </b></i> you can speed up the movements of the turtle as fast as you want. Speed only allows one argument: number of moves per second. <br><i><b> speed Infinity </i></b> sets the animation time to zero, which means turtle motion occurs immediately, as soon as you run it (as long as there is nothing else already ahead of it in the queue)." %}<br><br>
@@ -51,7 +51,7 @@
 				<img src="../../static/app/images/serpienteDRAW.png" alt="">
 			    <br><br>
 
-				{% trans "<b> How does this program work? </b> When the user calls to the 'snake' function, following the blocks in order, the turtle will draw 90º arcs with 50px radius, first, turning right, then, turning left and, finally, turning right and left again. It'll also paint 2 dots (using <i><b> label </b></i>) to simulate the snake's eyes. As you can see, before calling to the fuction, the turtle is turned 45º to the right and speeded up to 100 moves per second." %} <br><br>
+				{% trans "<b> How does this program work? </b> When the user calls to the 'snake' function, following the blocks in order, the turtle will draw 90º arcs with 50px radius, first, turning right, then, turning left and, finally, turning right and left again. It'll also paint 2 dots (using <i><b> label </b></i>) to simulate the snake's eyes. As you can see, before calling to the fuction, the turtle is turned 45º to the right and speeded up to 100 moves per sec." %} <br><br>
 
 				<h4> Level 3 </h4>
 

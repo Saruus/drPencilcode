@@ -1,0 +1,89 @@
+					<p><strong>Task 1. When visiting Dr.Pencilcode http://drpencilcode.libresoft.es </strong></p>
+					<p> a. What do you think about the webpage? Do you like it? </p>
+				  
+        			
+       			 <form method="POST" class="project-form" name=form">{% csrf_token %}
+           		 {{ form.as_p }}
+				 <button id="Submit" name='submit' type="submit" class="btn btn-primary standard-button">{% trans "Save" %}</button>
+        		</form>
+    			
+				<div align='center'>
+					<img src="../../static/app/images/survey_img.png" alt="">
+				</div>	
+
+             </section>
+ 
+
+              <!--  <form name="form" class="project-form" method="post" action="/helpus">
+                {% csrf_token %} <!--django obliga a establecer este metodo de seguridad para el metodo post
+                	<input name="question1" class="form-control input-box placeholder" placeholder="Give us your opinion." type="text" />
+
+					<p><strong>Task 2. Analyze one of your Pencil code projects with Dr.Pencilcode </strong></p>
+					<p> a. Was it easy to do the analysis? </p>	
+					<tr>
+						<td><input name="task2a" type="radio" value= "y"> Yes </td><br>
+						<td><input name="task2a" type="radio" value= "mol"> More or less </td><br>
+						<td><input name="task2a" type="radio" value= "n"> No </td><br><br>
+					</tr>
+
+					<p> b. Do you understood the results shown? </p>
+
+					<tr>
+						<td><input name="task2b" type="radio" value= "y"> Yes </td><br>
+						<td><input name="task2b" type="radio" value= "mol"> More or less </td><br>
+						<td><input name="task2b" type="radio" value= "n"> No </td><br><br>
+					</tr>
+
+					<p> c. How did you feel when you saw your results? </p>
+
+					<tr>
+						<td><input name="task2c" type="radio" value= "y"> Yes </td><br>
+						<td><input name="task2c" type="radio" value= "mol"> More or less </td><br>
+						<td><input name="task2c" type="radio" value= "n"> No </td><br><br>
+					</tr>
+
+					<p> d. Why? </p>
+                	<input name="task2d" class="form-control input-box placeholder" placeholder="Write your impressions here." type="text" />
+
+					<strong>Task 6. Comment whatever you want about Dr. Pencilcode: things you like,  things you don't, ideas that we could incorporate...</strong>
+
+					<input name="task6" class="form-control input-box placeholder" placeholder="Give us feedback." type="text" />
+
+                     <button id="Submit" name='_question1' type="submit" class="btn btn-primary standard-button">{% trans "Save" %}</button>
+					 <button type="reset" class="btn btn-primary standard-button"> {% trans "Reset" %}</button>
+                     <br><br>
+                 </form><br><br>
+-->
+
+
+
+
+
+				<!--	<p> b. Have you understood what is the web for?
+						<form>
+						  <input type="radio" name="gender" value="yes"> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p><strong>Task 2. When analyzing your project </strong></p>
+					<p> a. Was it easy to do the analysis?</p>
+						 <form>
+						  <input type="radio" name="gender" value="yes" checked> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p> b. Do you undestood the results shown?</p>
+						 <form>
+						  <input type="radio" name="gender" value="yes" checked> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p> c. How did you feel when you saw the results?</p>
+						 <form>
+						  <input type="radio" name="gender" value="yes" checked> Yes <br>
+						  <input type="radio" name="gender" value="mol"> More or less <br>
+						  <input type="radio" name="gender" value="no"> No
+						</form> 
+					<p> d. Why? </p>
+					<input type="text" name="firstname" value="Explain why."><br>
+					<input type="text" class="form-control" placeholder="Text input">-->

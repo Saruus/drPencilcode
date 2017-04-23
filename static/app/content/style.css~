@@ -88,21 +88,26 @@
      transform: translateY(3px);
 }
 
-        .hvr-float {
-          display: inline-block;
-          vertical-align: middle;
-          -webkit-transform: perspective(0.5px) translateZ(0);
-          transform: perspective(0.5px) translateZ(0);
-          box-shadow: 0 0 0.5px transparent;
-          -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-          -webkit-transition-property: transform;
-          transition-property: transform;
-          -webkit-transition-timing-function: ease-out;
-          transition-timing-function: ease-out;
-        }
-        .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
-          -webkit-transform: translateY(-3px);
-          transform: translateY(-3px);
-        }
+.hvr-float {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(0.5px) translateZ(0);
+      transform: perspective(0.5px) translateZ(0);
+      box-shadow: 0 0 0.5px transparent;
+      -webkit-transition-duration: 0.2s;
+      transition-duration: 0.2s;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+}
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+      -webkit-transform: translateY(-3px);
+      transform: translateY(-3px);
+}
+
+.glyphicon-chevron-up {
+	margin-bottom: 0.3em; 
+
+}
 

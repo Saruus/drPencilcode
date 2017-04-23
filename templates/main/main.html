@@ -137,7 +137,7 @@
                             <div class="vertical-project-form" >
 
                                 <h5 class="dark-text form-heading"><strong>{% trans "Analyze your Pencilcode Project now!" %}</strong></h5>
-
+								{% trans "Introduce the <span class='colored-text'><a data-toggle='modal' href='#modalUrl'>url</a></span> of your Pencil Code project here:" %}
                                 <form name="form" class="project-form" method="post" action="/selector">
                                 {% csrf_token %}
                                     <input name="urlProject" id="cf-name" class="form-control input-box placeholder" placeholder="https://your_name.pencilcode.net/edit/project_name" type="text" />
@@ -563,6 +563,35 @@
 
     </footer>
     </div>
+
+
+     <!-- Modal Url -->
+    <div id="modalUrl" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
+            <div class="small-text-medium uppercase colored-text">
+                {% trans "What is an url?" %}
+            </div>
+            <h4 class="modal-title"><strong>{% trans "How I can know my Pencil Code project's url?" %}</strong></h4>
+            <div class="colored-line"></div>
+          </div>
+          <div class="modal-body">
+            {% trans "<img class='framed' src='static/app/images/url.png' />" %}
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+   <!-- =========================
+              PROGRESS BAR
+    ============================== -->
 
     <div id="pb" class="jumbotron">
     <div class="container">

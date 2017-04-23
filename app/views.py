@@ -42,7 +42,6 @@ import urllib2
 import shutil
 import unicodedata
 import csv
-import kurt
 import zipfile
 from zipfile import ZipFile
 
@@ -204,7 +203,7 @@ def processStringUrl(url):
     """
 
     #http://sarabc.pencilcode.net/edit/first
-    # idProject = ''
+
     idProject = "error"
     counter = 0
     name = ''
@@ -229,7 +228,6 @@ def processStringUrl(url):
     except ValueError:
         idProject = 'error';
         return idProject
-
 
     if protocol == "https:":
         protocol = "http:"
@@ -265,9 +263,13 @@ def sendRequestgetJSON(idProject):
 
     # Guardamos en la base de datos.
     fileName.save()
+
+
     dir_zips = os.path.dirname(os.path.dirname(__file__)) + "/uploads/"
     fileSaved = dir_zips + str(fileName.id) + ".json"
     #fileName.id -> models añaden el campo id automaticamente.
+
+    print "FILE_SAVED ", fileSaved
 
     # /home/sara/drPencilcode-master/uploads/15.json
 
@@ -287,6 +289,13 @@ def sendRequestgetJSON(idProject):
     # abre la url(urlopen) y lee los datos de esa url(urllib2).
     outputFile.write(jsonFile.read())
     outputFile.close() #lo escribe todo en un .json.
+
+    jsonerror = json.loads(open(file_name).read())
+    
+    for key in jsonerror:
+        if key == "error":
+            raise
+
     return (file_name, fileName)
 
 # ________________________ LEARN MORE __________________________________#
@@ -398,13 +407,17 @@ def analyzeProject(request, file_name, filename): #ESTA FUNCION DEVUELVE UN DICC
         metricLint = "coffeelint --reporter raw " + file_name.replace(".json", ".coffee")
         # devuelve diccionario con errores del proyecto .coffee (si hay o no hay)
 
+        print "METRICLINT ----> ", metricLint
+
         try:
+            
             resultLint = os.popen(metricLint).read()
+            print "RESULT LINT -----> ", resultlint
+
         except:
             print "error en lint"
 
         print "\n resultMastery --> ",resultMastery
-        # print "resultLint --> ", resultLint
 
         # Create a dictionary with necessary information
         dictionary.update(procMastery(request, resultMastery, filename))

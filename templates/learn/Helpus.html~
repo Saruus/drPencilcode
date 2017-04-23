@@ -15,59 +15,51 @@
         <div class="panel panel-default">
             <div class="panel-body col-lg-10 col-lg-offset-1">
                 <section>
-                    <h3>{% trans "What do you think about Dr.Pencilcode?" %}</h3><br>
-							
 					<h4 align = 'center'> Dr.Pencilcode workshop - survey </h4>
-					<p><strong>Task 1. When visiting Dr.Pencilcode http://drpencilcode.libresoft.es </strong></p>
-					<p> a. What do you think about the webpage? Do you like it? </p>
- 
-				<!--		 <form action="survey.php" method="post">
-						  <input type="radio" name="task1" value="yes"> Yes <br>
-						  <input type="radio" name="task1" value="moreless"> More or less <br>
-						  <input type="radio" name="task1" value="no"> No 
-						</form> -->
+					<div align = 'center'><img align= 'center' src="../../static/app/images/caritas.png" alt=""></div><br>
+					
 
-                         <form name="form" class="project-form" method="post" action="/learn/Helpus">
-                                {% csrf_token %} <!--django obliga a establecer este metodo de seguridad para el metodo post-->
-                                    <input name="question1" class="form-control input-box placeholder" placeholder="Give us your opinion." type="text" />
-                                    <button id="Submit" name='_question1' type="submit" class="btn btn-primary standard-button">{% trans "Save" %}</button>
-                                    <br><br>
-                         </form>
+			
+				  <form method = "POST" action = "/learn/Helpus" class="project-form" name=form >
+					<!--action, ruta url donde quiero mandarlo para
+					que sea procesado por la vista, si lo dejo en blanco lo manda
+					a la misma vista de donde viene -->
+       				{% csrf_token %} <!--django obliga a establecer este metodo de seguridad para el metodo post-->
+					<h5 style="color: red">{% trans "Task 1. When visiting Dr.Pencilcode:" %}</h5>
+					<p><b>{% trans "a. What do you think about the webpage? Do you like it?" %}</b></p>
+
+<div id="form">{{form.as_p}}</div> 
+					<div id="form">{{form.question1a}}</div>
+
+					<p><b>{% trans "b. Do you understand what the web is for?" %}</b></p>
+
+					<div id="form">{{form.question1b}}</div> <br>
+
+					<h5 style="color: red">{% trans "Task 2. Analyze one of your Pencil Code Projects:" %}</h5>
+					<p><b>{% trans "a. Was it easy to do the analysis?" %}</b></p>
+
+					<div id="form">{{form.question2a}}</div>
+
+					<p><b>{% trans "b. Did you understand the results shown?" %}</b></p>
+					<div id="form">{{form.question2b}}</div> 
+
+					<p><b>{% trans "c. How did you feel when you show your results?" %}</b></p>
+					<div id="form">{{form.question2c}}</div> 
+
+					<p><b>{% trans "d. Why?" %}</b></p>
+					<div id="form">{{form.question2d}}</div><br>
+
+					<h5 style="color: red">{% trans "Task 6. Give us some feedback:" %}</h5>
+					<p><b>{% trans "Comment whatever you want about Dr. Pencilcode:" %} <br> {% trans "Things you like,  things you don't like, ideas that we could add to the webpage..." %}</b></p>
+					<div id="form">{{form.question6}}</div><br><br>
+					
+
+   				 <button id ="Submit" type='submit' class="btn btn-primary standard-button" value="submit form">Submit</button>
+				<button type="reset" class="btn btn-primary standard-button"> {% trans "Reset" %}</button>
 
 
 
-				<!--	<p> b. Have you understood what is the web for?
-						<form>
-						  <input type="radio" name="gender" value="yes"> Yes <br>
-						  <input type="radio" name="gender" value="mol"> More or less <br>
-						  <input type="radio" name="gender" value="no"> No
-						</form> 
-					<p><strong>Task 2. When analyzing your project </strong></p>
-					<p> a. Was it easy to do the analysis?</p>
-						 <form>
-						  <input type="radio" name="gender" value="yes" checked> Yes <br>
-						  <input type="radio" name="gender" value="mol"> More or less <br>
-						  <input type="radio" name="gender" value="no"> No
-						</form> 
-					<p> b. Do you undestood the results shown?</p>
-						 <form>
-						  <input type="radio" name="gender" value="yes" checked> Yes <br>
-						  <input type="radio" name="gender" value="mol"> More or less <br>
-						  <input type="radio" name="gender" value="no"> No
-						</form> 
-					<p> c. How did you feel when you saw the results?</p>
-						 <form>
-						  <input type="radio" name="gender" value="yes" checked> Yes <br>
-						  <input type="radio" name="gender" value="mol"> More or less <br>
-						  <input type="radio" name="gender" value="no"> No
-						</form> 
-					<p> d. Why? </p>
-					<input type="text" name="firstname" value="Explain why."><br>
-					<input type="text" class="form-control" placeholder="Text input">-->
-
-				<div align='center'>
-					<img src="../../static/app/images/survey_img.png" alt="">
-				</div>	
+				</form>
 
              </section>
   

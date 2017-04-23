@@ -5,26 +5,34 @@
     <!-- /END JUMBOTRON -->
     <!-- PANEL-->
     {% block content %}
+<div class="container">
     <div class="panel panel-default">
         <div class="panel-body col-lg-10 col-lg-offset-1">
-    {% trans "" %}
+            <section id="level0">
+                <h3>{% trans "How does Dr. Pencilcode evaluate?" %}</h3><br><br>
 
-        </div>
-    </div>
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-body col-lg-10 col-lg-offset-1">
-                <section>
-                    <h3>{% trans "How can you get more points?" %}</h3>
-					
-		
+			<div class = "col-md-5">
+		  <div class="progress">
+		  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="33"
+		  aria-valuemin="0" aria-valuemax="100" style="width:33%"> 1/3
+		  </div>
+		  </div>
 
+		  <div class="progress">
+		  <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="66"
+		  aria-valuemin="0" aria-valuemax="100" style="width:66%"> 2/3
+		  </div>
+		  </div>
+
+
+		  <div class="progress">
+		  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="1000"
+		  aria-valuemin="0" aria-valuemax="100" style="width:100%"> 3/3
+		  </div>
+		  </div>
+
+</div>
              </section>
-  
-			 <br>
-			 <h4> Click for more information about blocks and examples: </h4>
-			<a href="https://ref.pencilcode.net/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Pencil Code Reference." %}</a><br>
-			<a href="https://gym.pencilcode.net/ref/" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Pencil Code Gym." %}</a><br>
 			<br><br>
             </div>
         </div>

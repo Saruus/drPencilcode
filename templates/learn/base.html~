@@ -1,13 +1,20 @@
 {% load i18n %}
+<!DOCTYPE html>
 <html>
 <head>
+
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="description" content="Responsive Bootstrap 3 Startup and Multipurpose Template">
     <meta name="keywords" content="Stamp, Startup, Multipurpose, Bootstrap, Landing page, Template, Registration, Landing">
     <meta name="author" content="Programamos URJC Libresoft FECyT">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-    <script src="../../static/app/scripts/translations.js"></script>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="../../static/app/content/bootstrap-tour.css">
+    <script src="../../static/app/scripts/bootstrap.min.js"></script>
+    <script src="../../static/app/scripts/bootstrap-tour.js"></script>
+	<script src="../../static/app/scripts/js/mdb.min.js"></script>
 
     <!-- SITE TITLE -->
     <title>Dr. Pencilcode</title>
@@ -18,7 +25,7 @@
      FAV AND TOUCH ICONS AND FONT
     ============================== -->
     <link rel="icon" href="../../static/app/images/favicon.ico">
-    <link rel="stylesheet" href="../../static/app/icons/icons.css">
+    <link rel="stylesheet" href="static/app/icons/icons.css">
     <link type="text/css" rel="stylesheet" href="../../static/app/content/css_002.css">
     <link type="text/css" rel="stylesheet" href="../../static/app/content/css.css">
     <!-- =========================
@@ -26,7 +33,8 @@
     ============================== -->
     <!-- BOOTSTRAP AND ANIMATION -->
     <link rel="stylesheet" href="../../static/app/content/bootstrap.min.css">
-    <link rel="stylesheet" href="../../static/app/content/animate.css">
+    <link rel="stylesheet" href="../static/app/content/animate.css">
+
 
     <!-- CAROUSEL AND LIGHTBOX -->
     <link rel="stylesheet" href="../../static/app/content/owl_002.css">
@@ -37,20 +45,86 @@
     <!-- CUSTOM STYLESHEETS -->
     <link rel="stylesheet" href="../../static/app/content/styles.css">
     <link rel="stylesheet" href="../../static/app/content/cloud.css">
-
-
     <!-- RESPONSIVE FIXES -->
     <link rel="stylesheet" href="../../static/app/content/responsive.css">
 
     <!-- DEFAULT COLOR/ CURRENTLY USING -->
     <link rel="stylesheet" href="../../static/app/content/red.css">
 
-	<!--<script>
+
+
+
+
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Responsive Bootstrap 3 Startup and Multipurpose Template">
+    <meta name="keywords" content="Stamp, Startup, Multipurpose, Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="author" content="Programamos URJC Libresoft FECyT">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="../../static/app/content/bootstrap-tour.css">
+    <script src="../../static/app/scripts/bootstrap.min.js"></script>
+    <script src="../../static/app/scripts/bootstrap-tour.js"></script>
+	<script src="../../static/app/scripts/js/mdb.min.js"></script>
+
+    <!-- SITE TITLE -->
+    <title>Dr. Pencilcode</title>
+
+
+    <link rel="stylesheet" href="../../static/app/content/style.css">
+    <!-- =========================
+     FAV AND TOUCH ICONS AND FONT
+    ============================== -->
+    <link rel="icon" href="../../static/app/images/favicon.ico">
+    <link rel="stylesheet" href="static/app/icons/icons.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css_002.css">
+    <link type="text/css" rel="stylesheet" href="../../static/app/content/css.css">
+    <!-- =========================
+     STYLESHEETS
+    ============================== -->
+    <!-- BOOTSTRAP AND ANIMATION -->
+    <link rel="stylesheet" href="../../static/app/content/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/app/content/animate.css">
+
+
+    <!-- CAROUSEL AND LIGHTBOX -->
+    <link rel="stylesheet" href="../../static/app/content/owl_002.css">
+    <link rel="stylesheet" href="../../static/app/content/owl.css">
+    <link rel="stylesheet" href="../../static/app/content/nivo-lightbox.css">
+    <link rel="stylesheet" href="../../static/app/content/default.css">
+
+    <!-- CUSTOM STYLESHEETS -->
+    <link rel="stylesheet" href="../../static/app/content/styles.css">
+    <link rel="stylesheet" href="../../static/app/content/basic.css">
+    <!-- RESPONSIVE FIXES -->
+    <link rel="stylesheet" href="../../static/app/content/responsive.css">
+
+    <!-- DEFAULT COLOR/ CURRENTLY USING -->
+    <link rel="stylesheet" href="../../static/app/content/red.css">
+
+
+
+
+
+	<style>
+		#star{
+        color:#FBE083;
+        border-color: #F9B966;
+        display: inline;
+		}
+
+		#bonustext {
+		font-family: Purisa,Bold, sans-serif !important;
+		background-color: white !important;
+		}
+
+	</style>
+
+	<script>
 		function goBack() {
    			window.history.go(-1);
 			/*location.href = '../../upload/result3.html'*/
 		}
-	</script>		-->
+	</script>	
 
 </head>
 <body>
@@ -65,7 +139,7 @@
                 <ul class="nav navbar-nav navbar-right main-navigation ">
                         <li class="navbar-brand"><a class="navbar-brand pull-right" href="https://twitter.com/DrScratchTool"><span class="icon-social-twitter colored-text"></span></a></li>
                         <li class="navbar-brand"><a class="navbar-brand pull-right" href="mailto:sara.blazquezca@gmail.com"><span class="icon-basic-mail colored-text"></span></a></li>
-					<li class="navbar-brand"><a action = "/selector" class="btn btn-default" id="back">{% trans "Go Back" %}</a></li>
+					<li class="navbar-brand"><a onclick = "goBack()" class="btn btn-default" id="back">{% trans "Go Back" %}</a></li>
                     <li class="navbar-brand"><a class="navbar-brand pull-right">{% trans "Dr. Pencilcode (Beta Version)" %}</a></li>
                       </ul>
             </div>
@@ -90,7 +164,6 @@
 		<li role="presentation"><a href="/learn/Blocks/">{% trans "Blocks" %}</a></li>
       	<li role="presentation"><a href="/learn/Points/">{% trans "Points" %}</a></li>
       	<li role="presentation"><a href="/learn/Bonus/">{% trans "Bonus" %}</a></li>
-		<li role="presentation"><a href="/learn/Helpus/">{% trans "HELP US" %}</a></li>
 	</ul>
     </div>
     <!-- /END JUMBOTRON -->

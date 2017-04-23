@@ -14,9 +14,9 @@ def generate(filename,level):
 	
 	text = open("certi.tex") # abrir documento LaTeX
 	text = text.read() # leer documento LaTeX
-	text_list = list(text) # pasa a lista
+	text_list = list(text) # pasa a lista, lista de caraceres uno a uno
 
-	y_cali = text.find("%pointcalification") # busca marcador de calificación
+	y_cali = text.find("%pointcalification") # busca marcador de calificación, busca la posicion en la que está esa palabra
 	z_cali = len("%pointcalification")+2
 	text_list[y_cali+z_cali:y_cali+z_cali] = list(person[1]) # inserta calificación
 

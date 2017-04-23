@@ -47,7 +47,7 @@
 			<div class="row">
 		  	<div>
 				<h4>
-				 <form name="form" class="project-form" enctype="multipart/form-data" method="get" action="/download_certificate">
+				 <form name="form" class="project-form" enctype="multipart/form-data" method="post" action="/download_certificate">
 				{% csrf_token %}
                <!--django obliga a establecer este metodo de seguridad para el metodo post -->
                <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button>

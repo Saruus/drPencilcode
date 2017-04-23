@@ -39,6 +39,7 @@
 				<center><table style="border-collapse:separate;border:0;border-spacing:8px"><tr>
 				<td style="background:white;width:60px;text-align:center;border-radius:5px">white</td>
 				<td style="background:yellow;width:60px;text-align:center;border-radius:5px">yellow</td>
+				<td style="background:orange;width:60px;text-align:center;border-radius:5px">orange</td>
 				<td style="background:lime;width:60px;text-align:center;border-radius:5px">lime</td>
 				<td style="background:aqua;width:60px;text-align:center;border-radius:5px">aqua</td>
 				<td style="background:blue;width:60px;text-align:center;border-radius:5px">blue</td>
@@ -48,6 +49,7 @@
 				</tr><tr>
 				<td style="background:gray;color:silver;width:60px;text-align:center;border-radius:5px">gray</td>
 				<td style="background:olive;color:silver;width:60px;text-align:center;border-radius:5px">olive</td>
+				<td style="background:drakorange;width:60px;text-align:center;border-radius:5px">darkorange</td>
 				<td style="background:green;color:silver;width:60px;text-align:center;border-radius:5px">green</td>
 				<td style="background:teal;color:silver;width:60px;text-align:center;border-radius:5px">teal</td>
 				<td style="background:navy;color:silver;width:60px;text-align:center;border-radius:5px">navy</td>
@@ -101,8 +103,8 @@
   				{% trans "<b> How does this program work? </b> This program is the same as the one above. Instead of changing the color of the new turtle, <i><b> wear </b></i> add a img on it. When execution reaches the line 't.bk 50', the image of the dog is the thing that will be go backward. <br> <i><b> hide( ) </b></i>  will hide the turtle." %}
 
 				<h4> Level 3 </h4>
-				{% trans "Every color on a computer screen is made by mixing red, green, and blue light. Each of the three colors can be adjusted to 256 intensities, from 0 to 255, which makes a total of 256 × 256 × 256 = 16777216 possible colors.
-The <b>rgb</b> function can be used to create a color code that can be used with <b>dot</b> or <b>pen</b> or <b>fill</b>." %}<br>
+				{% trans "Every color on a computer screen is made by mixing red, green, and blue light. Each of the three colors can be adjusted to 256 intensities, from 0 to 255, which makes a total of 256 × 256 × 256 = 16777216 possible colors. <br> The <b>rgb</b> function can be used to create a color code that can be used with <b>dot</b> or <b>pen</b> or <b>fill</b>." %}<br>
+
 				{% trans "<b> How does this program work? </b> The program above specifies a light blueish-greenish color that includes red with intensity 176, green with intensity 224, and blue with intensity 230. Using <b>dot</b>, it's possible to set its diameter, in this case, 150. <b>do fadeOut</b> will fade out the turtle and hide it." %}
 
 

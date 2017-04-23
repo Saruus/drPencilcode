@@ -42,7 +42,6 @@ import urllib2
 import shutil
 import unicodedata
 import csv
-import kurt
 import zipfile
 from zipfile import ZipFile
 
@@ -117,10 +116,8 @@ def selector(request):
                 dic = {'url': url}
                 d.update(dic)
 
-                #return render_to_response("upload/result3.html",d)
-                return render_to_response("upload/dashboard-unregistered-basic.html",d)
-                
-             
+                return render_to_response("upload/dashboard.html",d)
+                         
     else:
         return HttpResponseRedirect('/')
 
@@ -206,7 +203,7 @@ def processStringUrl(url):
     """
 
     #http://sarabc.pencilcode.net/edit/first
-    # idProject = ''
+
     idProject = "error"
     counter = 0
     name = ''
@@ -231,7 +228,6 @@ def processStringUrl(url):
     except ValueError:
         idProject = 'error';
         return idProject
-
 
     if protocol == "https:":
         protocol = "http:"
@@ -267,9 +263,13 @@ def sendRequestgetJSON(idProject):
 
     # Guardamos en la base de datos.
     fileName.save()
+
+
     dir_zips = os.path.dirname(os.path.dirname(__file__)) + "/uploads/"
     fileSaved = dir_zips + str(fileName.id) + ".json"
     #fileName.id -> models añaden el campo id automaticamente.
+
+    print "FILE_SAVED ", fileSaved
 
     # /home/sara/drPencilcode-master/uploads/15.json
 
@@ -289,6 +289,13 @@ def sendRequestgetJSON(idProject):
     # abre la url(urlopen) y lee los datos de esa url(urllib2).
     outputFile.write(jsonFile.read())
     outputFile.close() #lo escribe todo en un .json.
+
+    jsonerror = json.loads(open(file_name).read())
+    
+    for key in jsonerror:
+        if key == "error":
+            raise
+
     return (file_name, fileName)
 
 # ________________________ LEARN MORE __________________________________#
@@ -400,13 +407,17 @@ def analyzeProject(request, file_name, filename): #ESTA FUNCION DEVUELVE UN DICC
         metricLint = "coffeelint --reporter raw " + file_name.replace(".json", ".coffee")
         # devuelve diccionario con errores del proyecto .coffee (si hay o no hay)
 
+        print "METRICLINT ----> ", metricLint
+
         try:
+            
             resultLint = os.popen(metricLint).read()
+            print "RESULT LINT -----> ", resultlint
+
         except:
             print "error en lint"
 
         print "\n resultMastery --> ",resultMastery
-        # print "resultLint --> ", resultLint
 
         # Create a dictionary with necessary information
         dictionary.update(procMastery(request, resultMastery, filename))
@@ -758,9 +769,9 @@ def download_certificate(request):
         response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(filename)
         return response
 
-def csrf_failure(request, reason=""):
-    ctx = {'message': 'CSRF no furula'}
-    return render_to_response('csrf/fallo.html', ctx)
+#def csrf_failure(request, reason=""):
+#    ctx = {'message': 'CSRF no furula'}
+#    return render_to_response('csrf/fallo.html', ctx)
 
 
 
@@ -769,28 +780,55 @@ def csrf_failure(request, reason=""):
 
 def getFeedback(request):
     print "ENTRO EN FEEDBACK"
+    form = SurveyForm(request.POST or None)
+    form_filled = False
+    if form.is_valid():
+        form_diccionario = form.cleaned_data
+        form_filled = True
+        print form_diccionario
+        #para conseguir la "informacion limpia" sin los corchetes y demas
+        save_name = form_diccionario.get("name")
+        save_surname = form_diccionario.get("surname")
+        save_date = datetime.now()
+        save_question1a = form_diccionario.get("question1a")
+        save_question1b = form_diccionario.get("question1b")
+        save_question2a = form_diccionario.get("question2a")
+        save_question2b = form_diccionario.get("question2b")
+        save_question2c = form_diccionario.get("question2c")
+        save_question2d = form_diccionario.get("question2d")
+        save_question3a = form_diccionario.get("question3a")
+        save_question3b = form_diccionario.get("question3b")
+        save_question3c = form_diccionario.get("question3c")
+        save_question4 = form_diccionario.get("question4")
+        save_question5 = form_diccionario.get("question5")
+        save_question6 = form_diccionario.get("question6")
+        
+        #Guardar en la base de datos
+        Encuesta = Survey()
+        Encuesta.name = save_name
+        Encuesta.surname = save_surname
+        Encuesta.date = save_date
+        Encuesta.question1a = save_question1a
+        Encuesta.question1b = save_question1b
+        Encuesta.question2a = save_question2a
+        Encuesta.question2b = save_question2b
+        Encuesta.question2c = save_question2c
+        Encuesta.question2d = save_question2d
+        Encuesta.question3a = save_question3a
+        Encuesta.question3b = save_question3b
+        Encuesta.question3c = save_question3c
+        Encuesta.question4 = save_question4
+        Encuesta.question5 = save_question5
+        Encuesta.question6 = save_question6
+        Encuesta.save()
 
-   # if request.method == "POST":
-   #     if "_question1" in request.POST:
-   #         form = SurveyForm(request.POST)
-     #       if form.is_valid():
-	#
-#			form_diccionario = form.cleaned_data['question1']
 
-				#para conseguir la "informacion limpia" sin los corchetes y demas
-		# 		guardar_pregunta = form_diccionario.get("question1")
-
-				# guardar en base de datos
-		 #		obj = Survey()
-		 #		obj.question1 = guardar_pregunta
-		 #		obj.save()
-
-          #  context = {
-		   #     "form":form
-		  #  }
-
-           # return render (request, "formulario.html", context)
-
+    context = {
+    "form":form,
+    "form_filled": form_filled
+	}
+    
+    return render(request, 'feedback/Helpus.html', context)
 
 
 def uncompress_zip(zip_file):

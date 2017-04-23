@@ -93,7 +93,7 @@
           {
             element: "#stepsix",
             title: "{% trans 'Feedback' %}",
-            content:"{% trans 'Give us your opinion about our web!'%}"
+            content:"{% trans 'Complete this survey! We will be thankful if you give us your opinion about our web!'%}"
           }
 		]});
 		        tour.init();
@@ -194,7 +194,7 @@
 
 			{% elif mastery.points > 18 %}
 				{% trans "<h4 class='dark-text'>Your level is... <strong> EXPERT! </strong></h4>" %}
-                          <p class='dark-text'> {% trans "You're a genius!" %}</br></p>
+                          <p class='dark-text'> {% trans "You're a genious!" %}</br></p>
 
 
 			{% endif %}
@@ -439,16 +439,13 @@
 			</div>
 		  	<div>
 
-			<form method='get' action="/learn/Helpus">
+			<form action="helpus">
    			 <button type="submit" id="stepsix" class="btn btn-danger btn-lg"> {% trans "Help us!" %} </button>
 			</form>
 				<br><br>
 
 			</div>
 		</div>
-
-
-
 
       <footer class="footer grey-bg">
           <div class="container">
