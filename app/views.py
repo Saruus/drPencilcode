@@ -31,6 +31,7 @@ from django.contrib.auth.decorators import login_required
 from email.MIMEText import MIMEText
 from django.utils.encoding import smart_str
 from django.utils.translation import activate
+from django.template import RequestContext
 import smtplib
 import ast
 import email.utils
@@ -116,7 +117,7 @@ def selector(request):
                 dic = {'url': url}
                 d.update(dic)
 
-                return render_to_response("upload/dashboard.html",d)
+                return render_to_response("upload/dashboard.html", d, context_instance=RequestContext(request))
                          
     else:
         return HttpResponseRedirect('/')
@@ -201,8 +202,6 @@ def processStringUrl(url):
     Responds the JSON URL
     or "error" else
     """
-
-    #http://sarabc.pencilcode.net/edit/first
 
     idProject = "error"
     counter = 0
@@ -439,7 +438,7 @@ def procMastery(request, lines, fileName):
     diccpuntos = {}
     mssg = ''
     diccpoints = {}
-    MaxBonus = [1, 2, 3, 4, 5, 6]
+    MaxBonus = [1, 2, 3, 4]
     current_points = 0
     lint_data = json.dumps(lines)
     categories = ['Move', 'Art', 'Text', 'Sound', 'Control', 'Operators', 'Duplicados']
@@ -760,8 +759,8 @@ def writeErrorAttribute(dic):
 #_________________________Download Certificate_______________________________#
 def download_certificate(request):
     if request.method == "POST":
-        filename = "http://sarabc.pencilcode.net/edit/first"
-        level = "15"
+        filename = str(request.POST['url'])
+        level = str(request.POST['score'])
         pyploma.generate(filename,level)
         path_to_file = os.path.dirname(os.path.dirname(__file__)) + "/app/output.pdf"
         pdf_data = open(path_to_file, 'r')
@@ -830,10 +829,3 @@ def getFeedback(request):
     
     return render(request, 'feedback/Helpus.html', context)
 
-
-def uncompress_zip(zip_file):
-    unziped = ZipFile(zip_file, 'r')
-    for file_path in unziped.namelist():
-        if file_path == 'project.json':
-            file_content = unziped.read(file_path)
-    show_file(file_content)

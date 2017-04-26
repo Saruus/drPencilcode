@@ -44,20 +44,6 @@
 				<h4> Click for more examples of this Category: </h4>
 				<a href="https://gym.pencilcode.net/imagine" target="_blank"><span class="glyphicon glyphicon-hand-right"></span>{% trans " Code interactive fiction." %}</a> <br><br>
 
-			<div class="row">
-		  	<div>
-				<h4>
-				 <form name="form" class="project-form" enctype="multipart/form-data" method="post" action="/download_certificate">
-				{% csrf_token %}
-               <!--django obliga a establecer este metodo de seguridad para el metodo post -->
-               <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button>
-               </form></h4>
-			</div>
-		  	<div>
-
-
-
-
              </section>
         </div>
     </div>
