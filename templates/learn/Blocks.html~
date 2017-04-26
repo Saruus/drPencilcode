@@ -18,21 +18,21 @@
                     <h3>{% trans "Move Blocks" %}</h3>
 					
 					<div class= "col-lg-offset-1">
-    				<table class="table-bordered table-condensed table-striped">
-					<tr><th>Blocks</th><th>Description</th></tr>
-					<tr><td><code> fd </code>,<code> bk </code></td><td> Go fordward or backard. </td></tr>
-					<tr><td><code> lt </code>,<code> rt </code></td><td> Turn left or right. </td></tr>
-					<tr><td><code> speed </code>,<code> pause </code></td><td> Speed up or pause your program. </td></tr>
-					<tr><td><code> home() </code></td><td> Go to the page center/origin. </td></tr>
-					<tr><td><code> moveto </code></td><td> Moves the turtle to an absolut location (in Cartesian coordinates). </td></tr>
-					<tr><td><code> movexy </code></td><td> Go to x, y relative to home. </td></tr>
-					<tr><td><code> jumpto </code></td><td> Jump to coordinates without drawing. </td></tr>
-					<tr><td><code> jumpxy </code></td><td> Jump by changing x and y without drawing. </td></tr>
-					<tr><td><code> getxy  </code></td><td> Read turtle coordinates. </td></tr>
-					<tr><td><code> turnto </code></td><td> Turn to an absolute direction. </td></tr>
-					<tr><td><code> slide </code></td><td> Move the turtle without rotation. </td></tr>
-					<tr><td><code> distance </code></td><td> Read distance between turtles.</td></tr>
-					<tr><td><code> direction </code></td><td> Read turtle direction. </td></tr>
+    				<table class="table table-bordered table-condensed table-striped">
+					<tr class="info"><th>Blocks</th><th>Description</th></tr>
+					<tr><td><code>fd</code> <code>bk</code></td><td> Go fordward or backard. </td></tr>
+					<tr><td><code>lt</code> <code>rt</code></td><td> Turn left or right. </td></tr>
+					<tr><td><code>speed</code> <code>pause</code></td><td> Speed up or pause your program. </td></tr>
+					<tr><td><code>home()</code></td><td> Go to the page center/origin. </td></tr>
+					<tr><td><code>moveto</code></td><td> Moves the turtle to an absolut location (in Cartesian coordinates). </td></tr>
+					<tr><td><code>movexy</code></td><td> Go to x, y relative to home. </td></tr>
+					<tr><td><code>jumpto</code></td><td> Jump to coordinates without drawing. </td></tr>
+					<tr><td><code>jumpxy</code></td><td> Jump by changing x and y without drawing. </td></tr>
+					<tr><td><code>getxy</code></td><td> Read turtle coordinates. </td></tr>
+					<tr><td><code>turnto</code></td><td> Turn to an absolute direction. </td></tr>
+					<tr><td><code>slide</code></td><td> Move the turtle without rotation. </td></tr>
+					<tr><td><code>distance</code></td><td> Read distance between turtles.</td></tr>
+					<tr><td><code>direction</code></td><td> Read turtle direction. </td></tr>
 					</table>
 					</div>
 
@@ -42,21 +42,21 @@
 
  				<div class= "col-lg-offset-1">
     			<table class="table-bordered table-condensed table-striped">
-				<tr><th>Blocks</th><th>Description</th></tr>
+				<tr class="info"><th>Blocks</th><th>Description</th></tr>
 				<tr><td><code>pen</code></td><td> Trace with a pen color. You can set its color and size. </td></tr>
-				<tr><td><code>dot</code>,<code>box</code></td><td> Draws a colored circle or a colored box. </td></tr>
-				<tr><td><code>grow</code>,<code> scale </code></td><td> Grows the size of the turtle. </td></tr>
+				<tr><td><code>dot</code> <code>box</code></td><td> Draws a colored circle or a colored box. </td></tr>
+				<tr><td><code>grow</code> <code> scale </code></td><td> Grows the size of the turtle. </td></tr>
 				<tr><td><code>scale</code></td><td>Does everything X bigger.</td></tr>
 				<tr><td><code>fill</code></td><td> Fills a traced shape. </td></tr>
 				<tr><td><code>img</code></td><td> Display images on the screen. </td></tr>
 				<tr><td><code>wear</code></td><td> Changes the appearance of the turtle. </td></tr>
-				<tr><td><code>show()</code>,<code>st()</code></td><td> Shows the turtle. </td></tr>
-				<tr><td><code>hide()</code>,<code>ht()</code></td><td> Hides the turtle. </td></tr>
-				<tr><td><code>rgb</code>,<code>rgba</code></td><td>Creates a color code that can be used with dot or pen or fill.</td></tr>
-				<tr><td><code>hsl</code>,<code>hsla</code></td><td>Creates a color code that can be used with dot or pen or fill.</td></tr>
+				<tr><td><code>show()</code> <code>st()</code></td><td> Shows the turtle. </td></tr>
+				<tr><td><code>hide()</code> <code>ht()</code></td><td> Hides the turtle. </td></tr>
+				<tr><td><code>rgb</code> <code>rgba</code></td><td>Creates a color code that can be used with dot or pen or fill.</td></tr>
+				<tr><td><code>hsl</code> <code>hsla</code></td><td>Creates a color code that can be used with dot or pen or fill.</td></tr>
 				<tr><td><code>fadeOut</code></td><td>Will make the turtle disappear and hide it.</td></tr>
 				<tr><td><code>fadeIn</code></td><td>Will show the turtle slowly.</td></tr>
-				<tr><td><code>cg()</code>,<code>ct()</code>,<code>cs()</code></td><td>Clear graphics, clear text or clear screen.</td></tr>
+				<tr><td><code>cg()</code> <code>ct()</code> <code>cs()</code></td><td>Clear graphics, clear text or clear screen.</td></tr>
 				<tr><td><code>remove()</code></td><td> Totally removes elements.</td></tr>
 				<tr><td><code>pu()</code></td><td>Pen up - temporarily disables the pen. </td></tr>
 				<tr><td><code>pd()</code></td><td>Pen down - starts a new pen path.</td></tr>
@@ -77,7 +77,7 @@
 
 				<div class= "col-lg-offset-1">
     			<table class="table-bordered table-condensed table-striped">
-				<tr><th>Blocks</th><th>Description</th></tr>
+				<tr class="info"><th>Blocks</th><th>Description</th></tr>
 				<tr><td><code>write</code></td><td>Writes text in the page.</td></tr>
 				<tr><td><code>type</code></td><td>Typewrite text in the document.</td></tr>
 				<tr><td><code>debug</code></td><td>Log an object to debug.</td></tr>
@@ -96,7 +96,7 @@
 
 				<div class= "col-lg-offset-1">
     			<table class="table-bordered table-condensed table-striped">
-				<tr><th>Blocks</th><th>Description</th></tr>
+				<tr class="info"><th>Blocks</th><th>Description</th></tr>
 				<tr><td><code>play</code></td><td>Plays musical notes in sequence.</td></tr>
 				<tr><td><code>stop</code></td><td>  </td></tr>
 				<tr><td><code>tone</code></td><td> Plays musical tones. </td></tr>
@@ -111,23 +111,23 @@
 
 				<div class= "col-lg-offset-1">
     			<table class="table-bordered table-condensed table-striped">
-				<tr><th>Blocks</th><th>Description</th></tr>
+				<tr class="info"><th>Blocks</th><th>Description</th></tr>
 				<tr><td><code>if</code></td><td>Do something only if a condiction is true.</td></tr>
 				<tr><td><code>else</code></td><td>Do something if the first confition is not true.</td></tr>
 				<tr><td><code>then</code></td><td> Writes the code of the condition in one line. <strong>If .. then ..</strong></td></tr>
 				<tr><td><code>unless</code></td><td> Do something if a condiction is true. Opposite of <strong>if</strong> </td></tr>
-				<tr><td><code>switch</code>, <code>when</code> </td><td>Picks an alternative.</td></tr>
+				<tr><td><code>switch</code>  <code>when</code> </td><td>Picks an alternative.</td></tr>
 				<tr><td><code>default</code></td><td> Picks this alternative when none of the others are chosen. </td></tr>
 				<tr><td><code>for</code></td><td>Repeats a block of code. Do something multiple times.</td></tr>
 
-				<tr><td><code>forever</code>, <code>tick</code></td><td>Repeats something forever.</td></tr>
+				<tr><td><code>forever</code> <code>tick</code></td><td>Repeats something forever.</td></tr>
 				<tr><td><code>button</code></td><td>Makes a button and do something when clicked.</td></tr>
-				<tr><td><code>keydown</code>,<code>keyup</code>, <code>keypress</code></td><td> Do something when keyboard keys are pressed. </td></tr>
-				<tr><td><code>click</code>,<code>dblclick</code></td><td>Do something when the mouse is clicked or double-clicked.</td></tr>
-				<tr><td><code>mousedown</code>, <code>mouseup</code>, <code>mousemove</code></td><td>Do something when using the mouse. </td></tr>
+				<tr><td><code>keydown</code> <code>keyup</code> <code>keypress</code></td><td> Do something when keyboard keys are pressed. </td></tr>
+				<tr><td><code>click</code> <code>dblclick</code></td><td>Do something when the mouse is clicked or double-clicked.</td></tr>
+				<tr><td><code>mousedown</code>  <code>mouseup</code> <code>mousemove</code></td><td>Do something when using the mouse. </td></tr>
 				<tr><td><code>lastmousemove</code></td><td>Checks the mouse.</td></tr>
-				<tr><td><code>break</code>,<code>continue</code></td><td> Gets out of a repeated loop. </td></tr>
-				<tr><td><code>await</code>,<code>defer</code></td><td> Suspends a function to wait for a return value </td></tr>
+				<tr><td><code>break</code> <code>continue</code></td><td> Gets out of a repeated loop. </td></tr>
+				<tr><td><code>await</code> <code>defer</code></td><td> Suspends a function to wait for a return value </td></tr>
 				<tr><td><code>in</code></td><td> Lists elements in a container. </td></tr>
 				<tr><td><code>stop</code></td><td>  </td></tr>
 				<tr><td><code>sync</code></td><td>Synchronizes turtles or sprites.</td></tr>
@@ -147,18 +147,18 @@
 
 				<div class= "col-lg-offset-1">
     			<table class="table-bordered table-condensed table-striped">
-				<tr><th>Blocks</th><th>Description</th></tr>
-				<tr><td><code>-></code>,<code>=></code></td><td> Declares a function. </td></tr>
-				<tr><td><code>is</code>,<code>isnt</code></td><td>  </td></tr>
+				<tr class="info"><th>Blocks</th><th>Description</th></tr>
+				<tr><td><code>-></code> <code>=></code></td><td> Declares a function. </td></tr>
+				<tr><td><code>is</code> <code>isnt</code></td><td>  </td></tr>
 				<tr><td><code>and</code></td><td> </td></tr>
 				<tr><td><code>or</code></td><td>  </td></tr>
 				<tr><td><code>not</code></td><td>  </td></tr>
-				<tr><td><code>max</code>,<code>min</code></td><td>  </td></tr>
-				<tr><td><code>sin</code>, <code>cos</code>, <code>tan</code></td><td>  </td></tr>
-				<tr><td><code>asin</code>, <code>acos</code>, <code>atan</code></td><td>  </td></tr>
-				<tr><td><code>exp</code>, <code>ln</code></td><td>  </td></tr>
+				<tr><td><code>max</code> <code>min</code></td><td>  </td></tr>
+				<tr><td><code>sin</code> <code>cos</code> <code>tan</code></td><td>  </td></tr>
+				<tr><td><code>asin</code> <code>acos</code> <code>atan</code></td><td>  </td></tr>
+				<tr><td><code>exp</code> <code>ln</code></td><td>  </td></tr>
 				<tr><td><code>sqrt</code></td><td>  </td></tr>
-				<tr><td><code>true</code>, <code>false</code></td><td>  </td></tr>
+				<tr><td><code>true</code> <code>false</code></td><td>  </td></tr>
 				<tr><td><code>null</code></td><td>  </td></tr>
 				<tr><td><code>Infinity</code></td><td>  </td></tr>
 				<tr><td><code>NaN</code></td><td>  </td></tr>

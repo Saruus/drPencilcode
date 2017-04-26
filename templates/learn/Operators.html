@@ -17,7 +17,7 @@
 				{% trans "Traditional order of operations applies, with * and / being done before + and -. Of course, by using parentheses, 				you can force any order you like." %} <br><br>
 
 				<p><table class="table table-bordered table-condensed">
-				<tr><th>Operator</th><th>Result</th></tr>
+				<tr class="info" ><th>Operator</th><th>Result</th></tr>
 				<tr><td><code> 4 + 5 </code></td><td> Addition. <code> = 9 </code></td></tr>
 				<tr><td><code> 8 - 2 </code></td><td> Subtraction. <code> = 6 </code></td></tr>
 				<tr><td><code> 3 * 5 </code></td><td>  Multiplication. <code>= 15 </code> </td></tr>
@@ -31,7 +31,7 @@
 				{% trans "The operations that assign or change variables are summarized below." %}
 
 				<p><table class="table table-bordered table-condensed">
-				<tr><th>Operator</th><th>Meaning</th></tr>
+				<tr class="info"><th>Operator</th><th>Meaning</th></tr>
 				<tr><td><code>x = 2</code></td><td>Set <code>x</code> to 2.</td></tr>
 				<tr><td><code>x += 2</code></td><td>Increase <code>x</code> by 2; equivalent to <code>x = x + 2</code></td></tr>
 				<tr><td><code>x -= 2</code></td><td>Decrease <code>x</code> by 2; equivalent to <code>x = x - 2</code></td></tr>
@@ -52,7 +52,7 @@
 				{% trans "A logical expression is a proposition of fact which may be true or false. For example x is 2 is true if the 					variable x happens to have been assigned the value 2, but false if it happens to have any other value." %} <br><br>
 
 				<p><table class="table table-bordered table-condensed">
-				<tr><th>Operator</th><th>is <strong>true</strong> only when</th></tr>
+				<tr class="info"><th>Operator</th><th>is <strong>true</strong> only when</th></tr>
 				<tr><td><code>x is 2</code></td><td><code>x</code> is equal to 2 (also written <code>x == 2</code>)</td></tr>
 				<tr><td><code>x isnt 2</code></td><td><code>x</code> is not 2 (also written <code>x != 2</code>)</td></tr>
 				<tr><td><code>x &gt; 2</code></td><td><code>x</code> is greater than 2</td></tr>

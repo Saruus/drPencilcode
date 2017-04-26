@@ -80,7 +80,7 @@
 
 					{% trans "If you use a block more than once, you will get another bonus. If you get this bonus, Dr. Pencilcode will show the following message in the <b>Details section</b> of your Dashboard:" %}<br><br>
 
-                    <span class="glyphicon glyphicon-star" id="star"></span> <strong id='bonustext'> {% trans "You have use the same block more than once!" %} </strong>
+                    <span class="glyphicon glyphicon-star" id="star"></span> <strong id='bonustext'> {% trans "You have used the same block more than once!" %} </strong>
 
 
              </section>

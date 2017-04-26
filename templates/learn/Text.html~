@@ -12,7 +12,7 @@
             <section id="level0">
                 <h3>{% trans "Write" %}</h3>
 
-   				{% trans "The most basic and most obvious way to start with this category is using <i><b>write</b></i>. This block allows to write words and sentences onto the page. <i><b>Write</b></i> only takes one argument: the text you want to write (wrapped up in quotes). n order to level up and make it more complex, <i><b>await</b></i>, <i><b>read</b></i> and <i><b>defer</b></i> blocks are used in this program. As the Control Category, these blocks can help your PencilCode projects be more interactive, but in this case, by answering questions. "%}<br>
+   				{% trans "The most basic and most obvious way to start with this category is using <i><b>write</b></i>. This block allows to write words and sentences onto the page. <i><b>Write</b></i> only takes one argument: the text you want to write (wrapped up in quotes). In order to level up and make it more complex, <i><b>await</b></i>, <i><b>read</b></i> and <i><b>defer</b></i> blocks are used in this program. As the Control Category, these blocks can help your PencilCode projects be more interactive, but in this case, by answering questions. "%}<br>
 <img src="../../static/app/images/littlepencil.png" alt="">
 {% trans "<i><b>Await</b></i> pauses execution until an asynchronous process completes. Execution is unblocked when the <i><b>defer</b></i> function is triggered."%}<br>
 <img src="../../static/app/images/littlepencil.png" alt="">

@@ -47,10 +47,6 @@
     <!-- DEFAULT COLOR/ CURRENTLY USING -->
     <link rel="stylesheet" href="../../static/app/content/red.css">
 
-	<style>
-
-	</style>
-
     <script>
 
                     window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
@@ -460,13 +456,13 @@
 				 <form name="form" class="project-form" enctype="multipart/form-data" method="post" action="/download_certificate">
 				{% csrf_token %}
                <!--django obliga a establecer este metodo de seguridad para el metodo post -->
-               <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button>
+               <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button> <!--{{ url }} {{ mastery.points }}-->
                </form></h4>
 
 			</div>
 		  	<div>
 
-			<form action="helpus">
+			<form action="helpus" target='_blank'>
    			 <button type="submit" id="stepsix" class="btn btn-danger btn-lg"> {% trans "Help us!" %} </button>
 			</form>
 				<br>
