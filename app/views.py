@@ -46,6 +46,19 @@ import csv
 import zipfile
 from zipfile import ZipFile
 
+
+#____________________________ TRANSLATION _____________________________________#
+
+def blocks(request):
+    callback = request.GET.get('callback')
+    headers = {}
+    headers['Accept-Language'] = str(request.LANGUAGE_CODE)
+
+    headers = json.dumps(headers)
+    if callback:
+        headers = '%s(%s)' % (callback, headers)
+        return HttpResponse(headers, content_type="application/json")
+
 # ___________________________ MAIN _________________________________ #
 
 def main(request):
@@ -112,6 +125,12 @@ def selector(request):
                 return render_to_response('main/main.html',
                     {'no_exists':no_exists},
                     RC(request))
+
+            elif d['Error'] == 'code_error':
+                code_error = True
+                return render_to_response('main/main.html',
+                    {'code_error':code_error},
+                    RC(request))
             else:
                 url = request.POST['urlProject'] # urlProject es el nombre de la url que metes para analizar
                 dic = {'url': url}
@@ -129,11 +148,11 @@ def handler_upload(fileSaved, counter):
     # Primera vez que entra en handler_uppload
     # ---> fileSaved = /home/sara/drPencilcode-master/uploads/15.json
     # ---> counter = 0
-
+    
     if os.path.exists(fileSaved):
         counter = counter + 1
         if counter == 1:
-        	fileSaved = fileSaved.split(".")[0] + "(1).json" # sb2? --> Dr.Scratch.
+        	fileSaved = fileSaved.split(".")[0] + "(1).json" 
         else:
             fileSaved = fileSaved.split('(')[0] + "(" + str(counter) + ").json"
 
@@ -154,7 +173,6 @@ def urlUnregistered(request):
         print form
         if form.is_valid():
             url = form.cleaned_data['urlProject']
-            print url
             idProject = processStringUrl(url) #http://sarabc.pencilcode.net/load/first
             print "Project to analyze:", idProject
             if idProject == "error":
@@ -170,8 +188,11 @@ def urlUnregistered(request):
                     # pathProject -> /home/sara/drPencilcode-master/uploads/47.json
                     # request -> <WSGIRequest: POST '/selector'>
                     d = analyzeProject(request, pathProject, file)
-                except IndentationError: # FIXME
-                    #There is an error with kutz or hairball
+                    if d == "error":
+                        d = {'Error': 'code_error'}
+                        return d
+                except IndentationError: 
+                    #There is an error with coffee-mastery
                     #We save the project in folder called error_analyzing
                     print "Something went wrong"
                     file.method = 'url/error'
@@ -244,13 +265,11 @@ def processStringUrl(url):
 
     idProject = protocol + '/' + blank + '/' + server + '/' + "load" + '/' + name
 
-    print "idProject ---> ", idProject
     return idProject
 
 def sendRequestgetJSON(idProject):
     """First request to getJSON"""
     fileURL = idProject + ".json" #http://sarabc.pencilcode.net/load/first.json
-    print fileURL
 
     # Create DB of files
     now = datetime.now()
@@ -258,19 +277,17 @@ def sendRequestgetJSON(idProject):
                      move = "", art = "", text = "", sound = "",
                      control = "", operators = "")
 
-    print  "GUARDADO EN LA BASE DE DATOS --> ", fileName
-
     # Guardamos en la base de datos.
     fileName.save()
 
 
-    dir_zips = os.path.dirname(os.path.dirname(__file__)) + "/uploads/"
-    fileSaved = dir_zips + str(fileName.id) + ".json"
+    dir_json = os.path.dirname(os.path.dirname(__file__)) + "/uploads/"
+    fileSaved = dir_json + str(fileName.id) + ".json" #fileName.id registro en el que se guarda de base de datos
     #fileName.id -> models añaden el campo id automaticamente.
 
     print "FILE_SAVED ", fileSaved
 
-    # /home/sara/drPencilcode-master/uploads/15.json
+    # /home/sara/drPencilcode/uploads/15.json
 
     # Log
     pathLog = os.path.dirname(os.path.dirname(__file__)) + "/log/"
@@ -283,14 +300,14 @@ def sendRequestgetJSON(idProject):
     counter = 0
     file_name = handler_upload(fileSaved, counter)  # /home/sara/drPencilcode-master/uploads/15.json
     outputFile = open(file_name, 'wb')
-   # print "Retrieving: ", idProject
+
     jsonFile = urllib2.urlopen(idProject) # http://sarabc.pencilcode.net/load/first
     # abre la url(urlopen) y lee los datos de esa url(urllib2).
     outputFile.write(jsonFile.read())
     outputFile.close() #lo escribe todo en un .json.
 
     jsonerror = json.loads(open(file_name).read())
-    
+        
     for key in jsonerror:
         if key == "error":
             raise
@@ -327,7 +344,6 @@ def createDashboards():
     print "allUsers ---> ", allUsers
 
     for user in allUsers:
-        print user
         try:
             newdash = Dashboard.objects.get(user=user)
             print newdash
@@ -381,13 +397,17 @@ def analyzeProject(request, file_name, filename): #ESTA FUNCION DEVUELVE UN DICC
 
     if os.path.exists(file_name):
         list_file = file_name.split('(')
+
+        # list_file -> ['/home/sara/drPencilcodeGAMMA/uploads/47.json']
+
         if len(list_file) > 1:
             file_name = list_file[0] + '\(' + list_file[1]
             list_file = file_name.split(')')
             file_name = list_file[0] + '\)' + list_file[1]
-        print "list_file ---> !", list_file
-        print "file_name -> ", file_name #/home/sara/drPencilcode-master/uploads/47.json
-        # Request to coffeelint
+
+        # file_name -> /home/sara/drPencilcodeGAMMA/uploads/47.json
+
+        # Request to coffee-mastery
         with open(file_name) as data_file:
             data = json.load(data_file)  #todo lo que hay escrito en 47.json (diccionario) lo guarda en data
 
@@ -396,25 +416,34 @@ def analyzeProject(request, file_name, filename): #ESTA FUNCION DEVUELVE UN DICC
             coffee_file.write(data["data"]) # copia el valor de la llave data del diccionario data en 47.coffee
 
         metricMastery = "python /home/sara/coffee-masteryBETA/coffee-mastery.py " + file_name.replace(".json", ".coffee")
-        print "Running", metricMastery
+
         try:
-            resultMastery = os.popen(metricMastery).read() # resultmastery es lo que hay en el json mas los niveles basic, developing.. de cada categoria.
+            resultMastery = os.popen(metricMastery).read() 
+            # resultmastery datos json(sin comentarios, comas, etc) mas los niveles basic, developing.. de cada categoria.
         except:
             print "error en mastery"
-
+            raise
 
         metricLint = "coffeelint --reporter raw " + file_name.replace(".json", ".coffee")
         # devuelve diccionario con errores del proyecto .coffee (si hay o no hay)
 
-        print "METRICLINT ----> ", metricLint
-
         try:
-            
             resultLint = os.popen(metricLint).read()
-            print "RESULT LINT -----> ", resultlint
-
+            print "RESULT LINT -----> ", resultLint
         except:
             print "error en lint"
+
+        # resultLint= ast.literal_eval(resultLint)
+
+        resultLint = resultLint.split(str(file_name.replace(".json", ".coffee")))[1]
+
+        try:
+            if len(resultLint) > 10:
+                print "El programa no está bien escrito"
+                raise
+        except:
+            dictionary = "error"
+            return dictionary
 
         print "\n resultMastery --> ",resultMastery
 
@@ -481,13 +510,10 @@ def procMastery(request, lines, fileName):
     for elem in dicclevels:
         current_points = current_points + dicclevels[elem]
 
-    # BONUS??
-    calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBonus)
-
+    # BONUS
+    score = calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBonus)
 
     mssg = wtimprove(dicclevels)
-    print mssg
-
 
     #Save in DB
 
@@ -503,21 +529,16 @@ def procMastery(request, lines, fileName):
     d["mastery"] = {}
     d["mastery"] = diccblocks
     d["lint"] = dicclevels
-    d["mastery"]["points"] = current_points
+    d["mastery"]["points"] = score
     d["mastery"]["emptybonus"] = MaxBonus
     d["mastery"]["message"] = mssg
 
     print str(d) + "\n"
-    #print "PUNTUACION FINAL: ", totalpoints
 
     return d
 
-#{'mastery': {'Sound': 'false', 'Control': ['for'], 'Art': ['pen'], 'Text': 'false', 
-#'Operators': ['='], 'Move': ['rt', 'speed', 'fd']}, 'Error': 'None'}
-
 def wtimprove(dicclevels):
-    #{'Sound': 0, 'Control': 3, 'Art': 1, 'Text': 1, 'Operators': 3, 'Move': 3}
-    print "DICCLEVELS ", dicclevels
+
     level0 = []
     level1 = []
     level2 = []
@@ -607,10 +628,8 @@ def calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBo
         if element != 'Duplicados' and diccblocks[element] != 'false':
             allcategor = allcategor + 1
             
-    print MaxBonus
     if allcategor == 6:
         listbonus.append("You have used blocks of all categories!")
-        print "BONUS: you have used blocks of all categories!"  
         current_points = current_points + 1 
         MaxBonus.pop()  
 
@@ -650,28 +669,24 @@ def calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBo
             string = str('You have used blocks of three different levels in ' + categ + ' categories!')
       	
         listbonus.append(string)
-        print str("You have used blocks of three different levels in a category!")
         current_points = current_points + 1
         MaxBonus.pop()
 
         # Bonus por complejidad
         if complexity == 'true':
             listbonus.append(str("Bonus for complexity, you have used more blocks of level 3 than 1 and 2."))
-            print str("Bonus for complexity, you have used more blocks of level 3 than 1 and 2.")
             current_points = current_points + 1
             MaxBonus.pop()
     
     diccduplic = ast.literal_eval(diccduplic)
       
     if diccduplic != dict():
-        print "You have use the same block more than once!" 
         listbonus.append("You have use the same block more than once!")
         current_points = current_points + 1
         MaxBonus.pop()
 
     diccblocks["Bonus"] = listbonus
-    print "bonussss", diccblocks["Bonus"]
-
+    return current_points
 
 
 # _____ ID/BUILDERS ____________#
@@ -778,13 +793,11 @@ def download_certificate(request):
 
 
 def getFeedback(request):
-    print "ENTRO EN FEEDBACK"
     form = SurveyForm(request.POST or None)
     form_filled = False
     if form.is_valid():
         form_diccionario = form.cleaned_data
         form_filled = True
-        print form_diccionario
         #para conseguir la "informacion limpia" sin los corchetes y demas
         save_name = form_diccionario.get("name")
         save_surname = form_diccionario.get("surname")
