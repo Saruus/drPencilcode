@@ -21,8 +21,8 @@ from django.utils.encoding import force_bytes
 from django.db.models import Avg
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils import timezone
-from app.models import Project, Dashboard, Attribute
-from app.models import Dead, Sprite, Mastery, Duplicate, File, Survey
+from app.models import Dashboard, Activity
+from app.models import File, Survey
 from app.forms import UploadFileForm, UserForm, NewUserForm, UrlForm, SurveyForm
 from app import pyploma
 from django.contrib.auth.models import User
@@ -319,10 +319,6 @@ def learn(request, page):
         return render_to_response(page,
                                 RC(request))
 
-def learnUnregistered(request):
-
-    return render_to_response("learn/learn-unregistered.html",)
-
 
 # ________________________ DASHBOARD ____________________________#
 
@@ -340,40 +336,6 @@ def createDashboards():
             newDash = Dashboard(user=user.username, frelease=fupdate)
             newDash.save()
             print newDash
-
-def myDashboard(request):
-    """Dashboard page"""
-    if request.user.is_authenticated():
-        user = request.user.username
-        # The main page of user
-        # To obtain the dashboard associated to user
-        mydashboard = Dashboard.objects.get(user=user)
-        projects = mydashboard.project_set.all()
-        beginner = mydashboard.project_set.filter(level="beginner")
-        developing = mydashboard.project_set.filter(level="developing")
-        advanced = mydashboard.project_set.filter(level="advanced")
-        return render_to_response("myDashboard/content-dashboard.html",
-                                    {'user': user,
-                                    'beginner': beginner,
-                                    'developing': developing,
-                                    'advanced': advanced,
-                                    'projects': projects},
-                                    context_instance=RC(request))
-    else:
-        user = None
-        return HttpResponseRedirect("/")
-
-def myProjects(request):
-    """Show all projects of dashboard"""
-    if request.user.is_authenticated():
-        user = request.user.username
-        mydashboard = Dashboard.objects.get(user=user)
-        projects = mydashboard.project_set.all()
-        return render_to_response("myProjects/content-projects.html",
-                                {'projects': projects},
-                                context_instance=RC(request))
-    else:
-        return HttpResponseRedirect("/")
 
 
 # _______________________ AUTOMATIC ANALYSIS _________________________________#
@@ -511,7 +473,8 @@ def procMastery(request, lines, fileName):
     fileName.sound = dicc["Sound"]
     fileName.control = dicc["Control"]
     fileName.operators = dicc["Operators"]
-#    fileName.bonus = dicc["Bonus"]
+    fileName.bonus = diccblocks["Bonus"]
+    fileName.score = score
     fileName.save()
     
     d["mastery"] = {}
@@ -524,6 +487,8 @@ def procMastery(request, lines, fileName):
     print str(d) + "\n"
 
     return d
+
+#_________________________ Feedback Messages _______________________________#
 
 def wtimprove(dicclevels):
 
@@ -606,6 +571,7 @@ def wtimprove(dicclevels):
 
     return string
 
+#_________________________ Calculo de Bonus _______________________________#
 
 def calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBonus):
     listbonus = []
@@ -677,89 +643,8 @@ def calculoBonus(categories, diccblocks, dicc, current_points, diccduplic, MaxBo
     return current_points
 
 
-# _____ ID/BUILDERS ____________#
+#_________________________ Download Certificate _______________________________#
 
-def idProject(request, idProject):
-    """Resource uniquemastery of project"""
-    if request.user.is_authenticated():
-        user = request.user.username
-    else:
-        user = None
-    dmastery = {}
-    project = Project.objects.get(id=idProject)
-    item = Mastery.objects.get(myproject=project)
-    dmastery = buildMastery(item)
-    TotalPoints = dmastery["TotalPoints"]
-    dsprite = Sprite.objects.filter(myproject=project)
-    ddead = Dead.objects.filter(myproject=project)
-    dattribute = Attribute.objects.filter(myproject=project)
-    listAttribute = buildAttribute(dattribute)
-    numduplicate = Duplicate.objects.filter(myproject=project)[0].numduplicates
-    return render_to_response("project.html", {'project': project,
-                                               'dmastery': dmastery,
-                                               'lattribute': listAttribute,
-                                               'numduplicate': numduplicate,
-                                               'dsprite': dsprite,
-                                               'Total points': TotalPoints,
-                                               'ddead': ddead},
-                                               context_instance=RequestContext(request))
-
-
-def buildMastery(item):
-    """Generate the dictionary with mastery"""
-    dmastery = {}
-    dmastery["Total points"] = item.TotalPoints
-    dmastery["Abstraction"] = item.abstraction
-    dmastery["Parallelism"] = item.paralel
-    dmastery["Logic"] = item.logic
-    dmastery["Synchronization"] = item.synchronization
-    dmastery["Flow Control"] = item.flowcontrol
-    return dmastery
-
-def buildAttribute(qattribute):
-    """Generate dictionary with attribute"""
-    # Build the dictionary
-    dic = {}
-    for item in qattribute:
-        dic[item.character] = {"orientation": item.orientation,
-                               "position": item.position,
-                               "costume": item.costume,
-                               "visibility": item.visibility,
-                               "size": item.size}
-    listInfo = writeErrorAttribute(dic)
-    return listInfo
-
-# _______BUILDERS'S HELPERS ________#
-
-
-def writeErrorAttribute(dic):
-    """Write in a list the form correct of attribute plugin"""
-    lErrors = []
-    for key in dic.keys():
-        text = ''
-        dx = dic[key]
-        if key != 'stage':
-            if dx["orientation"] == 1:
-                text = 'orientation,'
-            if dx["position"] == 1:
-                text += ' position, '
-            if dx["visibility"] == 1:
-                text += ' visibility,'
-            if dx["costume"] == 1:
-                text += 'costume,'
-            if dx["size"] == 1:
-                text += ' size'
-            if text != '':
-                text = key + ': ' + text + ' modified but not initialized correctly'
-                lErrors.append(text)
-            text = None
-        else:
-            if dx["background"] == 1:
-                text = key + ' background modified but not initialized correctly'
-                lErrors.append(text)
-    return lErrors
-
-#_________________________Download Certificate_______________________________#
 def download_certificate(request):
     if request.method == "POST":
         filename = str(request.POST['url'])
@@ -771,10 +656,9 @@ def download_certificate(request):
         response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(filename)
         return response
 
-#def csrf_failure(request, reason=""):
-#    ctx = {'message': 'CSRF no furula'}
-#    return render_to_response('csrf/fallo.html', ctx)
-
+def csrf_failure(request, reason=""):
+    ctx = {'message': 'CSRF no furula'}
+    return render_to_response('csrf/fallo.html', ctx)
 
 
 # _________________________ SURVEY FOR FEEDBACK _______________________________ #
