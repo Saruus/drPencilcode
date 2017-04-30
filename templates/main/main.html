@@ -88,30 +88,6 @@
                         <li class="navbar-brand"><a href="#section2"><em>{% trans "How?" %}</em></a></li>
                         <li class="navbar-brand"><a href="#section3"><em>{% trans "Working on" %}</em></a></li>
                         <li class="navbar-brand"><a href="#section4"><em>{% trans "Contact us" %}</em></a></li>
-
-                        <li style="display: block;" class="login js-login dropdown">
-                          <a aria-expanded="false" type="button" data-toggle="dropdown" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                            <span class="glyphicon glyphicon-book"><span class="icon-basic-world"></span></span>
-                          </a>
-                          <ul role="menu" class="dropdown-menu">
-                            <li>
-                            <div style="padding: 15px; padding-bottom: 10px;">
-                            <form action="/i18n/setlang/" method="post" type="hidden">
-                              {% csrf_token %}
-                              <input name="next" type="hidden" value="{{ redirect_to }}" />
-                              <select name="language" type="hidden">
-                            {% get_language_info_list for LANGUAGES as languages %}
-                            {% for language in languages %}
-                             <option style="padding: 15px;" type="submit" class='btn-group btn-group-justified colored-text' value="{{ language.code }}">{{ language.name }} ({{ language.code }})</option>
-                            {% endfor %}
-                          </select>
-                          <input type="submit" value="Change language" class='btn-group btn-group-justified colored-text'/>
-                          </form>
-                        </div>
-                       </li>
-                   	  </ul>
-                      </li>
-
                    </ul>
 
                       <!-- LOGIN REGISTER -->

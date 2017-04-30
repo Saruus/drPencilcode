@@ -30,7 +30,7 @@ STATIC_ROOT = '/static/'
 SECRET_KEY = '...'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -43,7 +43,7 @@ TEMPLATE_LOADERS = (
 
 TEMPLATE_DIRS = ('templates',)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','http://193.147.79.206/','193.147.79.206']
 
 
 # Application definition
@@ -73,7 +73,7 @@ ROOT_URLCONF = 'drPencilcode.urls'
 
 WSGI_APPLICATION = 'drPencilcode.wsgi.application'
 
-CSRF_FAILURE_VIEW = 'drPencilcode.views.csrf_failure'
+#CSRF_FAILURE_VIEW = 'app.views.csrf_failure'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

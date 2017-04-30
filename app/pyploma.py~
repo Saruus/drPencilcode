@@ -7,8 +7,9 @@
 import os
 
 def generate(filename,level):
-	base_dir = os.getcwd()
-	os.chdir(base_dir+"/app")
+	base_dir = os.path.dirname(os.path.dirname(__file__))
+	path = os.path.join(base_dir + "/app")
+	os.chdir(path)
 	salida = open("output.tex","w") # crea fichero LaTeX para cada persona
 	person = [filename,level] # pasar la cadena en lista ["testing.sb2","21"]
 	
@@ -28,5 +29,5 @@ def generate(filename,level):
 
 	salida.write(text_final) # guarda los cambio en el fichero creado
 	salida.close() # cierra el fichero creado
-	os.system(str("pdflatex " + "output.tex")) # compila el fichero LaTeX a pdf (opcional)
+	os.system("pdflatex output.tex")
 	os.chdir(base_dir)

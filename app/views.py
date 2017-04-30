@@ -47,18 +47,6 @@ import zipfile
 from zipfile import ZipFile
 
 
-#____________________________ TRANSLATION _____________________________________#
-
-def blocks(request):
-    callback = request.GET.get('callback')
-    headers = {}
-    headers['Accept-Language'] = str(request.LANGUAGE_CODE)
-
-    headers = json.dumps(headers)
-    if callback:
-        headers = '%s(%s)' % (callback, headers)
-        return HttpResponse(headers, content_type="application/json")
-
 # ___________________________ MAIN _________________________________ #
 
 def main(request):
@@ -795,12 +783,13 @@ def download_certificate(request):
 def getFeedback(request):
     form = SurveyForm(request.POST or None)
     form_filled = False
+    data_exist = False
     if form.is_valid():
         form_diccionario = form.cleaned_data
         form_filled = True
         #para conseguir la "informacion limpia" sin los corchetes y demas
         save_name = form_diccionario.get("name")
-        save_surname = form_diccionario.get("surname")
+        save_user = form_diccionario.get("user")
         save_date = datetime.now()
         save_question1a = form_diccionario.get("question1a")
         save_question1b = form_diccionario.get("question1b")
@@ -814,30 +803,36 @@ def getFeedback(request):
         save_question4 = form_diccionario.get("question4")
         save_question5 = form_diccionario.get("question5")
         save_question6 = form_diccionario.get("question6")
-        
-        #Guardar en la base de datos
-        Encuesta = Survey()
-        Encuesta.name = save_name
-        Encuesta.surname = save_surname
-        Encuesta.date = save_date
-        Encuesta.question1a = save_question1a
-        Encuesta.question1b = save_question1b
-        Encuesta.question2a = save_question2a
-        Encuesta.question2b = save_question2b
-        Encuesta.question2c = save_question2c
-        Encuesta.question2d = save_question2d
-        Encuesta.question3a = save_question3a
-        Encuesta.question3b = save_question3b
-        Encuesta.question3c = save_question3c
-        Encuesta.question4 = save_question4
-        Encuesta.question5 = save_question5
-        Encuesta.question6 = save_question6
-        Encuesta.save()
+      
+        if form_filled:
+            contador = Survey.objects.filter(name=save_name,user=save_user).count()
+            if contador > 1:
+                data_exist = True
+            else:
+                #Guardar en la base de datos
+                Encuesta = Survey()
+                Encuesta.name = save_name
+                Encuesta.user = save_user
+                Encuesta.date = save_date
+                Encuesta.question1a = save_question1a
+                Encuesta.question1b = save_question1b
+                Encuesta.question2a = save_question2a
+                Encuesta.question2b = save_question2b
+                Encuesta.question2c = save_question2c
+                Encuesta.question2d = save_question2d
+                Encuesta.question3a = save_question3a
+                Encuesta.question3b = save_question3b
+                Encuesta.question3c = save_question3c
+                Encuesta.question4 = save_question4
+                Encuesta.question5 = save_question5
+                Encuesta.question6 = save_question6
+                Encuesta.save()
 
 
     context = {
     "form":form,
-    "form_filled": form_filled
+    "form_filled": form_filled,
+    "data_exist": data_exist
 	}
     
     return render(request, 'feedback/Helpus.html', context)

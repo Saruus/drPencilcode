@@ -68,8 +68,8 @@ class Activity(models.Model):
 
 class Survey(models.Model):
 
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
+    user = models.CharField(max_length=100)
     date = models.TextField()
     question1a = models.CharField(max_length=10)
     question1b = models.CharField(max_length=10)

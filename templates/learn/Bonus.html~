@@ -7,7 +7,7 @@
     {% block content %}
     <div class="panel panel-default">
         <div class="panel-body col-lg-10 col-lg-offset-1">
-    {% trans "Dr. Pencilcode can give you four different bonuses. Each Bonus add one point to your final score. In this page, we are going to explain you how you can get those bonuses and some examples of how to do it. Check out the following cases:" %}
+    {% trans "Dr. Pencilcode can give you four different bonuses. Each Bonus add <b>ONE POINT<b> to your final score. In this page, we are going to explain you how you can get those bonuses and some examples of how to do it. Check out the following cases:" %}
 
         </div>
     </div>
@@ -34,7 +34,7 @@
 
 					<h3>{% trans "Bonus for complexity" %}</h3>
 
-					{% trans "You can get another bonus - in each category - if you use more blocks from <b>level 3</b> than blocks from previous levels (<b>level 1</b> and <b>level 2</b>). For example:" %} <br><br>
+					{% trans "You can get another bonus if you use more blocks from <b>level 3</b> than blocks from previous levels (<b>level 1</b> and <b>level 2</b>). For example:" %} <br><br>
 
 						<div class="col-md-4">
 						<img src="../../static/app/images/bonus3code.png" alt="">

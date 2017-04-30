@@ -86,22 +86,34 @@
         <div class="panel panel-default">
             <div class="panel-body col-lg-10 col-lg-offset-1">
                 <section>
-
+			
 				{% if form_filled %}
 
-				 <div class="alert alert-success">
-				  <strong> Your survey has been saved! </strong> Thank you so much for your help! <span class="glyphicon glyphicon-thumbs-up"></span>
-				<a  href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
-				</div>
+					{% if data_exist%}
+
+						<div class="alert alert-danger">
+						<strong> Thank you! </strong> but you have already filled out this form! <span class="glyphicon glyphicon-exclamation-sign""></span>
+						<a  href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+						</div>
+
+
+					{% else %}
+
+						 <div class="alert alert-success">
+						  <strong> Your survey has been saved! </strong> Thank you so much for your help! <span class="glyphicon glyphicon-thumbs-up"></span>
+						<a  href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+						</div>
+					{% endif %}
 				
 				{% else %}
 
-				 <div class="alert alert-warning">
-				  <strong> Please</strong>, answer and complete all the questions!    <span class="glyphicon glyphicon-pencil"></span>
-				<a  href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
-				</div>
+					 <div class="alert alert-warning">
+					<strong> Please</strong>, answer and complete all the questions!    <span class="glyphicon glyphicon-pencil"></span>
+					<a  href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+					</div>
 
-    			{% endif %}
+				{% endif %}
+
 					<h4 align = 'center'> Dr.Pencilcode workshop - survey </h4>
 					<div align = 'center'><img align= 'center' src="../../static/app/images/caritas.png" alt=""></div>
 			
@@ -112,8 +124,8 @@
 					a la misma vista de donde viene -->
        				{% csrf_token %} <!--django obliga a establecer este metodo de seguridad para el metodo post-->
 
-					<b>{% trans "Name:" %}</b>  <div id="form">{{form.name}}</div>
-					<b>{% trans "Surname:" %}</b> <div id="form">{{form.surname}}</div><br>
+					<b>{% trans "Name and Surname:" %}</b>  <div id="form">{{form.name}}</div>
+					<b>{% trans "Pencil Code User:" %}</b> <div id="form">{{form.user}}</div><br>
 
 					<h5 style="color: red">{% trans "Task 1. When visiting Dr.Pencilcode:" %}</h5>
 					<p><b>{% trans "a. What do you think about the webpage? Do you like it?" %}</b></p>
@@ -162,7 +174,7 @@
 					
 
    				 <button id ="Submit" type='submit' class="btn btn-primary standard-button" value="submit form">Submit</button>
-				<button type="reset" class="btn btn-primary standard-button"> {% trans "Reset" %}</button>
+				<button type="reset" class="btn btn-primary standard-button" onclick="document.getElementById('project-form').reset()"> {% trans "Reset" %}</button>
 
 				</form>
 

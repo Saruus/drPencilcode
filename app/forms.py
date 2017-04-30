@@ -22,8 +22,8 @@ class UpdateForm(forms.Form):
 
 class SurveyForm(forms.Form):
 
-    name = forms.CharField(max_length=100)
-    surname = forms.CharField(max_length=100)
+    name = forms.CharField(max_length=200)
+    user = forms.CharField(max_length=100)
     question1a = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
     question1b = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
     question2a = forms.ChoiceField(widget=forms.RadioSelect(), choices=[('yes', 'Yes'), ('mol', 'More or less'), ('no','No')])
