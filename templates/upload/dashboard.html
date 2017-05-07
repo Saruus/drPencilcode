@@ -213,10 +213,9 @@
 				{% trans "<h4 class='dark-text'>Your level is... <strong> EXPERT! </strong></h4>" %}
                           <p class='dark-text'> {% trans "You're a genious!" %}</br></p>
 
-
 			{% endif %}
-              <a class="twitter-share-button" data-text="{% blocktrans with points=mastery.points %} I have just used Dr. Pencilcode! Beat it! @DrScratchTool {% endblocktrans %}"href="https://twitter.com/share">Tweet</a>
-
+              <a class="twitter-share-button" data-text="{% blocktrans with points=mastery.points %} I have just obtained {{ points }} points analyzing my project in Dr. Pencilcode! Beat it! @DrScratchTool {% endblocktrans %}"href="https://twitter.com/share">Tweet</a>
+                       
               <div class="container">
                   <p class='text-left'>
                     {% if url != "" %}
@@ -453,7 +452,7 @@
 		<div class="row">
 		  	<div>
 				<h4>
-				 <form name="form" class="project-form" enctype="multipart/form-data" method="post" action="/download_certificate">
+				 <form name="form" class="project-form" enctype="multipart/form-data" method="POST" action="/download_certificate">
 				{% csrf_token %}
                <!--django obliga a establecer este metodo de seguridad para el metodo post -->
                <button value="{{ filename }}" name="certificate" type="submit" id="stepfive" class="btn btn-warning btn-lg">{% trans "Download Certificate" %}</button> <!--{{ url }} {{ mastery.points }}-->

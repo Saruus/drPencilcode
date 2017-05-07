@@ -54,7 +54,7 @@
 		</div><br><br><br><br><br><br><br><br>
 
 
-		{% trans "Adding the points obtained in each category you can get a total score of <b>18 points</b> (6 categories x 3 points). You will get the maximun score when you use blocks from level 3 in all the categories and you complete all the bonuses.<br> According to the points you get, <b>your level</b> as a programmer can be:" %}<br><br>
+		{% trans "Adding the points obtained in each category you can get a total score of <b>18 points</b> (6 categories x 3 points). You will get the maximun score when you use blocks from level 3 in all the categories and you complete all the bonuses.<br> According to the points you get, <b>your level</b> as programmer could be:" %}<br><br>
 
 			<span class="glyphicon glyphicon-check" id="check"></span> {% trans " BASIC"%}<br>
 			<span class="glyphicon glyphicon-check" id="check"></span> {% trans " INTERMEDIATE"%}<br>
@@ -62,7 +62,7 @@
 			<span class="glyphicon glyphicon-check" id="check"></span> {% trans " EXPERT"%}<br><br>
 
 
-{% trans "Here we show you a table indicating the blocks' levels of each category:" %}<br><br>
+{% trans "Here we show you a table indicating the blocks' levels of each category:" %}<br>
 	</section>
 	</div>
 </div>
